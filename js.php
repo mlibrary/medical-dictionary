@@ -31,7 +31,7 @@
 
         // Update the list of results after a delay.
         // The delay prevents the from flashing quickly as you type.
-        search_timer = window.setTimeout(search_and_render(search_field.value), 200)
+        search_timer = window.setTimeout(function(){ search_and_render(search_field.value) }, 150)
       }
     }
 
