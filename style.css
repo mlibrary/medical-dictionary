@@ -1,0 +1,83 @@
+body {
+  font-size: 1.1em;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  padding: 1em 1.5em;
+  width: 80%;
+  max-width: 40em;
+  margin: 1em auto;
+  border: 0.3em double #DDD;
+}
+
+* {
+  margin: 0 0 0.5em 0;
+  padding: 0;
+  line-height: 1.4em;
+}
+
+header {
+  margin-bottom: 1em;
+}
+
+footer {
+  margin-top: 3em;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+aside {
+  display: block;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 1.5em;
+}
+
+label {
+  font-weight: bold;
+}
+
+h1, h2 {
+  line-height: 1.2em;
+  font-weight: normal;
+  font-style: italic;
+}
+
+h1 {
+  font-size: 1.7em;
+  margin-bottom: 1em;
+  padding: 0.3em 7%;
+  text-align: center;
+  background-color: #F6F6F6;
+  border-top: 0.08em solid #DDD;
+  border-bottom: 0.08em solid #DDD;
+}
+
+h1 span {
+  display: block;
+  font-size: 0.5em;
+  margin: 0.2em 0 0 0;
+  color: #555;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+dl {
+  margin: 1em 5%;
+}
+
+dd, dt {
+  background-color: #EEE;
+}
+
+dt {
+  margin-bottom: 0;
+  padding: 0.7em 1em 0.3em 1em;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+dd {
+  margin-top: 0;
+  padding: 0 0.5em 0.7em 2em;
+}
