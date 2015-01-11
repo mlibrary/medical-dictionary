@@ -86,7 +86,7 @@
         // Iterate over every term in the alphabetical array.
         for (i = 0; i < alphabetical.length; ++i) {
           var term         = alphabetical[i].toLowerCase()
-          var search_words = term.split(splittable_chars)
+          var term_words = term.split(splittable_chars)
 
           // If this is a browse...
           if (is_a_browse) {
@@ -96,9 +96,9 @@
           // If this is a search
           } else {
             // Iterate over each word in that term.
-            for (j = 0; j < search_words.length; ++j) {
+            for (j = 0; j < term_words.length; ++j) {
               // Get the word from the term and set the minimum distance.
-              var search_word = search_words[j]
+              var term_word = term_words[j]
               var distance    = 0
 
               // Iterate over each word in the search query and find the best match
@@ -106,7 +106,7 @@
               for (k = 0; k < query_words.length; ++k) {
                 distance = Math.max(
                              jaro_winkler(
-                               search_word,
+                               term_word,
                                query_words[k]
                              ),
                              distance
@@ -138,14 +138,6 @@
       return matches
     }
 
-    function match_by_letter() {
-
-    }
-
-    function match_by_words() {
-
-    }
-
       //////////
      // SORT //
     //////////
@@ -154,25 +146,27 @@
     function sort_matches(matches) {
       // If we have matches, sort them by distance from the query.
       if (matches.length > 0) {
-        matches = matches.sort(function(first, second) {
-          difference = second['distance'] - first['distance']
+        matches = matches.sort(
+          function(first, second) {
+            difference = second['distance'] - first['distance']
 
-          if (difference !== 0) {
-            return difference
-          // If the the distances are the same sort the terms in alphabetical order.
-          } else {
-            first = first['term'].toLowerCase()
-            seccond = second['term'].toLowerCase()
-
-            if (first > second) {
-              return -1
-            } else if (first < second) {
-              return 1
+            if (difference !== 0) {
+              return difference
+            // If the the distances are the same sort the terms in alphabetical order.
             } else {
-              return 0
+              first = first['term'].toLowerCase()
+              seccond = second['term'].toLowerCase()
+
+              if (first > second) {
+                return -1
+              } else if (first < second) {
+                return 1
+              } else {
+                return 0
+              }
             }
           }
-        })
+        )
       }
 
       return matches
