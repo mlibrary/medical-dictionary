@@ -75,17 +75,18 @@
     function search_for(query, is_a_browse) {
       var query   = query.toLowerCase()
       var matches = []
+      var splittable_chars = /[ ()[\]<>{}]/
       // Set the minimum score, and the range around the best score that will be accepted.
       var best_score  = 0.85
       var score_range = 0.05
       // Split the query so we can search through it word by word.
-      var query_words = query.split(/[ ()[\]<>{}]/)
+      var query_words = query.split(splittable_chars)
 
       if (query.length > 0) {
         // Iterate over every term in the alphabetical array.
         for (i = 0; i < alphabetical.length; ++i) {
           var term         = alphabetical[i].toLowerCase()
-          var search_words = term.split(' ')
+          var search_words = term.split(splittable_chars)
 
           // If this is a browse...
           if (is_a_browse) {
