@@ -113,6 +113,9 @@
                            )
               }
 
+              var result = { 'term':     alphabetical[i],
+                             'distance': distance }
+
               // If this is the first match and it is within the minimum range, or
               // the match is above the range for the current best match, set it as
               // the new best score and reset the matches array.
@@ -120,15 +123,12 @@
                   distance > (best_score + score_range)) {
 
                 best_score = distance
-                matches = [{'term':     alphabetical[i],
-                          'distance': distance}]
+                matches = [result]
               // ... if that fails, but the match is within the current range, push
               // it to the matches array.
               } else if (distance > (best_score - score_range) &&
                          distance < (best_score + score_range)) {
-
-                matches.push({'term':     alphabetical[i],
-                              'distance': distance})
+                matches.push(result)
               }
             }
           }
