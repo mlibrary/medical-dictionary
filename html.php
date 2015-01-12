@@ -15,7 +15,7 @@
       <h1>Plain Language Medical Dictionary <span>application by the University of Michigan Library</span></h1>
 
       <aside>As you type, matching results will be listed below automatically.</aside>
-      <label for="search_field">Search for a term: </label>
+      <label for="search-field">Search for a term: </label>
       <input type="search" id="search-field"></input>
 
       <aside>You can also browse all terms starting with a letter.</aside>
