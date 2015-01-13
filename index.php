@@ -3,5 +3,5 @@
   // All Rights Reserved. Licensed according to the terms of the Revised BSD license.
   // See LICENSE.txt for details.
 
-  require 'full/html.php';
+  require 'minified/html.php';
 ?>
