@@ -1,11 +1,14 @@
 <script>
+  // Copyright (c) 2014 The Regents of the University of Michigan.
+  // All Rights Reserved. Licensed according to the terms of the Revised BSD license.
+  // See LICENSE.txt for details.
 
     ///////////////////
    // INITIAL SETUP //
   ///////////////////
 
   window.onload = function() {
-    // Clear out the "No JavasSript" message
+    // Clear out the "No JavaScript" message
     clear_page()
 
     // Initialize global-ish variables
@@ -13,7 +16,7 @@
     var alphabetical = <?php echo(json_encode($alphabetical)); ?>;
     var search_field = document.getElementById('search-field')
     var browse_field = document.getElementById('browse-field')
-    var all_letters      = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+    var all_letters  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
     var search_timer
 
     // When a letter is entered in the search field...

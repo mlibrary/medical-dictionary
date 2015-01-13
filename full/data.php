@@ -1,4 +1,12 @@
 <?php
+  // Copyright (c) 2014 The Regents of the University of Michigan.
+  // All Rights Reserved. Licensed according to the terms of the Revised BSD license.
+  // See LICENSE.txt for details.
+
+  // Original source of definitions: Plain Language Thesaurus for Health
+  // Communications, Draft 3, October 2007. National Center for Health Marketing,
+  // Centers for Disease Control and Prevention, Department of Health and Human
+  // Services, United States of America. #07-151(NE)/092607.
   $dictionary = [
     "abdomen" => "stomach, stomach area, belly, tummy, abdominal",
     "ability" => "skill, are able, can",
