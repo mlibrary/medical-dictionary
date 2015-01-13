@@ -41,6 +41,10 @@ label {
   font-weight: bold;
 }
 
+input {
+  padding: 0.2em;
+}
+
 button {
   padding: 0.5em;
   font-size: 0.7em;
