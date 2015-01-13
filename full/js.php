@@ -131,23 +131,18 @@
                            )
               }
 
-              var result = { 'term':     alphabetical[i],
-                             'distance': distance }
-
-              // If this is the first match and it is within the minimum range, or
-              // the match is above the range for the current best match, set it as
-              // the new best score and reset the matches array.
-              if ((matches.length === 0 && (best_score - score_range) < distance) ||
-                  distance > (best_score + score_range)) {
-
+              // If the match is above the range for the current best match, set it as
+              // the new best score and filter out matches that are no longer good enough.
+              if_above_range(distance, best_score, score_range, function() {
                 best_score = distance
-                matches = [result]
-              // ... if that fails, but the match is within the current range, push
-              // it to the matches array.
-              } else if (distance > (best_score - score_range) &&
-                         distance < (best_score + score_range)) {
-                matches.push(result)
-              }
+                matches = filter_matches(matches, best_score, score_range)
+              })
+
+              // If the match is within the current range, push it to the matches array.
+              if_around_value(distance, best_score, score_range, function() {
+                matches.push({ 'term':     alphabetical[i],
+                               'distance': distance })
+              })
             }
           }
         }
@@ -175,7 +170,7 @@
               return difference
             // If the the distances are the same sort the terms in alphabetical order.
             } else {
-              first = first['term'].toLowerCase()
+              first   = first['term'].toLowerCase()
               seccond = second['term'].toLowerCase()
 
               if (first > second) {
@@ -193,19 +188,53 @@
       return matches
     }
 
+    // Take in a set of matches and remove any values that are not within the range given.
+    function filter_matches(matches, center, range) {
+      var output = []
+
+      // For each match from the array given...
+      for (var i = 0; i < matches.length; ++i) {
+        var possible_match = matches[i]
+
+        // ... add it to the output array if it is within the range given.
+        if_around_value(possible_match['distance'], center, range, function() {
+          output.push(possible_match)
+        })
+      }
+
+      return output
+    }
+
+    // Run an anonymous funtion if a value is close enough to another value.
+    function if_around_value(value, center, range, lamda) {
+      if (value > (center - range) &&
+          value < (center + range)) {
+        lamda()
+      }
+    }
+
+    // Run an anonymous funtion if a value is well above a given value.
+    function if_above_range(value, center, range, lamda) {
+      if (value > (center + range)) {
+        lamda()
+      }
+    }
+
+
       ////////////
      // RENDER //
     ////////////
 
     // Take a query string and an array of matches and render them on the page.
     function render_list(query, matches, match_message) {
-      // Default for when there are no matches
+      // Set the default for when there are no matches.
       var output = (search_field.value === '') ? '' : '<h2>No matches for <strong>' + query + '</strong></h2>'
 
+      // If there are matches...
       if (matches.length > 0) {
         output = '<h2>' + match_message + ' <strong>' + query + '</strong>:</h2><dl>'
 
-        // Add each matched term to the output
+        // Format each matched term and add it to the output.
         for (var i = 0; i < matches.length; ++i) {
           var term = matches[i]['term']
           output = output + '<dt>' + term + '</dt><dd>' + dictionary[term] + '</dd>'
@@ -217,10 +246,12 @@
       return output
     }
 
+    // Render the given HTML onto the page.
     function add_result_to_page(html) {
       document.getElementById("definition-area").innerHTML = html
     }
 
+    // Remove all content from the area we render results to.
     function clear_page() {
       add_result_to_page('')
     }

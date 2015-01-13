@@ -1121,4 +1121,6 @@
     $alphabetical[$index] = $term;
     ++$index;
   }
+
+  sort($alphabetical, SORT_NATURAL | SORT_FLAG_CASE);
 ?>
