@@ -7,9 +7,10 @@
 body {
   font-size: 1.1em;
   font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-  padding: 1em 1.5em;
+  padding: 1em;
   width: 80%;
   max-width: 40em;
+  min-width: 22em;
   margin: 1em auto;
   border: 0.3em double #DDD;
 }
@@ -96,5 +97,5 @@ dt {
 
 dd {
   margin-top: 0;
-  padding: 0 0.5em 0.7em 2em;
+  padding: 0 1.5em 0.7em 2em;
 }
