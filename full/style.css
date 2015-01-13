@@ -35,6 +35,13 @@ label {
   font-weight: bold;
 }
 
+button {
+  padding: 0.5em;
+  font-size: 0.7em;
+  display: block;
+  margin: 1em 0;
+}
+
 h1, h2 {
   line-height: 1.2em;
   font-weight: normal;

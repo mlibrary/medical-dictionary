@@ -1,1 +1,1 @@
-<?php require 'html.php'; ?>
+<?php require 'full/html.php'; ?>

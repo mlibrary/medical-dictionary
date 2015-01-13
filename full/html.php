@@ -3,10 +3,11 @@
   <head>
     <title>Plain Language Medical Dictionary</title>
     <!--[if lt IE 9]>
-      <script src="html5shiv/html5shiv-printshiv.js"></script>
+      <script src="full/html5shiv/html5shiv-printshiv.js"></script>
     <![endif]-->
-    <link href="style.css" type="text/css" rel="stylesheet"></link>
+    <link href="full/style.css" type="text/css" rel="stylesheet"></link>
     <?php
+      include 'data.php';
       include 'js.php';
     ?>
   </head>
@@ -18,7 +19,7 @@
       <label for="search-field">Search for a term: </label>
       <input type="search" id="search-field"></input>
 
-      <aside>You can also browse all terms starting with a letter.</aside>
+      <aside>You can also browse all terms, or view all terms starting with a letter.</aside>
       <label for="browse-field">Browse by letter: </label>
       <select id="browse-field" onchange="browse()">
         <option value="default" selected>-</option>
@@ -28,9 +29,12 @@
           }
         ?>
       </select>
+      <button onclick="view_all()">View all <?php echo count($dictionary); ?> terms</button>
     </header>
 
-    <div id="definition-area"></div>
+    <main id="definition-area">
+      <p>This application requires JavaScript to run.</p>
+    </main>
 
     <footer>
       <p>This work was performed under a subcontract with the <a href="http://www.uic.edu/index.html/">University of Illinois at Chicago</a> and made possible by grant #N01-LM-6-3503 from <a href="http://www.nlm.nih.gov/">National Library of Medicine (NLM)</a> and its contents are solely the responsibility of the authors and do not necessarily represent the official views of the National Library of Medicine.</p>
