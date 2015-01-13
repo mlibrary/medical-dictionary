@@ -228,7 +228,10 @@
     // Take a query string and an array of matches and render them on the page.
     function render_list(query, matches, match_message) {
       // Set the default for when there are no matches.
-      var output = (search_field.value === '') ? '' : '<h2>No matches for <strong>' + query + '</strong></h2>'
+      var no_match_message = '<h2>No matches for <strong>' + query + '</strong></h2>'
+
+      var output = (search_field.value === '' &&
+                    browse_field.options[browse_field.selectedIndex].value === 'default') ? '' : no_match_message
 
       // If there are matches...
       if (matches.length > 0) {
