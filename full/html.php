@@ -7,7 +7,7 @@
 <html>
   <head>
     <title>Plain Language Medical Dictionary</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!--[if lt IE 9]>
       <script src="full/html5shiv/html5shiv-printshiv.js"></script>
     <![endif]-->
