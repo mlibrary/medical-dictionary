@@ -103,33 +103,33 @@
 
       if (query.length > 0) {
         // For every word in the dictionary...
-        for (var i = 0; i < alphabetical.length; ++i) {
-          var term       = alphabetical[i].toLowerCase()
-          var term_words = term.split(splittable_chars)
+        for_each(alphabetical, function(term) {
+          var lower_case_term = term.toLowerCase()
 
           // If this is a browse...
           if (is_a_browse) {
-            if (query === term.charAt(0)) {
-              matches.push({'term': alphabetical[i]})
+            if (query === lower_case_term.charAt(0)) {
+              matches.push({ 'term':     term,
+                             'distance': 1 })
             }
           // If this is a search...
           } else {
+            var term_words = lower_case_term.split(splittable_chars)
+
             // For every word in the current dictionary term...
-            for (var j = 0; j < term_words.length; ++j) {
-              // Get the word from the term and set the minimum distance.
-              var term_word = term_words[j]
+            for_each(term_words, function(term_word) {
               var distance  = 0
 
               // For every word in the query...
-              for (k = 0; k < query_words.length; ++k) {
+              for_each(query_words, function(single_query_word) {
                 distance = Math.max(
                              jaro_winkler(
                                term_word,
-                               query_words[k]
+                               single_query_word
                              ),
                              distance
                            )
-              }
+              })
 
               // If the match is above the range for the current best match, set it as
               // the new best score and filter out matches that are no longer good enough.
@@ -143,9 +143,9 @@
                 matches.push({ 'term':     alphabetical[i],
                                'distance': distance })
               })
-            }
+            })
           }
-        }
+        })
       }
 
       return matches
@@ -186,6 +186,12 @@
       }
 
       return matches
+    }
+
+    function for_each(array, lambda) {
+      for (var i = 0; i < array.length; ++i) {
+        lambda(array[i], i)
+      }
     }
 
     // Take in a set of matches and remove any values that are not within the range given.
