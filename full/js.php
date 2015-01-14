@@ -140,7 +140,7 @@
 
               // If the match is within the current range, push it to the matches array.
               if_around_value(distance, best_score, score_range, function() {
-                matches.push({ 'term':     alphabetical[i],
+                matches.push({ 'term':     term,
                                'distance': distance })
               })
             })
@@ -170,16 +170,7 @@
               return difference
             // If the the distances are the same sort the terms in alphabetical order.
             } else {
-              first   = first['term'].toLowerCase()
-              seccond = second['term'].toLowerCase()
-
-              if (first > second) {
-                return 1
-              } else if (first < second) {
-                return -1
-              } else {
-                return 0
-              }
+              return first['term'].localeCompare(second['term'])
             }
           }
         )
