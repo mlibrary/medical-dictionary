@@ -40,10 +40,13 @@ aside {
 
 label {
   font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5em;
 }
 
 input {
   padding: 0.2em;
+  display: inline-block;
 }
 
 button {
