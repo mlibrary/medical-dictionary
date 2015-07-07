@@ -53,8 +53,6 @@
     <footer>
       <p>This work was performed under a subcontract with the <a href="http://www.uic.edu/index.html/">University of Illinois at Chicago</a> and made possible by grant #N01-LM-6-3503 from <a href="http://www.nlm.nih.gov/">National Library of Medicine (NLM)</a> and its contents are solely the responsibility of the authors and do not necessarily represent the official views of the National Library of Medicine.</p>
 
-      <p>Original source of definitions: <cite>Plain Language Thesaurus for Health Communications, Draft 3, October 2007. National Center for Health Marketing, Centers for Disease Control and Prevention, Department of Health and Human Services, United States of America. #07-151(NE)/092607.</cite></p>
-
       <p>This application is copyright 2014, The Regents of the University of Michigan.</p>
     </footer>
   </body>
