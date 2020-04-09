@@ -240,11 +240,11 @@ function getData(data){
 }
 
 function alphaCompare(a,b) {
-	return a[0] > b[0];
+	return ('' + a[0]).localeCompare(''+b[0]);
 }
 function distanceCompare(a,b) {
-	if(a[2]==b[2]) return a[0] > b[0];
-	else return a[2] < b[2];
+	if(a[2]==b[2]) return ('' + a[0]).localeCompare(''+b[0]);
+	else return a[2]-b[2];
 }
 // Run an anonymous funtion if a value is close enough to another value.
 function getMatches(query,type){
@@ -268,9 +268,9 @@ function getMatches(query,type){
 function filter_matches(matches, center, range) {
       var output = []
       var len=matches.length;
-      var min=center-range;
+      var max=center+range;
       for (var i = 0; i < len; i++) 
-        if(matches[i][2]>=min) output.push(matches[i]);
+        if(matches[i][2]<=max) output.push(matches[i]);
       return output.sort(distanceCompare);
     }
 //list=dictionary for 1 letter, list=matches for 2 letters
@@ -312,28 +312,42 @@ function search_query(query) {
     var matches = []
     var splittable_chars = /[ ()[\]<>{}]/
     // Set the initial acceptable score range.
-    var best_score  = 0.85
-    var score_range = 0.05
+    var best_score  = 0
+    var score_range = 3
     // Split the query, search through word by word.
     var query_low = query.toLowerCase();
     var query_words = query_low.split(splittable_chars);
     for(const term of dictionary){
-      	var term_words = term[0].toLowerCase().split(splittable_chars)
-      	var distance = 0 //the larger the better
-        for(const term_word of term_words)
-          for(const query_word of query_words)
-          	distance = jaro_winkler(term_word , query_word)>distance?jaro_winkler(term_word,query_word):distance;
-        
-        // If the match is above range, update best_score and filetr matches
-        if(distance < (best_score-score_range)) continue;
-        else if(distance > (best_score+score_range)) best_score=distance;
-        else {
-        	var termD=term;
-        	termD.push(distance);
-        	matches.push(termD);
-        }
+    	var term_low= term[0].toLowerCase();
+      	var term_words = term_low.split(splittable_chars);
+      	var len_t=term_words.length;
+      	var len_q=query_words.length;
+      	var a=query_low.search(term_low)!=-1? 1:-1;
+      	var b=term_low.search(query_low)!=-1? 1:-1;
+      	var distance = 10;
+      	//if term or query is not the same
+      	if(a+b>0)distance=0;
+      	if(a+b==0)
+      		if(len_t!=len_q) distance=0.1*Math.abs(len_t - len_q)+1;
+      		else distance=0.1*levenshteinDistance(term_low,query_low);
+      	else {
+      		if(len_t*len_q==1){
+      			var levenDistance=levenshteinDistance(term_low,query_low);
+      			distance=levenDistance > Math.max(term_low.length-2,len-2)?10:0.5*levenDistance;
+      		}
+      		else
+      			for(const term_word of term_words)
+		          for(const query_word of query_words){
+      				var levenDistance=levenshteinDistance(term_word,query_word);
+                	distance = levenDistance < distance? levenDistance : distance;
+                }
+		        if(distance > best_score+score_range) continue;}
+    	var termD=term;
+    	termD[2]=distance;
+    	matches.push(termD);
       }
-    return filter_matches(matches, best_score, score_range);
+    matches=matches.sort(distanceCompare).slice(0,50);
+    return matches;
  }
 
 function search_paragraph(query) {
@@ -448,4 +462,46 @@ function jaro_winkler(string1, string2) {
 
   jaro = ((numMatches / string1.length) + (numMatches / string2.length) + (numMatches - ~~(transpositions / 2)) / numMatches) / 3.0;
   return jaro + Math.min(prefix, 4) * 0.1 * (1 - jaro);
+}
+
+
+// code copyed from trekhleb/javascript-algorithms on Github
+// path: src/algorithms/string/levenshtein-distance/levenshteinDistance.js
+
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {number}
+ */
+function levenshteinDistance(a, b) {
+  // Create empty edit distance matrix for all possible modifications of
+  // substrings of a to substrings of b.
+  const distanceMatrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+
+  // Fill the first row of the matrix.
+  // If this is first row then we're transforming empty string to a.
+  // In this case the number of transformations equals to size of a substring.
+  for (let i = 0; i <= a.length; i += 1) {
+    distanceMatrix[0][i] = i;
+  }
+
+  // Fill the first column of the matrix.
+  // If this is first column then we're transforming empty string to b.
+  // In this case the number of transformations equals to size of b substring.
+  for (let j = 0; j <= b.length; j += 1) {
+    distanceMatrix[j][0] = j;
+  }
+
+  for (let j = 1; j <= b.length; j += 1) {
+    for (let i = 1; i <= a.length; i += 1) {
+      const indicator = a[i - 1] === b[j - 1] ? 0 : 1;
+      distanceMatrix[j][i] = Math.min(
+        distanceMatrix[j][i - 1] + 1, // deletion
+        distanceMatrix[j - 1][i] + 1, // insertion
+        distanceMatrix[j - 1][i - 1] + indicator, // substitution
+      );
+    }
+  }
+
+  return distanceMatrix[b.length][a.length];
 }
