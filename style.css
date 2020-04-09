@@ -1,0 +1,313 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.nav li{
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: top;
+}
+.nav li: last-child{
+  margin-right: 0;
+}
+/*
+  Copyright (c) 2014 The Regents of the University of Michigan.
+  All Rights Reserved. Licensed according to the terms of the Revised BSD license.
+  See LICENSE.txt for details.
+*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+input,textarea,#real-text,button,body{
+  font: 300 16px/150% "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+}
+body {
+  width: 80%;
+  max-width: 40em;
+  min-width: 14em;
+  margin: 1em auto;
+  border: .2em solid #eee;
+}
+#main{padding: 1em;}
+
+header {
+  margin-bottom: 2em;
+}
+
+footer {
+  margin-top: 3em;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+aside {
+  display: block;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 1.5em;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+input {
+  padding: .5em;
+  display: inline-block;
+}
+input:focus{outline: none;}
+textarea,
+#real-text{
+  padding: 0 .5em;
+  padding-top: .2em;
+  display: inline-block;
+  position: absolute;
+  max-height: 68vh;
+  -ms-overflow-style: none; 
+  overflow: -moz-scrollbars-none;
+}
+#real-text{
+  padding-left:1em;
+  color:#353535;
+  z-index: 10;
+}
+textarea{
+  resize: none;
+  color: transparent;
+  z-index: 99;
+}
+#real-text::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+#real-text mark:hover{
+  background-color:#C69B00;
+}
+
+button {
+  display: block;
+  background-color: #eee;
+  border:none;
+  border-radius: .3em;
+  text-decoration: none;
+  text-align: center;
+  padding:.4em .8em;
+  cursor: pointer;
+}
+button:hover{background-color: #bbb;}
+button:focus{outline: none;}
+h1 {
+  font-weight: bold;
+  font-size: 1.7em;
+  color: #FFF;
+  margin-bottom: .5em;
+  padding: .5em 0;
+  text-align: center;
+  background-color: #00274C;
+  border-bottom: .2em solid #FECB05;
+}
+
+h1 span {
+  display: block;
+  font-weight: 200;
+  font-size: .6em;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 1.3em;
+}
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+#copyright{
+  font-size: .6em;
+  line-height: 133%;
+  text-align: center;
+  padding:1em 2em;
+  color: #aaa;
+}
+
+strong{font-weight: 700;}
+mark{background-color: #FECB05;}
+
+.relative{position: relative;}
+.center{margin:0 auto;text-align: center;}
+.flex{
+  display: flex;
+  justify-content: space-around;
+}
+.letter{
+  display: inline-block;
+  margin: .2em;
+}
+.search-box{
+  position: relative;
+  border:2px solid #FECB05;
+  background-color: white;
+  border-radius: 1.2em;
+  text-decoration: none;
+  width: 50%;
+  margin:0 auto;
+  z-index: 9999;
+}
+.search-word{
+  height:2.4em;
+}
+.search-word-focused{
+  border-radius: 1.2em 1.2em 0 0;
+}
+.search-paragraph{
+  padding: .5em;
+  min-height: 50vh;
+  max-height: 70vh;
+}
+#search-field{
+  border:none;
+  width: 92%;
+  margin: 0 .5em;
+  text-decoration: none;
+  font-size: 1em;
+  background-color: transparent;
+  color: #757575;
+}
+
+
+.shadow{
+  box-shadow: 0 .5em 1em rgba(67, 71, 83, 0.12);
+}
+
+.focused-button{
+  background-color: #999;
+  color:white;
+}
+
+.status{
+  width: 36%;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+.status button{
+  display: inline-block;
+  margin: 0 auto;
+  font-size: .8em;
+  border:1.5px solid #00274C;
+  border-radius: 0;
+  background-color: white;
+  width: 50%;
+}
+.status button:first-child{
+  border-radius: .5em 0 0 .5em;
+}
+.status button:last-child{
+  border-radius:  0 .5em .5em 0;
+}
+.status .current-status{
+  background-color: #00274C;
+  color: white;
+}
+.guess{
+  border:none;
+  border-radius: 1.2em;
+  position: absolute;
+  left: 25%;
+  top:0;
+  z-index: 0;
+}
+.guess button{
+  position: relative;
+  background-color: white;
+  width: 100%;
+  text-align: left;
+  border-radius: 0;
+}
+.guess button:first-child{
+  border-radius: 1.2em 1.2em 0 0;
+}
+.guess button:last-child{
+  border-radius: 0 0 1.2em 1.2em;
+}
+.guess button:hover{
+  background-color: #f8f8f8;
+}
+.BrowseFeild{margin-top: .8em;}
+
+.term-card{
+  width: 100%;
+  background-color: white;
+  border-radius: .5em;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+  padding: .5em 1em;
+  margin: .6em 0;
+  overflow: hidden;
+  cursor:pointer;
+}
+.paraTermList{
+  width: 50%;
+  max-height:70vh;
+  overflow-y: scroll; 
+  padding: 0 .5em;
+}
+#content-editable-field:focus{
+  outline: none;
+}
+#content-editable-field:empty::before {
+    content: attr(placeholder);
+    opacity:0.5;
+}
+
+#content-editable-field:empty:focus::before {
+    content: "";
+}
