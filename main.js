@@ -3,6 +3,7 @@
 var total=0;
 var dictionary=[];
 var currentLetters=[];
+const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const search_svg=(<svg className="search-icon" xmlns="http://www.w3.org/2000/svg" width="18.895" height="18.9" viewBox="0 0 18.895 18.9">
   <path id="union2" data-name="union2" className="cls-1" d="M-85.811,405.607-90.1,401.32A7.941,7.941,0,0,1-95,403a7.943,7.943,0,0,1-5.656-2.343,8.009,8.009,0,0,1,0-11.314A7.944,7.944,0,0,1-95,387a7.95,7.95,0,0,1,5.657,2.343,8.014,8.014,0,0,1,.663,10.563l4.287,4.287a1,1,0,0,1,0,1.414,1,1,0,0,1-.707.293A1,1,0,0,1-85.811,405.607Zm-13.435-14.849a6.007,6.007,0,0,0,0,8.485A5.957,5.957,0,0,0-95,401a5.957,5.957,0,0,0,4.243-1.757A5.961,5.961,0,0,0-89,395a5.961,5.961,0,0,0-1.758-4.243A5.961,5.961,0,0,0-95,389,5.961,5.961,0,0,0-99.247,390.758Z" transform="translate(103 -387)"/>
 </svg>);
@@ -19,15 +20,14 @@ const copy_svg=(<svg className="copy-icon" xmlns="http://www.w3.org/2000/svg" wi
 class DictionaryContainer extends React.Component {
 	constructor(props){
 		super(props);
-		this.state={status:"paragraph"};
+		this.state={status:"word"};
 		this.handleStatusChange=this.handleStatusChange.bind(this);
 	}
 	handleStatusChange(event){
 		this.setState({status:event.target.value});
 	}
 	render(){
-		var body=<Dictionary4Word/>;
-		if(this.state.status==="paragraph") body=<Dictionary4Paragraph/>;
+		const body=this.state.status==="paragraph"?<Dictionary4Word/>:<Dictionary4Paragraph/>;
 		return (
 			<div>
 				<h1>Plain Language Medical Dictionary <span>Application by the University of Michigan Library</span></h1>
@@ -42,7 +42,6 @@ class DictionaryContainer extends React.Component {
 This application is copyright 2014, The Regents of the University of Michigan.</p>
 			</div>);
 	}
-
 }
 class Dictionary4Word extends React.Component {
   constructor(props) {
@@ -60,17 +59,13 @@ class Dictionary4Word extends React.Component {
   	this.setState({letters:letters});
   }
   render() {
-  	const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  	let letterBrowse=<BrowseFeild onQueryChange={this.handleChange} list={alphabet} type="primary"/>;
-  	if(this.state.type==='letter')
-  		letterBrowse=<div>
-	  			<BrowseFeild onQueryChange={this.handleChange} list={alphabet} type="primary"/>
-	  			<BrowseFeild onQueryChange={this.handleChange} list={currentLetters} type="secondary"/>
-  			</div>;
+  	const SecondaryBrowseField= this.state.type==='letter'?
+  		<BrowseFeild onQueryChange={this.handleChange} list={currentLetters} type="secondary"/>:'';
     return (
     	<div>
     		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
-    		{letterBrowse}
+    		<div><BrowseFeild onQueryChange={this.handleChange} list={alphabet} type="primary"/>
+    			{SecondaryBrowseField}</div>
     		<MessageRow query={this.state.query} type={this.state.type}/>
     		<div className="TermCardList_word"><TermCardList matches={this.state.matches}/></div>
     	</div>
@@ -101,17 +96,23 @@ class Dictionary4Paragraph extends React.Component {
 class SearchBar4Word extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state={input:'',isToggled:false};
+	    this.state={isToggled:false};
 	    this.handleChange = this.handleChange.bind(this);
+	    this.handleBlur = this.handleBlur.bind(this);
 	}
 	handleChange(event) {
+		if(event.target.name!='guess') this.setState({isToggled:false});
+		var value=event.target.value;
 		var change=new Object();
-		change.query=event.target.value;
+		change.query=value;
 		change.type="search";
-		this.setState({input:event.target.value});
-		if(event.target.name==='guess') this.setState({isToggled:true});
-		else this.setState({isToggled:false});
 	    this.props.onQueryChange(change);
+	}
+	handleBlur(event){
+		setTimeout(
+		    function() {
+		    	this.setState({isToggled:true});
+		    }.bind(this),200);
 	}
 	render() {
 		const matches=this.props.matches;
@@ -121,11 +122,12 @@ class SearchBar4Word extends React.Component {
 		for(var i=0;!this.state.isToggled && this.props.type!="letter" && i<4 && i<len;i++) 
 			matchTerms.push(<button key={i} name="guess" value={matches[i][0]} onClick={this.handleChange}>{matches[i][0]}</button>);
 	    const shadow=matchTerms.length>1?"shadow":""; 
+	    
 	    return (
-	    	<div className="relative">
+	    	<div className="relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
 			        <input type="text" name="search" id="search-field" placeholder="Search for a medical term" autoComplete="off" 
-			        	onChange={this.handleChange} value={this.props.type==="letter"?this.state.input:this.props.query}></input>
+			        	onChange={this.handleChange}></input>
 			        {search_svg}
 			     </div>
 			     <div className={"search-box guess "+shadow}>{matchTerms}</div>
@@ -143,17 +145,26 @@ class SearchBar4Paragraph extends React.Component {
 	    this.setCaretPos = this.setCaretPos.bind(this);
 	}
 	handleContentEditable(event) {
-		var change=new Object();
 		var target=event.target;
-		var pos=this.getCaretPos(target);
-		console.log(target)
+		var newText=$('#'+target.id).text();
+		// var pos=this.getCaretPos(target);
+		
+		///when plain text changes
+		if(newText!=this.state.input){
+			var change=new Object();
+			this.setState({input:newText});
+			change.query=newText;
+			change.type="search";
+		    this.props.onQueryChange(change);
+		}
 
-		change.query=$('#content-editable-field').text();
-		change.type="search";
-		this.setState({input:this.props.display,pos:pos});
-	    this.props.onQueryChange(change);
-
-	    this.setCaretPos(target,pos);
+		// if(pos==0 && this.state.pos!=0){
+		// 	this.setCaretPos(target,this.state.pos);
+		// }
+		// else{ 
+		// 	this.setState({pos:pos});
+		// 	this.setCaretPos(target,pos);
+		// }
 	}
 	getCaretPos(target){
 		target.focus()
@@ -165,14 +176,13 @@ class SearchBar4Paragraph extends React.Component {
 	}
 	setCaretPos(target,pos){
 		target.focus();
-		console.log(target.parentNode.childNodes[0])
 		document.getSelection().collapse(target.parentNode.childNodes[0].childNodes[0], pos);
 	}
 	render() {
 			return(
 				<div className="relative search-box flex search-paragraph">
 			        <div name="search" id="content-editable-field" placeholder="Please paste the text here"
-			        	onInput={this.handleContentEditable} onBlur={this.handleContentEditable} contentEditable="true" suppressContentEditableWarning={true} 
+			        	onFocus={this.handleContentEditable} onBlur={this.handleContentEditable} contentEditable="true" suppressContentEditableWarning={true} 
 			        	dangerouslySetInnerHTML={{__html: this.props.display}}></div>
 			        {search_svg}
 			     </div>
