@@ -1,10 +1,17 @@
 // import {jaro_winkler} from './jaro_winkler/jaro_winkler.js';
 // var jaro_winkler=import('./jaro_winkler/jaro_winkler.js');
-
 var total=0;
 var dictionary=[];
 var currentLetters=[];
-
+const search_svg=(<svg className="search-icon" xmlns="http://www.w3.org/2000/svg" width="18.895" height="18.9" viewBox="0 0 18.895 18.9">
+  <path id="union2" data-name="union2" className="cls-1" d="M-85.811,405.607-90.1,401.32A7.941,7.941,0,0,1-95,403a7.943,7.943,0,0,1-5.656-2.343,8.009,8.009,0,0,1,0-11.314A7.944,7.944,0,0,1-95,387a7.95,7.95,0,0,1,5.657,2.343,8.014,8.014,0,0,1,.663,10.563l4.287,4.287a1,1,0,0,1,0,1.414,1,1,0,0,1-.707.293A1,1,0,0,1-85.811,405.607Zm-13.435-14.849a6.007,6.007,0,0,0,0,8.485A5.957,5.957,0,0,0-95,401a5.957,5.957,0,0,0,4.243-1.757A5.961,5.961,0,0,0-89,395a5.961,5.961,0,0,0-1.758-4.243A5.961,5.961,0,0,0-95,389,5.961,5.961,0,0,0-99.247,390.758Z" transform="translate(103 -387)"/>
+</svg>);
+const report_svg=(<svg className="report-icon" xmlns="http://www.w3.org/2000/svg" width="19.716" height="17.964" viewBox="0 0 19.716 17.964">
+	<path id="report" className="cls-1" d="M-84.228,406.518h-15.71a1.981,1.981,0,0,1-1.726-.99,1.981,1.981,0,0,1-.016-1.99l7.854-13.964a1.977,1.977,0,0,1,1.743-1.019,1.977,1.977,0,0,1,1.743,1.019l7.855,13.964a1.982,1.982,0,0,1-.017,1.991A1.981,1.981,0,0,1-84.228,406.518Zm-7.855-4.761a1.254,1.254,0,0,0-1.253,1.253,1.254,1.254,0,0,0,1.253,1.253,1.254,1.254,0,0,0,1.253-1.253A1.254,1.254,0,0,0-92.083,401.757Zm0-8.769a1.254,1.254,0,0,0-1.253,1.253v5.011a1.254,1.254,0,0,0,1.253,1.253,1.254,1.254,0,0,0,1.253-1.253v-5.011A1.254,1.254,0,0,0-92.083,392.989Z" transform="translate(101.941 -388.554)"/>
+</svg>);
+const copy_svg=(<svg className="copy-icon" xmlns="http://www.w3.org/2000/svg" width="17.325" height="19" viewBox="0 0 17.325 19">
+  <path id="copy" className="cls-1" d="M-97,406a2,2,0,0,1-2-2h10.329a1,1,0,0,0,1-1V393a1,1,0,0,0-1-1v-2h1a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm-4-3a2,2,0,0,1-2-2V389a2,2,0,0,1,2-2h9.326a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm0-13v10a1,1,0,0,0,1,1h7.33a1,1,0,0,0,1-1V390a1,1,0,0,0-1-1H-100A1,1,0,0,0-101,390Z" transform="translate(103 -387)"/>
+</svg>);
 	///////////////////
    //// COMPONENTS ///
   ///////////////////
@@ -12,7 +19,7 @@ var currentLetters=[];
 class DictionaryContainer extends React.Component {
 	constructor(props){
 		super(props);
-		this.state={status:"word"};
+		this.state={status:"paragraph"};
 		this.handleStatusChange=this.handleStatusChange.bind(this);
 	}
 	handleStatusChange(event){
@@ -65,7 +72,7 @@ class Dictionary4Word extends React.Component {
     		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
     		{letterBrowse}
     		<MessageRow query={this.state.query} type={this.state.type}/>
-    		<TermCardList matches={this.state.matches}/>
+    		<div className="TermCardList_word"><TermCardList matches={this.state.matches}/></div>
     	</div>
     	);
   }
@@ -85,7 +92,7 @@ class Dictionary4Paragraph extends React.Component {
     return (
     	<div className="flex">
     		<SearchBar4Paragraph onQueryChange={this.handleChange} display={this.state.display} />
-    		<div className="paraTermList"><TermCardList matches={this.state.matches}/></div>
+    		<div className="TermCardList_para"><TermCardList matches={this.state.matches}/></div>
     	</div>
     	);
   }
@@ -116,35 +123,58 @@ class SearchBar4Word extends React.Component {
 	    const shadow=matchTerms.length>1?"shadow":""; 
 	    return (
 	    	<div className="relative">
-		    	<div className="search-box search-word"> 
+		    	<div className="search-box flex"> 
 			        <input type="text" name="search" id="search-field" placeholder="Search for a medical term" autoComplete="off" 
 			        	onChange={this.handleChange} value={this.props.type==="letter"?this.state.input:this.props.query}></input>
-			        <div className="search-icon"></div>
+			        {search_svg}
 			     </div>
 			     <div className={"search-box guess "+shadow}>{matchTerms}</div>
 		     </div>
     	);
 	}
 }
+//content editable field
 class SearchBar4Paragraph extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state={input:''};
+	    this.state={input:'',pos:0};
 	    this.handleContentEditable = this.handleContentEditable.bind(this);
+	    this.getCaretPos = this.getCaretPos.bind(this);
+	    this.setCaretPos = this.setCaretPos.bind(this);
 	}
 	handleContentEditable(event) {
 		var change=new Object();
+		var target=event.target;
+		var pos=this.getCaretPos(target);
+		console.log(target)
+
 		change.query=$('#content-editable-field').text();
 		change.type="search";
-		this.setState({input:change.query});
+		this.setState({input:this.props.display,pos:pos});
 	    this.props.onQueryChange(change);
+
+	    this.setCaretPos(target,pos);
+	}
+	getCaretPos(target){
+		target.focus()
+        let _range = document.getSelection().getRangeAt(0)
+        let range = _range.cloneRange()
+        range.selectNodeContents(target.parentNode.childNodes[0])
+        range.setEnd(_range.endContainer, _range.endOffset)
+        return range.toString().length;
+	}
+	setCaretPos(target,pos){
+		target.focus();
+		console.log(target.parentNode.childNodes[0])
+		document.getSelection().collapse(target.parentNode.childNodes[0].childNodes[0], pos);
 	}
 	render() {
 			return(
-				<div className="relative search-box search-paragraph">
+				<div className="relative search-box flex search-paragraph">
 			        <div name="search" id="content-editable-field" placeholder="Please paste the text here"
 			        	onInput={this.handleContentEditable} onBlur={this.handleContentEditable} contentEditable="true" suppressContentEditableWarning={true} 
 			        	dangerouslySetInnerHTML={{__html: this.props.display}}></div>
+			        {search_svg}
 			     </div>
 			     );
 	}
@@ -201,7 +231,7 @@ class TermCardList extends React.Component {
 		if(this.props.matches.length>0){
 			list = this.props.matches.map((item)=> <TermCard key={item[0]} term={item[0]} define={item[1]} />);
 		}
-		return list;
+		return <div className="TermCardList">{list}</div>;
 	}
 }
 class TermCard extends React.Component {
@@ -214,15 +244,15 @@ class TermCard extends React.Component {
 		this.setState({isToggled:!this.state.isToggled});
 	}
 	render() {
-		if(this.state.length>60 && this.state.isToggled)
-			return(
-				<div className="term-card" onClick={this.handleClick}>
-					<h2>{this.props.term}</h2>
-					<p>{this.props.define.substring(0,60)+' ...'}</p></div>);
-		else return(
-				<div className="term-card" onClick={this.handleClick}>
-					<h2>{this.props.term}</h2>
-					<p>{this.props.define}</p></div>);
+		var def=this.state.length>60 && this.state.isToggled?(this.props.define.substring(0,60)+' ...'):this.props.define;
+		return(
+			<div className="term-card shadow">
+				<h2>{this.props.term}</h2>
+				<div className="iconset">
+					<button title="Report incorrect definition">{report_svg}</button>
+					<button title="Copy this definition">{copy_svg}</button></div>
+				<p onClick={this.handleClick}>{def}</p></div>);
+		
 	}
 }
 
@@ -314,6 +344,7 @@ function search_query(query) {
     // Set the initial acceptable score range.
     var best_score  = 0
     var score_range = 3
+    var perfect=false;//if there is perfect match for the query in our dictionary
     // Split the query, search through word by word.
     var query_low = query.toLowerCase();
     var query_words = query_low.split(splittable_chars);
@@ -326,7 +357,9 @@ function search_query(query) {
       	var b=term_low.search(query_low)!=-1? 1:-1;
       	var distance = 10;
       	//if term or query is not the same
-      	if(a+b>0)distance=0;
+      	if(a+b>0){
+      		distance=0;
+      		perfect=true;}
       	if(a+b==0)
       		if(len_t!=len_q) distance=0.1*Math.abs(len_t - len_q)+1;
       		else distance=0.1*levenshteinDistance(term_low,query_low);
@@ -346,10 +379,12 @@ function search_query(query) {
     	termD[2]=distance;
     	matches.push(termD);
       }
-    matches=matches.sort(distanceCompare).slice(0,50);
+    if(perfect&&matches.length>=10) matches=matches.sort(distanceCompare).slice(0,10);
+    else if(matches.length>=30) matches=matches.sort(distanceCompare).slice(0,30);
     return matches;
  }
 
+//query is plain text, pos is caret position
 function search_paragraph(query) {
 	var obj=new Object();
     obj.markedString="";
@@ -386,6 +421,18 @@ function search_paragraph(query) {
     
     return obj;
 }
+
+// get and set caret position in a contenteditable div
+const getCaretPosition = function (element) {
+    element.target.focus()
+	let _range = document.getSelection().getRangeAt(0)
+	let range = _range.cloneRange()
+	range.selectNodeContents(this.target)
+	range.setEnd(_range.endContainer, _range.endOffset)
+	return range.toString().length;
+}
+
+
 	///////////////////
    ////// RENDER /////
   ///////////////////
