@@ -28,9 +28,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-body {
-  line-height: 1;
-}
+
 ol, ul {
   list-style: none;
 }
@@ -47,16 +45,8 @@ table {
   border-spacing: 0;
 }
 
-.nav li{
-  display: inline-block;
-  margin: 0 10px;
-  vertical-align: top;
-}
-.nav li: last-child{
-  margin-right: 0;
-}
 /*
-  Copyright (c) 2014 The Regents of the University of Michigan.
+  Copyright (c) 2020 The Regents of the University of Michigan.
   All Rights Reserved. Licensed according to the terms of the Revised BSD license.
   See LICENSE.txt for details.
 */
@@ -72,51 +62,12 @@ input,textarea,button,body{
 body {
   width: 80%;
   max-width: 40em;
-  min-width: 14em;
+  min-width: 30em;
   margin: 1em auto;
   border: .2em solid #eee;
 }
 #main{padding: 1em;}
 
-p{margin: .5em 0;}
-
-header {
-  margin-bottom: 2em;
-}
-
-footer {
-  margin-top: 3em;
-  font-size: 0.8em;
-  text-align: center;
-}
-
-aside {
-  display: block;
-  font-size: 0.9em;
-  font-style: italic;
-  margin-top: 1.5em;
-}
-
-label {
-  font-weight: bold;
-  display: inline-block;
-  margin-right: 0.5em;
-}
-
-input:focus{outline: none;}
-
-button {
-  display: block;
-  background-color: #eee;
-  border:none;
-  border-radius: .3em;
-  text-decoration: none;
-  text-align: center;
-  padding:.3em .6em;
-  cursor: pointer;
-}
-button:hover{background-color: #bbb;}
-button:focus{outline: none;}
 h1 {
   font-weight: bold;
   font-size: 1.7em;
@@ -142,6 +93,9 @@ h3 {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+p{margin: .5em 0;}
+
 #copyright{
   font-size: .6em;
   line-height: 133%;
@@ -153,6 +107,41 @@ h3 {
 strong{font-weight: 700;}
 mark{background-color: #FECB05;}
 
+
+header {
+  margin-bottom: 2em;
+}
+
+footer {
+  margin-top: 3em;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+aside {
+  display: block;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 1.5em;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+input:focus, button:focus, a:focus{
+  outline: none;
+}
+textarea{
+  width: 100%;
+  outline: none;
+  border: none;
+  resize: none;
+  padding: 0;
+}
+
 .relative{position: relative;}
 .center{margin:0 auto;text-align: center;}
 .flex{
@@ -163,24 +152,44 @@ mark{background-color: #FECB05;}
 .shadow{box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.2);}
 .hide{display: none;}
 
-
-.letter{
+button {
   display: inline-block;
+  background-color: #eee;
+  border:none;
+  border-radius: .3em;
+  text-decoration: none;
+  text-align: center;
+  padding:.3em .6em;
   margin: .2em;
+  cursor: pointer;
 }
+button:hover{
+  background-color: #bbb;
+}
+/*current used as a key word for buttons that shows system status*/
+button[class^="current"]{
+  background-color: #aaa;
+  color:white;
+}
+
+/*////////////////////////
+////  status button  ////
+//////////////////////*/
+
 .status{
   width: 36%;
+  min-width: 12em;
   margin: 0 auto;
   margin-bottom: 1em;
 }
 .status button{
-  display: inline-block;
-  margin: 0 auto;
-  font-size: .8em;
-  border:1.5px solid #00274C;
+  width: 50%;
+  min-width: 6em;
+  margin: 0; /*remove inherited margin*/
+  border: 1.5px solid #00274C;
   border-radius: 0;
   background-color: white;
-  width: 50%;
+  font-size: .8em;
 }
 .status button:first-child{
   border-radius: .5em 0 0 .5em;
@@ -188,60 +197,62 @@ mark{background-color: #FECB05;}
 .status button:last-child{
   border-radius:  0 .5em .5em 0;
 }
-.status .current-status{
+
+.status button[class^="current"]{
   background-color: #00274C;
-  color: white;
 }
 
-.search-box{
+/*////////////////////////
+////    search box   ////
+//////////////////////*/
+
+.search-box-container{
   width: 48%;
+  min-width: 12em;
   position: relative;
-  text-decoration: none;
-  border-radius: 1.2em;
-  border:2px solid #FECB05;
-  background-color: white;
   margin:0 auto;
+}
+.search-box{
+  width: 100%;
+  position: relative;
   padding: .5em .8em;
+  border-radius: 1.2em;
+  border: 2px solid #FECB05;
+  background-color: white;
   z-index: 9999;
 }
 
-.search-word-focused{
-  border-radius: 1.2em 1.2em 0 0;
-}
+/*/////word: search-box/////*/
 
-/*input field for word search*/
-#search-field{
+.search-box input{
   display: inline-block;
+  flex-grow: 1; /*take all rest space*/
   border:none;
-  width: 90%;
-  height: 1.2em;
+  height: 1em;
   text-decoration: none;
   text-align: left;
   font-size: 1em;
   background-color: transparent;
 }
-
-.focused-button{
-  background-color: #bbb;
-  color:white;
+.search-box svg{
+  margin-left: .5em;
+  flex-grow: 0;
 }
-
-
 .guess{
-  border:none;
   position: absolute;
   padding: 0;
-  left:26%;
   top:0;
+  left:26%;
+  border:none;
   z-index: 99;
 }
 .guess button{
   position: relative;
-  padding: .5em .8em;
-  background-color: white;
   width: 100%;
+  padding: .5em .8em;
+  border-radius: 0; 
   text-align: left;
-  border-radius: 0;
+  background-color: white;
 }
 .guess button:first-child{
   border-radius: 1.2em 1.2em 0 0;
@@ -252,15 +263,50 @@ mark{background-color: #FECB05;}
 .guess button:hover{
   background-color: #f8f8f8;
 }
-.BrowseFeild{margin-top: .8em;}
+
+/*/////paragraph: search-box/////*/
+.search-box .box-paragraph{
+  flex-grow: 1;
+  display: inline-block;
+  min-height: 50vh;
+  max-height: 70vh;
+}
+
+#under-textarea{
+  width: 100%;
+  position: relative;
+  color:transparent;
+  padding: 0;
+}
+.box-paragraph textarea{
+  display: inline-block;
+  position: absolute;
+  top:.0;
+  left:0;
+  z-index: 99;
+  background-color: transparent;
+}
+
+
+/*//////////////////////////
+////    BrowseField    ////
+////////////////////////*/
+
+.BrowseFeild{
+  margin-top: .8em;
+}
+
+/*//////////////////////////
+////    TermCardList   ////
+////////////////////////*/
 
 .TermCardList_para{
   max-width: 48%;
-  max-height:70vh;
-  padding: 0 .5em;
+  max-height: 70vh;
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
+.padding{padding: 0 .5em;}
 .TermCardList_para::-webkit-scrollbar {
   display: none;
 }
@@ -268,45 +314,33 @@ mark{background-color: #FECB05;}
 .term-card{
   width: 100%;
   position: relative;
-  background-color: white;
-  border-radius: .5em;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .24);
   padding: 1em;
   margin: .5em auto;
   margin-bottom: 1em;
+
+  background-color: white;
+  border-radius: .5em;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .24);
+  
   overflow: hidden;
   cursor:pointer;
   z-index: 10;
 }
-
-.search-paragraph{
-  width: 90%;
-  padding: 0;
-  position: relative;
-  min-height: 50vh;
-  max-height: 70vh;
-}
-
-
-#markedString,
-textarea{
-  width: 100%;
-  text-decoration: none;
-  outline: none;
-  border:none;
-  padding: 0;
-  background-color: transparent;
-  resize: none;
-}
-#markedString{
-  color:transparent;
-}
-.search-paragraph textarea{
+.iconset{
   position: absolute;
-  top:.0;
-  left:0;
-  z-index: 99;
+  top: 1em;
+  right: 1em;
 }
+.iconset button{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  margin-left: .8em;
+}
+
+/*//////////////////////////
+//////    Request    //////
+////////////////////////*/
 
 .request-textarea{
   border:1.5px solid #eee;
@@ -317,27 +351,20 @@ textarea{
   height: 4em;
 }
 
+/*////////////////////////
+////  svg & icons   /////
+//////////////////////*/
+
 svg{
   height: 1em;
   display: inline-block;
+  background-color: transparent;
 }
+
 .search-icon{fill:#FECB05;}
 
-.iconset{
-  position: absolute;
-  top: 1em;
-  right: 1em;
-}
-.iconset button{
-  display: inline-block;
-  background-color: white;
-  padding: 0;
-  margin: 0;
-  margin-left: .8em;
-}
-
 .report-icon,
-.copy-icon{fill:#aaa;}
+.copy-icon{fill: #aaa;}
 
 .report-icon:hover,
-.copy-icon:hover{fill:#01274C;}
+.copy-icon:hover{fill: #01274C;}

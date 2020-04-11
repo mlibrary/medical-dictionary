@@ -99,12 +99,13 @@ class Dictionary4Paragraph extends React.Component {
   	if(selected!=-1) this.setState({selected:selected});
   }
   render() {
-    return (
-    	<div className="flex">
-    		<SearchBar4Paragraph onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
-    		<div className="TermCardList_para"><TermCardList matches={this.state.matches} selected={this.state.selected}/></div>
-    	</div>
-    	);
+  	var padding=this.state.matches.length>0? ' padding' : '';
+	return (
+		<div className="flex">
+			<SearchBar4Paragraph onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
+			<div className={"TermCardList_para"+padding}><TermCardList matches={this.state.matches} selected={this.state.selected}/></div>
+		</div>
+	);
   }
 }
 
@@ -140,9 +141,9 @@ class SearchBar4Word extends React.Component {
 	    const shadow=matchTerms.length>1?"shadow":""; 
 	    
 	    return (
-	    	<div className="relative" onBlur={this.handleBlur}>
+	    	<div className="search-box-container relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
-			        <input type="text" name="search" id="search-field" placeholder="Search for a medical term" autoComplete="off" 
+			        <input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" 
 			        	onChange={this.handleChange} value={this.props.type=="letter"?this.state.input:this.props.query}></input>
 			        {search_svg}
 			     </div>
@@ -195,14 +196,16 @@ class SearchBar4Paragraph extends React.Component {
 	}
 	render() {
 			return(
-				<div className="search-box flex">
-					<div className="search-paragraph">
-						<textarea name="search" placeholder="Please paste the text here"
-			        	onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
-			        	<div id="markedString" dangerouslySetInnerHTML={{__html: this.props.display}}></div>
-			        </div>
-			        {search_svg}
-			     </div>
+				<div className="search-box-container">
+					<div className="search-box flex">
+						<div className="box-paragraph relative">
+							<textarea name="search" placeholder="Please paste the text here"
+				        	onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
+				        	<div id="under-textarea" dangerouslySetInnerHTML={{__html: this.props.display}}></div>
+				        </div>
+				        {search_svg}
+				    </div>
+				</div>
 			     );
 	}
 } 
@@ -223,18 +226,22 @@ class BrowseFeild extends React.Component {
 	}
 	setStyle(){}
 	render() {
-		var query=this.props.query;
-		var boolean=this.props.type==='letter'?true:false;
+		const boolean= this.props.type==='letter'?true:false;
+		var query=""
+		if(boolean){
+			query=this.props.query.length<3 && this.props.status==='primary'?this.props.query.charAt(0):this.props.query;
+		}
 	  	var listItems = this.props.list.map((letter)=>
-			<button key={letter} className={boolean && letter===query?"letter focused-button":"letter"} value={letter} type="button" onClick={this.handleClick}>
-				{letter}
-			</button>
-		);
+			<button key={letter} className={boolean && letter===query?"current-button":""} 
+			value={letter} type="button" onClick={this.handleClick}>
+				{letter}</button>
+				);
 	  	if(this.props.status==='primary')
 	  	 	listItems.push(
-		  		<button key="all" className={boolean && 'all'===query?"letter focused-button":"letter"} value='all' type="button" onClick={this.handleClick}>
-					{"view all "+total+" terms"}
-				</button>);
+		  		<button key="all" className={boolean && 'all'===query?"current-button":""}
+		  		value='all' type="button" onClick={this.handleClick}>
+					{"view all "+total+" terms"}</button>
+					);
 	    return <div className="BrowseFeild">{listItems}</div>;
 	}
 }
@@ -268,18 +275,11 @@ class TermCardList extends React.Component {
 	}
 	render() {
 		if(this.state.request==false){
-			var list=null;
-			if(this.props.matches.length>0){
-				list = this.props.matches.map((item)=> <TermCard key={item[0]} term={item[0]} define={item[1]} />);
-			}
-			else return null;
-			return <div className="TermCardList">{list}</div>;}
-		else return (<div>
-						<p>back</p>
-						<h3>Find something incorrect?</h3>
-						<p>Please let us know what we can improve on: </p>
-						<div className="request-textarea" rows="4"><textarea placeholder="Leave your comments here"></textarea></div>
-						</div>);
+			if(this.props.matches.length <= 0) return null;
+			const list = this.props.matches.map((item)=> <TermCard key={item[0]} term={item[0]} define={item[1]} />);
+			return <div className="TermCardList">{list}</div>;
+		}
+		else return <Request query={''}/>
 	}
 }
 class TermCard extends React.Component {
@@ -304,14 +304,32 @@ class TermCard extends React.Component {
 	}
 	render() {
 		var def=this.state.length>60 && this.state.isToggled?(this.props.define.substring(0,60)+' ...'):this.props.define;
+		var title="";
+		if(this.state.length>60)
+			if(this.state.isToggled) title="expand";
+			else title="collapse";
 		return(
 			<div className="term-card">
 				<h2>{this.props.term}</h2>
 				<div className="iconset">
 					<button onClick={this.handleReport} title="Report incorrect definition">{report_svg}</button>
 					<button onClick={this.handleCopy} title="Copy this definition to clipboard">{copy_svg}</button></div>
-				<p onClick={this.handleClick}>{def}</p>
+				<p onClick={this.handleClick} title={title}>{def}</p>
 			</div>);
+	}
+}
+
+class Request extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render(){
+		return (<div>
+					<p>back</p>
+					<h3>Find something incorrect?</h3>
+					<p>Please let us know what we can improve on: </p>
+					<div className="request-textarea" rows="4"><textarea placeholder="Leave your comments here"></textarea></div>
+				</div>);
 	}
 }
 
