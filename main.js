@@ -102,7 +102,6 @@ class Dictionary4Paragraph extends React.Component {
   handleMouseUp(pos) {
   	const flagArray=this.state.flagArray;
   	if(flagArray.length <= 0 || pos.start < 0 || pos.end > flagArray.length) return;
-
   	var selected=-1;
   	if(pos.end==pos.start) {
   		selected=flagArray[pos.end];
@@ -111,7 +110,7 @@ class Dictionary4Paragraph extends React.Component {
   			if(flagArray[i]!=-1){ 
   				selected=flagArray[i];break;}
 
-  	if(selected!=-1) this.setState({selected:selected});
+  	this.setState({selected:selected});
   }
   render() {
   	var padding=this.state.matches.length>0? ' padding' : '';
@@ -300,12 +299,16 @@ class TermCardList extends React.Component {
 	}
 	render() {
 		if(this.props.matches.length <= 0) return null;
+		var selected='';
+		if(this.props.selected!=-1 && this.props.selected < this.props.matches.length) 
+			selected=this.props.matches[this.props.selected][0];
 		const list = this.props.matches.map(
-			(item)=> <TermCard type="normal" onReport={this.handleReport} key={item[0]} query={item} />
+			(item)=> <TermCard type={selected===item[0]?"selected":"normal"} onReport={this.handleReport} key={item[0]} query={item} />
 			);
 		return <div>{list}</div>;
 	}
 }
+
 class TermCard extends React.Component {
 	constructor(props) {
 	    super(props);
@@ -338,7 +341,7 @@ class TermCard extends React.Component {
 				</div>
 				);
 		else return(
-			<div className="term-card">
+			<div className={this.props.type==="selected"?"term-card term-card-selected":"term-card"}>
 				<h2>{this.props.query[0]}</h2>
 				<div className="iconset">
 					<button onClick={this.handleReport} title="Report incorrect definition">{report_svg}</button>
