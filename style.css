@@ -55,7 +55,7 @@ table {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-input,textarea,button,body{
+input,textarea,button,body,label{
   font: 300 16px/150% "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
@@ -66,13 +66,14 @@ body {
   margin: 1em auto;
   border: .2em solid #eee;
 }
-#main{padding: 1em;}
+#main{
+  padding: 1em;
+}
 
 h1 {
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 1.5em;
   color: white;
-  margin-bottom: .5em;
   padding: .5em 0;
   text-align: center;
   background-color: #00274C;
@@ -94,7 +95,7 @@ h3 {
   font-weight: bold;
 }
 
-p{margin: .5em 0;}
+p{margin-top: .5em;}
 
 #copyright{
   font-size: .6em;
@@ -125,12 +126,6 @@ aside {
   margin-top: 1.5em;
 }
 
-label {
-  font-weight: bold;
-  display: inline-block;
-  margin-right: 0.5em;
-}
-
 input:focus, button:focus, a:focus{
   outline: none;
 }
@@ -143,7 +138,10 @@ textarea{
 }
 
 .relative{position: relative;}
-.center{margin:0 auto;text-align: center;}
+.center{
+  margin:0 auto;
+  text-align: center;}
+.right{text-align: right;}
 .flex{
   display: flex;
   justify-content: space-around;
@@ -171,6 +169,18 @@ button[class^="current"]{
   background-color: #aaa;
   color:white;
 }
+button[class*="dark"],button[class*="bright"]{
+  border:1.5px solid #00274C;
+  font-weight: 500;
+}
+button[class*="dark"]{
+  color: white;
+  background-color: #00274C;
+}
+button[class*="bright"]{
+  color: #00274C;
+  background-color: white;
+}
 
 /*////////////////////////
 ////  status button  ////
@@ -186,9 +196,7 @@ button[class^="current"]{
   width: 50%;
   min-width: 6em;
   margin: 0; /*remove inherited margin*/
-  border: 1.5px solid #00274C;
   border-radius: 0;
-  background-color: white;
   font-size: .8em;
 }
 .status button:first-child{
@@ -242,14 +250,15 @@ button[class^="current"]{
   position: absolute;
   padding: 0;
   top:0;
-  left:26%;
-  border:none;
+  left:0;
+  border: 2px solid white;
   z-index: 99;
 }
 .guess button{
   position: relative;
   width: 100%;
   padding: .5em .8em;
+  margin: 0;
   border-radius: 0; 
   text-align: left;
   background-color: white;
@@ -300,13 +309,20 @@ button[class^="current"]{
 ////    TermCardList   ////
 ////////////////////////*/
 
+/*.TermCardList_para,
+.TermCardList_word{
+  max-height: 20em;
+  overflow-y: scroll;
+}*/
 .TermCardList_para{
   max-width: 48%;
   max-height: 70vh;
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
-.padding{padding: 0 .5em;}
+.padding{
+  padding: 0 .5em;
+}
 .TermCardList_para::-webkit-scrollbar {
   display: none;
 }
@@ -339,16 +355,54 @@ button[class^="current"]{
 }
 
 /*//////////////////////////
-//////    Request    //////
+//////    Report    //////
 ////////////////////////*/
 
-.request-textarea{
-  border:1.5px solid #eee;
+.form{margin: .5em;}
+
+.back-a{
+  font-size: .8em;
+  width: 3em;
+  margin-bottom:.5em; 
+  line-height: 100%;
+  color: #00274C;
+  border-bottom: 1px solid #00274C;
+  cursor: pointer;
+}
+.back-a:hover{
+  background-color: #00274C;
+  color: white;
+}
+.term-card-min{
+  width: 96%;
+  padding: 1em;
+  margin: .5em auto;
+  margin-bottom: 1em;
+  background-color: #f8f8f8;
+  border-radius: .5em;
+  cursor: pointer;
+}
+.form-textarea{
+  border:1.5px solid #aaa;
   border-radius:.5em;
   padding: .2em .5em;
+  margin:.5em auto;
 }
-.request-textarea textarea{
+.form-textarea textarea{
   height: 4em;
+}
+.form button{
+  position: relative;
+  top: 0;
+  width: 5em;
+  margin-left: 1em;
+  border-radius: 10em;
+  transition-property: ease-out;
+  transition: top .2s, box-shadow .2s;
+}
+.form button:hover{
+  top: -2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 /*////////////////////////

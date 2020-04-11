@@ -33,8 +33,8 @@ class DictionaryContainer extends React.Component {
 				<h1>Plain Language Medical Dictionary <span>Application by the University of Michigan Library</span></h1>
 				<section id="main">
 					<div className="status">
-						<button className={this.state.status==="word"?"current-status":""} onClick={this.handleStatusChange} value="word">Word</button>
-						<button className={this.state.status==="paragraph"?"current-status":""} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
+						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word">Word</button>
+						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
 					</div>
 					{body}
 				</section>
@@ -46,28 +46,37 @@ This application is copyright 2014, The Regents of the University of Michigan.</
 class Dictionary4Word extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {query:'',type:'',matches:[]};
+    this.state = {query:'',type:'',matches:[],report_query:[-1,-1]};
     this.handleChange = this.handleChange.bind(this);
-    this.handleLetterChange = this.handleLetterChange.bind(this);
+    this.handleReport = this.handleReport.bind(this);
   }
   handleChange(change) {
     this.setState({query: change.query,type:change.type});
     var matches=getMatches(change.query,change.type);
     this.setState({matches:matches});
   }
-  handleLetterChange(letters){
-  	this.setState({letters:letters});
+  handleReport(query) {
+  	this.setState({report_query:query});
   }
   render() {
+  	if(this.state.report_query[0]!=-1)
+  		return (
+	  		<div>
+	    		<SearchBar4Word onQueryChange={this.handleChange} status="disabled" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
+	    		<div className="TermCardList_word padding">
+	    			<Report onBack={this.handleReport} query={this.state.report_query}/></div>
+	    	</div>
+  			);
   	const SecondaryBrowseField= this.state.type==='letter'?
   		<BrowseFeild onQueryChange={this.handleChange} status="secondary" query={this.state.query} type={this.state.type} list={currentLetters} />:'';
     return (
     	<div>
     		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
-    		<div><BrowseFeild onQueryChange={this.handleChange} status="primary" query={this.state.query} type={this.state.type} list={alphabet} />
-    			{SecondaryBrowseField}</div>
-    		<MessageRow query={this.state.query} type={this.state.type}/>
-    		<div className="TermCardList_word"><TermCardList matches={this.state.matches}/></div>
+			<BrowseFeild onQueryChange={this.handleChange} status="primary" query={this.state.query} type={this.state.type} list={alphabet} />
+			{SecondaryBrowseField}
+			<MessageRow query={this.state.query} type={this.state.type}/>
+    		<div className="TermCardList_word padding">
+    			<TermCardList onReport={this.handleReport} matches={this.state.matches}/></div>
     	</div>
     	);
   }
@@ -75,14 +84,18 @@ class Dictionary4Word extends React.Component {
 class Dictionary4Paragraph extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {query:'',display:'',matches:[],flagArray:[],selected:-1};
+    this.state = {query:'',display:'',matches:[],flagArray:[],selected:-1,report_query:[-1,-1]};
     this.handleChange = this.handleChange.bind(this);
+    this.handleReport = this.handleReport.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
   }
   handleChange(change) {
     this.setState({query: change.query});
     var obj=search_paragraph(change.query);
     this.setState({matches:obj.matches, display:obj.markedString, flagArray:obj.flagArray});
+  }
+  handleReport(query) {
+  	this.setState({report_query:query});
   }
   handleMouseUp(pos) {
   	const flagArray=this.state.flagArray;
@@ -100,10 +113,20 @@ class Dictionary4Paragraph extends React.Component {
   }
   render() {
   	var padding=this.state.matches.length>0? ' padding' : '';
+  	if(this.state.report_query[0]!=-1)
+  		return (
+  			<div className="flex">
+				<SearchBar4Paragraph status="disabled" onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
+				<div className={"TermCardList_para"+padding}>
+					<Report onBack={this.handleReport} query={this.state.report_query}/></div>
+			</div>
+  			);
+
 	return (
 		<div className="flex">
-			<SearchBar4Paragraph onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
-			<div className={"TermCardList_para"+padding}><TermCardList matches={this.state.matches} selected={this.state.selected}/></div>
+			<SearchBar4Paragraph status="normal" onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
+			<div className={"TermCardList_para"+padding}>
+				<TermCardList onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
 		</div>
 	);
   }
@@ -132,8 +155,8 @@ class SearchBar4Word extends React.Component {
 		    }.bind(this),200);
 	}
 	render() {
-		const matches=this.props.matches;
-		const len=matches.length;
+		var matches=this.props.matches;
+		var len=matches.length;
 		var matchTerms=[];
 		matchTerms.push(<button key="fake">fake</button>);
 		for(var i=0;!this.state.isToggled && this.props.type!="letter" && i<4 && i<len;i++) 
@@ -143,7 +166,7 @@ class SearchBar4Word extends React.Component {
 	    return (
 	    	<div className="search-box-container relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
-			        <input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" 
+			        <input type="text" name="search" disabled={this.props.status==="disabled"?true:false} placeholder="Search for a medical term" autoComplete="off" 
 			        	onChange={this.handleChange} value={this.props.type=="letter"?this.state.input:this.props.query}></input>
 			        {search_svg}
 			     </div>
@@ -199,7 +222,7 @@ class SearchBar4Paragraph extends React.Component {
 				<div className="search-box-container">
 					<div className="search-box flex">
 						<div className="box-paragraph relative">
-							<textarea name="search" placeholder="Please paste the text here"
+							<textarea name="search" placeholder="Please paste the text here" disabled={this.props.status==="disabled"?true:false}
 				        	onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
 				        	<div id="under-textarea" dangerouslySetInnerHTML={{__html: this.props.display}}></div>
 				        </div>
@@ -224,7 +247,6 @@ class BrowseFeild extends React.Component {
 		change.type='letter';
 		this.props.onQueryChange(change);
 	}
-	setStyle(){}
 	render() {
 		const boolean= this.props.type==='letter'?true:false;
 		var query=""
@@ -253,8 +275,8 @@ class MessageRow extends React.Component {
 	}
 	render () {
 		if(this.props.query==='') return null;
-		if(this.props.query==='all'&&this.props.type==='letter') return <p>All the terms we have:</p>;
-		const message=this.props.type==='letter'?"Terms started with ":"Possible matches for ";
+		if(this.props.query==='all' && this.props.type==='letter') return <p>All the terms we have:</p>;
+		const message= this.props.type==='letter'? "Terms started with ":"Possible matches for ";
 		return <p>{message}<strong>{this.props.query}</strong>:</p>
 	}
 }
@@ -262,11 +284,12 @@ class MessageRow extends React.Component {
 class TermCardList extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state = {request:false};
 	    this.handleScroll=this.handleScroll.bind(this);
-	    this.handleRequest=this.handleRequest.bind(this);
+	    this.handleReport=this.handleReport.bind(this);
 	  }
-	handleRequest(){}
+	handleReport(query){
+		this.props.onReport(query);
+	}
 	handleScroll(){
 		element.scroll({
 		  top: 100,
@@ -274,61 +297,82 @@ class TermCardList extends React.Component {
 		});
 	}
 	render() {
-		if(this.state.request==false){
-			if(this.props.matches.length <= 0) return null;
-			const list = this.props.matches.map((item)=> <TermCard key={item[0]} term={item[0]} define={item[1]} />);
-			return <div className="TermCardList">{list}</div>;
-		}
-		else return <Request query={''}/>
+		if(this.props.matches.length <= 0) return null;
+		const list = this.props.matches.map(
+			(item)=> <TermCard type="normal" onReport={this.handleReport} key={item[0]} query={item} />
+			);
+		return <div>{list}</div>;
 	}
 }
 class TermCard extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state = {isToggled: true, length:this.props.define.length};
+	    this.state = {isToggled: true};
 	    this.handleClick = this.handleClick.bind(this);
 	    this.handleCopy = this.handleCopy.bind(this);
 	    this.handleReport = this.handleReport.bind(this);
 	}
 	handleClick(event){
-		this.setState({isToggled:!this.state.isToggled});
+		if(this.props.query[1].length > 60) this.setState({isToggled:!this.state.isToggled});
+	}
+	handleReport(){
+		this.props.onReport(this.props.query);
 	}
 	handleCopy(event){
 		var target=event.target;
 		target.focus();
 		document.execCommand("copy");
- 		alert("Copied the text: " + this.props.define);
+ 		alert("Copied the text: " + this.props.query[1]);
 	}
-	handleReport(event){
-
-	}
+	
 	render() {
-		var def=this.state.length>60 && this.state.isToggled?(this.props.define.substring(0,60)+' ...'):this.props.define;
-		var title="";
-		if(this.state.length>60)
-			if(this.state.isToggled) title="expand";
-			else title="collapse";
-		return(
+		const define=this.props.query[1];
+		var def=define.length > 60 && this.state.isToggled? define.substring(0,60)+"...":define;
+		if(this.props.type==="min")
+			return (
+				<div className="term-card-min">
+					<h2>{this.props.query[0]}</h2>
+					<p onClick={this.handleClick}>{def}</p>
+				</div>
+				);
+		else return(
 			<div className="term-card">
-				<h2>{this.props.term}</h2>
+				<h2>{this.props.query[0]}</h2>
 				<div className="iconset">
 					<button onClick={this.handleReport} title="Report incorrect definition">{report_svg}</button>
 					<button onClick={this.handleCopy} title="Copy this definition to clipboard">{copy_svg}</button></div>
-				<p onClick={this.handleClick} title={title}>{def}</p>
+				<p onClick={this.handleClick}>{def}</p>
 			</div>);
 	}
 }
 
-class Request extends React.Component {
+//to report errors in existing terms
+class Report extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {submitted:false};
+		this.handleBack = this.handleBack.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+	handleBack(){
+		this.props.onBack([-1,-1]);
+	}
+	handleSubmit(event) {
+	    console.log(event.target);
+	    event.preventDefault();
+	 }
 	render(){
-		return (<div>
-					<p>back</p>
+		return (<div className="form">
+					<p onClick={this.handleBack} className="back-a">&larr;back</p>
 					<h3>Find something incorrect?</h3>
-					<p>Please let us know what we can improve on: </p>
-					<div className="request-textarea" rows="4"><textarea placeholder="Leave your comments here"></textarea></div>
+					<TermCard type="min" query={this.props.query}/>
+					<form action="" method="post">
+						<label htmlFor="comment">Please let us know what we can improve on: <strong>{this.props.query[0]}</strong></label>
+						<div className="form-textarea" rows="4">
+							<textarea type="text" name="comment" placeholder="Tell us more about this problem" required></textarea></div>
+						<div className="right"><button onClick={this.handleBack} className="button-bright">Cancel</button>
+						<button type="submit" value="submit" className="button-dark">Send</button></div>
+					</form>
 				</div>);
 	}
 }
