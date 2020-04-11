@@ -27,7 +27,7 @@ class DictionaryContainer extends React.Component {
 		this.setState({status:event.target.value});
 	}
 	render(){
-		const body=this.state.status==="paragraph"?<Dictionary4Word/>:<Dictionary4Paragraph/>;
+		const body=this.state.status==="word"?<Dictionary4Word/>:<Dictionary4Paragraph/>;
 		return (
 			<div>
 				<h1>Plain Language Medical Dictionary <span>Application by the University of Michigan Library</span></h1>
@@ -75,19 +75,34 @@ class Dictionary4Word extends React.Component {
 class Dictionary4Paragraph extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {query:'',display:'',matches:[]};
+    this.state = {query:'',display:'',matches:[],flagArray:[],selected:-1};
     this.handleChange = this.handleChange.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
   }
   handleChange(change) {
     this.setState({query: change.query});
     var obj=search_paragraph(change.query);
-    this.setState({matches:obj.matches,display:obj.markedString});
+    this.setState({matches:obj.matches, display:obj.markedString, flagArray:obj.flagArray});
+  }
+  handleMouseUp(pos) {
+  	const flagArray=this.state.flagArray;
+  	if(flagArray.length <= 0 || pos.start < 0 || pos.end > flagArray.length) return;
+
+  	var selected=-1;
+  	if(pos.end==pos.start) {
+  		selected=flagArray[pos.end];
+  	} else 
+  		for(var i=pos.start ; i < pos.end ; i++)
+  			if(flagArray[i]!=-1){ 
+  				selected=flagArray[i];break;}
+
+  	if(selected!=-1) this.setState({selected:selected});
   }
   render() {
     return (
     	<div className="flex">
-    		<SearchBar4Paragraph onQueryChange={this.handleChange} display={this.state.display} />
-    		<div className="TermCardList_para"><TermCardList matches={this.state.matches}/></div>
+    		<SearchBar4Paragraph onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
+    		<div className="TermCardList_para"><TermCardList matches={this.state.matches} selected={this.state.selected}/></div>
     	</div>
     	);
   }
@@ -127,7 +142,7 @@ class SearchBar4Word extends React.Component {
 	    	<div className="relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
 			        <input type="text" name="search" id="search-field" placeholder="Search for a medical term" autoComplete="off" 
-			        	onChange={this.handleChange}></input>
+			        	onChange={this.handleChange} value={this.props.query}></input>
 			        {search_svg}
 			     </div>
 			     <div className={"search-box guess "+shadow}>{matchTerms}</div>
@@ -139,51 +154,52 @@ class SearchBar4Word extends React.Component {
 class SearchBar4Paragraph extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state={input:'',pos:0};
-	    this.handleContentEditable = this.handleContentEditable.bind(this);
+	    this.state={pos:0};
+	    this.handleChange = this.handleChange.bind(this);
+	    this.handleMouseUp = this.handleMouseUp.bind(this);
 	    this.getCaretPos = this.getCaretPos.bind(this);
-	    this.setCaretPos = this.setCaretPos.bind(this);
 	}
-	handleContentEditable(event) {
-		var target=event.target;
-		var newText=$('#'+target.id).text();
-		// var pos=this.getCaretPos(target);
-		
-		///when plain text changes
-		if(newText!=this.state.input){
-			var change=new Object();
-			this.setState({input:newText});
-			change.query=newText;
-			change.type="search";
-		    this.props.onQueryChange(change);
-		}
-
-		// if(pos==0 && this.state.pos!=0){
-		// 	this.setCaretPos(target,this.state.pos);
-		// }
-		// else{ 
-		// 	this.setState({pos:pos});
-		// 	this.setCaretPos(target,pos);
-		// }
+	handleChange(event) {
+		var change=new Object();
+		change.query=event.target.value;
+		change.type="search";
+	    setTimeout(function(){
+	    	this.props.onQueryChange(change);
+	    }.bind(this),200);
+	}
+	handleMouseUp(event){
+		var pos=this.getCaretPos(event.target);
+		this.props.onMouseUp(pos);
 	}
 	getCaretPos(target){
-		target.focus()
-        let _range = document.getSelection().getRangeAt(0)
-        let range = _range.cloneRange()
-        range.selectNodeContents(target.parentNode.childNodes[0])
-        range.setEnd(_range.endContainer, _range.endOffset)
-        return range.toString().length;
-	}
-	setCaretPos(target,pos){
-		target.focus();
-		document.getSelection().collapse(target.parentNode.childNodes[0].childNodes[0], pos);
+		// IE < 9 Support
+		var pos=new Object();
+	    if (document.selection) {
+	        target.focus();
+	        var range = document.selection.createRange();
+	        var rangelen = range.text.length;
+	        range.moveStart('character', -target.value.length);
+	        var start = range.text.length - rangelen;
+	        pos.start=start;
+	        pos.end=start+ranglen;
+	    } // IE >=9 and other browsers
+	    else if (target.selectionStart || target.selectionStart == '0') {
+	        	pos.start=target.selectionStart;
+	        	pos.end=target.selectionEnd;
+	    } else {
+	    	pos.start=0;
+	    	pos.end=0;
+	    }
+	    return pos;
 	}
 	render() {
 			return(
-				<div className="relative search-box flex search-paragraph">
-			        <div name="search" id="content-editable-field" placeholder="Please paste the text here"
-			        	onFocus={this.handleContentEditable} onBlur={this.handleContentEditable} contentEditable="true" suppressContentEditableWarning={true} 
-			        	dangerouslySetInnerHTML={{__html: this.props.display}}></div>
+				<div className="search-box flex">
+					<div className="search-paragraph">
+						<textarea name="search" placeholder="Please paste the text here"
+			        	onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
+			        	<div id="markedString" dangerouslySetInnerHTML={{__html: this.props.display}}></div>
+			        </div>
 			        {search_svg}
 			     </div>
 			     );
@@ -235,13 +251,31 @@ class MessageRow extends React.Component {
 class TermCardList extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this.state = {request:false};
+	    this.handleScroll=this.handleScroll.bind(this);
+	    this.handleRequest=this.handleRequest.bind(this);
 	  }
+	handleRequest(){}
+	handleScroll(){
+		element.scroll({
+		  top: 100,
+		  behavior: 'smooth'
+		});
+	}
 	render() {
-		var list=null;
-		if(this.props.matches.length>0){
-			list = this.props.matches.map((item)=> <TermCard key={item[0]} term={item[0]} define={item[1]} />);
-		}
-		return <div className="TermCardList">{list}</div>;
+		if(this.state.request==false){
+			var list=null;
+			if(this.props.matches.length>0){
+				list = this.props.matches.map((item)=> <TermCard key={item[0]} term={item[0]} define={item[1]} />);
+			}
+			else return null;
+			return <div className="TermCardList">{list}</div>;}
+		else return (<div>
+						<p>back</p>
+						<h3>Find something incorrect?</h3>
+						<p>Please let us know what we can improve on: </p>
+						<div className="request-textarea" rows="4"><textarea placeholder="Leave your comments here"></textarea></div>
+						</div>);
 	}
 }
 class TermCard extends React.Component {
@@ -249,20 +283,31 @@ class TermCard extends React.Component {
 	    super(props);
 	    this.state = {isToggled: true, length:this.props.define.length};
 	    this.handleClick = this.handleClick.bind(this);
+	    this.handleCopy = this.handleCopy.bind(this);
+	    this.handleReport = this.handleReport.bind(this);
 	}
 	handleClick(event){
 		this.setState({isToggled:!this.state.isToggled});
 	}
+	handleCopy(event){
+		var target=event.target;
+		target.focus();
+		document.execCommand("copy");
+ 		alert("Copied the text: " + this.props.define);
+	}
+	handleReport(event){
+
+	}
 	render() {
 		var def=this.state.length>60 && this.state.isToggled?(this.props.define.substring(0,60)+' ...'):this.props.define;
 		return(
-			<div className="term-card shadow">
+			<div className="term-card">
 				<h2>{this.props.term}</h2>
 				<div className="iconset">
-					<button title="Report incorrect definition">{report_svg}</button>
-					<button title="Copy this definition">{copy_svg}</button></div>
-				<p onClick={this.handleClick}>{def}</p></div>);
-		
+					<button onClick={this.handleReport} title="Report incorrect definition">{report_svg}</button>
+					<button onClick={this.handleCopy} title="Copy this definition to clipboard">{copy_svg}</button></div>
+				<p onClick={this.handleClick}>{def}</p>
+			</div>);
 	}
 }
 
@@ -377,39 +422,42 @@ function search_query(query) {
       		if(len_t*len_q==1){
       			var levenDistance=levenshteinDistance(term_low,query_low);
       			distance=levenDistance > Math.max(term_low.length-2,len-2)?10:0.5*levenDistance;
-      		}
-      		else
-      			for(const term_word of term_words)
-		          for(const query_word of query_words){
-      				var levenDistance=levenshteinDistance(term_word,query_word);
-                	distance = levenDistance < distance? levenDistance : distance;
-                }
-		        if(distance > best_score+score_range) continue;}
+      		} else for(const term_word of term_words)
+			          for(const query_word of query_words){
+	      				var levenDistance=levenshteinDistance(term_word,query_word);
+	                	distance = levenDistance < distance? levenDistance : distance;
+	                }
+		    if(distance > best_score+score_range) continue;}
     	var termD=term;
     	termD[2]=distance;
     	matches.push(termD);
       }
-    if(perfect&&matches.length>=10) matches=matches.sort(distanceCompare).slice(0,10);
+    if(perfect && matches.length>=10) matches=matches.sort(distanceCompare).slice(0,10);
     else if(matches.length>=30) matches=matches.sort(distanceCompare).slice(0,30);
     return matches;
- }
+}
 
 //query is plain text, pos is caret position
 function search_paragraph(query) {
 	var obj=new Object();
+	const array_raw=[]
     obj.markedString="";
     obj.matches=[];
+    obj.flagArray=[];
     if(query.length<=0) return obj;
 
-    var splitPoints=[]
+    var splitPoints=[];
+    var flagArray=query.split('').fill(-1);
+    
     var query_low = query.toLowerCase();
     for(const term of dictionary){
       	var term_low = term[0].toLowerCase()
       	var position=query.search(term_low);
-      	if(position!=-1){splitPoints.push([position,term_low.length,term]);
+      	if(position!=-1){
+      		splitPoints.push([position,position+term_low.length,term]);
       	}
       }
-     
+	
     var markedString="";
 	var matches = []
     var len=splitPoints.length;
@@ -419,27 +467,18 @@ function search_paragraph(query) {
     for(var i=0;i<len;i++){
     	const match=splitPoints[i];
     	matches.push(match[2]);
+    	flagArray.fill(i,match[0],match[1]);
     	if(match[0]>=start){
-    		var end=match[0]+match[1];
-	    	markedString=markedString+query.substring(start,match[0])+"\<mark\>"+query.substring(match[0],end)+"\<\/mark\>";
-	    	start=end;
+	    	markedString=markedString+query.substring(start,match[0])+"\<mark\>"+query.substring(match[0],match[1])+"\<\/mark\>";
+	    	start=match[1];
 	    }
 	}
     markedString=markedString+query.substring(start);
     obj.markedString=markedString;
     obj.matches=matches;
+    obj.flagArray=flagArray;
     
     return obj;
-}
-
-// get and set caret position in a contenteditable div
-const getCaretPosition = function (element) {
-    element.target.focus()
-	let _range = document.getSelection().getRangeAt(0)
-	let range = _range.cloneRange()
-	range.selectNodeContents(this.target)
-	range.setEnd(_range.endContainer, _range.endOffset)
-	return range.toString().length;
 }
 
 

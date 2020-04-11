@@ -65,7 +65,7 @@ table {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-input,textarea,#real-text,button,body{
+input,textarea,button,body{
   font: 300 16px/150% "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
@@ -105,23 +105,6 @@ label {
 
 input:focus{outline: none;}
 
-#real-text{
-  padding: .2em .5em 0 1em;
-  position: absolute;
-  max-height: 68vh;
-  -ms-overflow-style: none;
-  color:#353535; 
-  overflow: -moz-scrollbars-none;
-  z-index: 10;
-}
-
-
-#real-text::-webkit-scrollbar{display: none;}
-
-#real-text mark:hover{
-  background-color:#C69B00;
-}
-
 button {
   display: block;
   background-color: #eee;
@@ -137,7 +120,7 @@ button:focus{outline: none;}
 h1 {
   font-weight: bold;
   font-size: 1.7em;
-  color: #FFF;
+  color: white;
   margin-bottom: .5em;
   padding: .5em 0;
   text-align: center;
@@ -152,8 +135,8 @@ h1 span {
 }
 
 h2 {
-  font-weight: normal;
   font-size: 1.3em;
+  font-weight: normal;
 }
 h3 {
   font-size: 1.2em;
@@ -164,7 +147,7 @@ h3 {
   line-height: 133%;
   text-align: center;
   padding:1em 2em;
-  color: #aaa;
+  color: #bbb;
 }
 
 strong{font-weight: 700;}
@@ -180,47 +163,11 @@ mark{background-color: #FECB05;}
 .shadow{box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.2);}
 .hide{display: none;}
 
+
 .letter{
   display: inline-block;
   margin: .2em;
 }
-
-.search-box{
-  position: relative;
-  text-decoration: none;
-  border-radius: 1.5em;
-  border:2px solid #FECB05;
-  background-color: white;
-  width: 50%;
-  margin:0 auto;
-  padding: .5em 1em;
-  z-index: 9999;
-}
-
-.search-word-focused{
-  border-radius: 1.2em 1.2em 0 0;
-}
-.search-paragraph{
-  min-height: 50vh;
-  max-height: 70vh;
-}
-#search-field{
-  display: inline-block;
-  border:none;
-  width: 90%;
-  height: 1.2em;
-  text-decoration: none;
-  text-align: left;
-  font-size: 1em;
-  background-color: transparent;
-  color: #757575;
-}
-
-.focused-button{
-  background-color: #999;
-  color:white;
-}
-
 .status{
   width: 36%;
   margin: 0 auto;
@@ -245,17 +192,52 @@ mark{background-color: #FECB05;}
   background-color: #00274C;
   color: white;
 }
+
+.search-box{
+  width: 48%;
+  position: relative;
+  text-decoration: none;
+  border-radius: 1.2em;
+  border:2px solid #FECB05;
+  background-color: white;
+  margin:0 auto;
+  padding: .5em .8em;
+  z-index: 9999;
+}
+
+.search-word-focused{
+  border-radius: 1.2em 1.2em 0 0;
+}
+
+/*input field for word search*/
+#search-field{
+  display: inline-block;
+  border:none;
+  width: 90%;
+  height: 1.2em;
+  text-decoration: none;
+  text-align: left;
+  font-size: 1em;
+  background-color: transparent;
+}
+
+.focused-button{
+  background-color: #bbb;
+  color:white;
+}
+
+
 .guess{
   border:none;
-  margin: 0 auto;
   position: absolute;
   padding: 0;
-  left:25%;
+  left:26%;
   top:0;
   z-index: 99;
 }
 .guess button{
   position: relative;
+  padding: .5em .8em;
   background-color: white;
   width: 100%;
   text-align: left;
@@ -273,10 +255,14 @@ mark{background-color: #FECB05;}
 .BrowseFeild{margin-top: .8em;}
 
 .TermCardList_para{
-  width: 50%;
+  max-width: 48%;
   max-height:70vh;
-  overflow-y: scroll; 
-  padding: 0 1em;
+  padding: 0 .5em;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.TermCardList_para::-webkit-scrollbar {
+  display: none;
 }
 
 .term-card{
@@ -286,27 +272,50 @@ mark{background-color: #FECB05;}
   border-radius: .5em;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .24);
   padding: 1em;
+  margin: .5em auto;
   margin-bottom: 1em;
   overflow: hidden;
   cursor:pointer;
   z-index: 10;
 }
 
-#content-editable-field{
+.search-paragraph{
   width: 90%;
+  padding: 0;
+  position: relative;
+  min-height: 50vh;
+  max-height: 70vh;
 }
-#content-editable-field:focus{
+
+
+#markedString,
+textarea{
+  width: 100%;
+  text-decoration: none;
   outline: none;
+  border:none;
+  padding: 0;
+  background-color: transparent;
+  resize: none;
 }
-#content-editable-field:empty::before {
-    content: attr(placeholder);
-    opacity:0.5;
+#markedString{
+  color:transparent;
+}
+.search-paragraph textarea{
+  position: absolute;
+  top:.0;
+  left:0;
+  z-index: 99;
 }
 
-#content-editable-field:empty:focus::before {
-    content: "";
+.request-textarea{
+  border:1.5px solid #eee;
+  border-radius:.5em;
+  padding: .2em .5em;
 }
-
+.request-textarea textarea{
+  height: 4em;
+}
 
 svg{
   height: 1em;
