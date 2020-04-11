@@ -149,6 +149,11 @@ textarea{
 }
 .shadow{box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.2);}
 .hide{display: none;}
+.blank{
+  width: 100%;
+  height: 10em;
+  background-color: white;
+}
 
 button {
   display: inline-block;
@@ -223,6 +228,7 @@ button[class*="bright"]{
 .search-box{
   width: 100%;
   position: relative;
+  margin: 0;
   padding: .5em .8em;
   border-radius: 1.2em;
   border: 2px solid #FECB05;
@@ -251,7 +257,7 @@ button[class*="bright"]{
   padding: 0;
   top:0;
   left:0;
-  border: 2px solid white;
+  border: none;
   z-index: 99;
 }
 .guess button{
@@ -259,6 +265,8 @@ button[class*="bright"]{
   width: 100%;
   padding: .5em .8em;
   margin: 0;
+  font-size: 1em;
+  line-height: 100%;
   border-radius: 0; 
   text-align: left;
   background-color: white;
@@ -362,7 +370,9 @@ button[class*="bright"]{
 
 .back-a{
   font-size: .8em;
-  width: 3em;
+  padding: 1px;
+  width: 3.5em;
+  text-align: center;
   margin-bottom:.5em; 
   line-height: 100%;
   color: #00274C;

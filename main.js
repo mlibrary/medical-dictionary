@@ -13,6 +13,8 @@ const report_svg=(<svg className="report-icon" xmlns="http://www.w3.org/2000/svg
 const copy_svg=(<svg className="copy-icon" xmlns="http://www.w3.org/2000/svg" width="17.325" height="19" viewBox="0 0 17.325 19">
   <path id="copy" className="cls-1" d="M-97,406a2,2,0,0,1-2-2h10.329a1,1,0,0,0,1-1V393a1,1,0,0,0-1-1v-2h1a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm-4-3a2,2,0,0,1-2-2V389a2,2,0,0,1,2-2h9.326a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm0-13v10a1,1,0,0,0,1,1h7.33a1,1,0,0,0,1-1V390a1,1,0,0,0-1-1H-100A1,1,0,0,0-101,390Z" transform="translate(103 -387)"/>
 </svg>);
+
+const form_url="https://script.google.com/macros/s/AKfycbzciytBw2suR8xjs5BX7viyFhbEKwQLucrPWLfYaR-Eu9DCx2k/exec"
 	///////////////////
    //// COMPONENTS ///
   ///////////////////
@@ -122,7 +124,7 @@ class Dictionary4Paragraph extends React.Component {
 			</div>
   			);
 
-	return (
+	else return (
 		<div className="flex">
 			<SearchBar4Paragraph status="normal" onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
 			<div className={"TermCardList_para"+padding}>
@@ -350,26 +352,63 @@ class TermCard extends React.Component {
 class Report extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {submitted:false};
+		this.state = {status:'input',error:'',comment:'',loading:false};
 		this.handleBack = this.handleBack.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-	handleBack(){
+	handleBack() {
 		this.props.onBack([-1,-1]);
 	}
+	handleChange(event) {
+		this.setState({comment:event.target.value});
+	}
 	handleSubmit(event) {
-	    console.log(event.target);
 	    event.preventDefault();
+	    this.setState({status:'loading'});
+	    const formObj={type:'report',term:this.props.query[0],comment:this.state.comment};
+	    let json=JSON.stringify(formObj);
+		let u = new URLSearchParams(formObj).toString();
+		let result={};
+		var jqxhr = $.ajax({
+		    url: form_url+'?'+u,
+		    method: "GET",
+		    dataType: "json",
+		    data: json,
+		    success:function(e){
+				if(e.result==='success') this.setState({status:'submitted',error:''});
+				else this.setState({status:'error',error:e.error,name});
+			}.bind(this)
+		});
+		
 	 }
 	render(){
-		return (<div className="form">
+		if(this.state.status==="loading"){
+			return (
+				<div className="blank">loading</div>
+				);
+		}
+		else if(this.state.status==="submitted"){
+			return (
+				<div className="form">
+					<p onClick={this.handleBack} className="back-a">&larr;back</p>
+					<h3>Report Sent!</h3>
+					<p>Your report of incorrect information about <strong>{this.props.query[0]}</strong> has been sent! We will update the dictionary as soon as we can. 
+					<br/>💙 Thank you for your report and patient!</p>
+					<div onClick={this.handleBack} className="right"><button className="button-dark">Back</button></div>
+				</div>
+				);
+		}
+		else return (
+				<div className="form">
 					<p onClick={this.handleBack} className="back-a">&larr;back</p>
 					<h3>Find something incorrect?</h3>
 					<TermCard type="min" query={this.props.query}/>
-					<form action="" method="post">
+					<form onSubmit={this.handleSubmit} action="" method="get">
 						<label htmlFor="comment">Please let us know what we can improve on: <strong>{this.props.query[0]}</strong></label>
 						<div className="form-textarea" rows="4">
-							<textarea type="text" name="comment" placeholder="Tell us more about this problem" required></textarea></div>
+							<textarea type="text" name="comment" onChange={this.handleChange}
+								placeholder="Tell us more about this problem" required></textarea></div>
 						<div className="right"><button onClick={this.handleBack} className="button-bright">Cancel</button>
 						<button type="submit" value="submit" className="button-dark">Send</button></div>
 					</form>
