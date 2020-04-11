@@ -60,11 +60,11 @@ class Dictionary4Word extends React.Component {
   }
   render() {
   	const SecondaryBrowseField= this.state.type==='letter'?
-  		<BrowseFeild onQueryChange={this.handleChange} list={currentLetters} type="secondary"/>:'';
+  		<BrowseFeild onQueryChange={this.handleChange} status="secondary" query={this.state.query} type={this.state.type} list={currentLetters} />:'';
     return (
     	<div>
     		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
-    		<div><BrowseFeild onQueryChange={this.handleChange} list={alphabet} type="primary"/>
+    		<div><BrowseFeild onQueryChange={this.handleChange} status="primary" query={this.state.query} type={this.state.type} list={alphabet} />
     			{SecondaryBrowseField}</div>
     		<MessageRow query={this.state.query} type={this.state.type}/>
     		<div className="TermCardList_word"><TermCardList matches={this.state.matches}/></div>
@@ -111,7 +111,7 @@ class Dictionary4Paragraph extends React.Component {
 class SearchBar4Word extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.state={isToggled:false};
+	    this.state={input:'',isToggled:false};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleBlur = this.handleBlur.bind(this);
 	}
@@ -121,6 +121,7 @@ class SearchBar4Word extends React.Component {
 		var change=new Object();
 		change.query=value;
 		change.type="search";
+		this.setState({input:value});
 	    this.props.onQueryChange(change);
 	}
 	handleBlur(event){
@@ -142,7 +143,7 @@ class SearchBar4Word extends React.Component {
 	    	<div className="relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
 			        <input type="text" name="search" id="search-field" placeholder="Search for a medical term" autoComplete="off" 
-			        	onChange={this.handleChange} value={this.props.query}></input>
+			        	onChange={this.handleChange} value={this.props.type=="letter"?this.state.input:this.props.query}></input>
 			        {search_svg}
 			     </div>
 			     <div className={"search-box guess "+shadow}>{matchTerms}</div>
@@ -214,6 +215,7 @@ class BrowseFeild extends React.Component {
 	}
 	handleClick(event){
 		var change=new Object();
+		var value=event.target.value;
 		this.setState({current:event.target.value});
 		change.query=event.target.value;
 		change.type='letter';
@@ -221,14 +223,16 @@ class BrowseFeild extends React.Component {
 	}
 	setStyle(){}
 	render() {
+		var query=this.props.query;
+		var boolean=this.props.type==='letter'?true:false;
 	  	var listItems = this.props.list.map((letter)=>
-			<button key={letter} className={letter===this.state.current?"letter focused-button":"letter"} value={letter} type="button" onClick={this.handleClick}>
+			<button key={letter} className={boolean && letter===query?"letter focused-button":"letter"} value={letter} type="button" onClick={this.handleClick}>
 				{letter}
 			</button>
 		);
-	  	if(this.props.type==='primary')
+	  	if(this.props.status==='primary')
 	  	 	listItems.push(
-		  		<button key="all" className={'all'===this.state.current?"letter focused-button":"letter"} value='all' type="button" onClick={this.handleClick}>
+		  		<button key="all" className={boolean && 'all'===query?"letter focused-button":"letter"} value='all' type="button" onClick={this.handleClick}>
 					{"view all "+total+" terms"}
 				</button>);
 	    return <div className="BrowseFeild">{listItems}</div>;
