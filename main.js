@@ -7,11 +7,14 @@ const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const search_svg=(<svg className="search-icon" xmlns="http://www.w3.org/2000/svg" width="18.895" height="18.9" viewBox="0 0 18.895 18.9">
   <path id="union2" data-name="union2" className="cls-1" d="M-85.811,405.607-90.1,401.32A7.941,7.941,0,0,1-95,403a7.943,7.943,0,0,1-5.656-2.343,8.009,8.009,0,0,1,0-11.314A7.944,7.944,0,0,1-95,387a7.95,7.95,0,0,1,5.657,2.343,8.014,8.014,0,0,1,.663,10.563l4.287,4.287a1,1,0,0,1,0,1.414,1,1,0,0,1-.707.293A1,1,0,0,1-85.811,405.607Zm-13.435-14.849a6.007,6.007,0,0,0,0,8.485A5.957,5.957,0,0,0-95,401a5.957,5.957,0,0,0,4.243-1.757A5.961,5.961,0,0,0-89,395a5.961,5.961,0,0,0-1.758-4.243A5.961,5.961,0,0,0-95,389,5.961,5.961,0,0,0-99.247,390.758Z" transform="translate(103 -387)"/>
 </svg>);
-const report_svg=(<svg className="report-icon" xmlns="http://www.w3.org/2000/svg" width="19.716" height="17.964" viewBox="0 0 19.716 17.964">
+const report_svg=(<svg className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="19.716" height="17.964" viewBox="0 0 19.716 17.964">
 	<path id="report" className="cls-1" d="M-84.228,406.518h-15.71a1.981,1.981,0,0,1-1.726-.99,1.981,1.981,0,0,1-.016-1.99l7.854-13.964a1.977,1.977,0,0,1,1.743-1.019,1.977,1.977,0,0,1,1.743,1.019l7.855,13.964a1.982,1.982,0,0,1-.017,1.991A1.981,1.981,0,0,1-84.228,406.518Zm-7.855-4.761a1.254,1.254,0,0,0-1.253,1.253,1.254,1.254,0,0,0,1.253,1.253,1.254,1.254,0,0,0,1.253-1.253A1.254,1.254,0,0,0-92.083,401.757Zm0-8.769a1.254,1.254,0,0,0-1.253,1.253v5.011a1.254,1.254,0,0,0,1.253,1.253,1.254,1.254,0,0,0,1.253-1.253v-5.011A1.254,1.254,0,0,0-92.083,392.989Z" transform="translate(101.941 -388.554)"/>
 </svg>);
-const copy_svg=(<svg className="copy-icon" xmlns="http://www.w3.org/2000/svg" width="17.325" height="19" viewBox="0 0 17.325 19">
+const copy_svg=(<svg className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="17.325" height="19" viewBox="0 0 17.325 19">
   <path id="copy" className="cls-1" d="M-97,406a2,2,0,0,1-2-2h10.329a1,1,0,0,0,1-1V393a1,1,0,0,0-1-1v-2h1a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm-4-3a2,2,0,0,1-2-2V389a2,2,0,0,1,2-2h9.326a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm0-13v10a1,1,0,0,0,1,1h7.33a1,1,0,0,0,1-1V390a1,1,0,0,0-1-1H-100A1,1,0,0,0-101,390Z" transform="translate(103 -387)"/>
+</svg>);
+const close_svg=(<svg className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path id="close" d="M-88.321,403.116l-6.265-6.265-6.265,6.265a1.016,1.016,0,0,1-1.437,0,1.017,1.017,0,0,1,0-1.436l6.266-6.266-6.266-6.266a1.017,1.017,0,0,1,0-1.436,1.016,1.016,0,0,1,1.437,0l6.265,6.265,6.265-6.265a1.016,1.016,0,0,1,1.437,0,1.015,1.015,0,0,1,0,1.436l-6.266,6.266,6.266,6.266a1.015,1.015,0,0,1,0,1.436,1.013,1.013,0,0,1-.719.3A1.013,1.013,0,0,1-88.321,403.116Z" transform="translate(102.586 -387.414)"/>
 </svg>);
 
 const form_url="https://script.google.com/macros/s/AKfycbzciytBw2suR8xjs5BX7viyFhbEKwQLucrPWLfYaR-Eu9DCx2k/exec"
@@ -22,11 +25,18 @@ const form_url="https://script.google.com/macros/s/AKfycbzciytBw2suR8xjs5BX7viyF
 class DictionaryContainer extends React.Component {
 	constructor(props){
 		super(props);
+		this._isMounted=false;
 		this.state={status:"word"};
 		this.handleStatusChange=this.handleStatusChange.bind(this);
 	}
+	componentDidMount(){
+		this._isMounted = true;
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
+	}
 	handleStatusChange(event){
-		this.setState({status:event.target.value});
+		this._isMounted && this.setState({status:event.target.value});
 	}
 	render(){
 		const body=this.state.status==="word"?<Dictionary4Word/>:<Dictionary4Paragraph/>;
@@ -46,113 +56,127 @@ This application is copyright 2014, The Regents of the University of Michigan.</
 	}
 }
 class Dictionary4Word extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {query:'',type:'',matches:[],report_query:[-1,-1]};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleReport = this.handleReport.bind(this);
-  }
-  handleChange(change) {
-    this.setState({query: change.query,type:change.type});
-    var matches=getMatches(change.query,change.type);
-    this.setState({matches:matches});
-  }
-  handleReport(query) {
-  	this.setState({report_query:query});
-  }
-  render() {
-  	if(this.state.report_query[0]!=-1)
-  		return (
-	  		<div>
-	    		<SearchBar4Word onQueryChange={this.handleChange} status="disabled" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
+  
+    constructor(props) {
+	    super(props);
+	    this._isMounted = false;
+	    this.state = {query:'',type:'',matches:[],report_query:[-1,-1]};
+	    this.handleChange = this.handleChange.bind(this);
+	    this.handleReport = this.handleReport.bind(this);
+    }
+    componentDidMount(){
+		this._isMounted = true;
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
+	}
+    handleChange(change) {
+	    this._isMounted && this.setState({query: change.query,type:change.type});
+	    var matches=change.query===''?[]:getMatches(change.query,change.type);
+	    this._isMounted && this.setState({matches:matches});
+    }
+    handleReport(query) {
+  		this._isMounted && this.setState({report_query:query});
+    }
+    render() {
+	  	if(this.state.report_query[0]!=-1)
+	  		return (
+		    		<Report onBack={this.handleReport} query={this.state.report_query}/>
+	  			);
+	  	const SecondaryBrowseField= this.state.type==='letter'?
+	  		<BrowseFeild onQueryChange={this.handleChange} status="secondary" query={this.state.query} type={this.state.type} list={currentLetters} />:'';
+	    return (
+	    	<div>
+	    		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
+				<BrowseFeild onQueryChange={this.handleChange} status="primary" query={this.state.query} type={this.state.type} list={alphabet} />
+				{SecondaryBrowseField}
+				<MessageRow query={this.state.query} type={this.state.type}/>
 	    		<div className="TermCardList_word padding">
-	    			<Report onBack={this.handleReport} query={this.state.report_query}/></div>
+	    			<TermCardList onReport={this.handleReport} matches={this.state.matches}/></div>
 	    	</div>
-  			);
-  	const SecondaryBrowseField= this.state.type==='letter'?
-  		<BrowseFeild onQueryChange={this.handleChange} status="secondary" query={this.state.query} type={this.state.type} list={currentLetters} />:'';
-    return (
-    	<div>
-    		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
-			<BrowseFeild onQueryChange={this.handleChange} status="primary" query={this.state.query} type={this.state.type} list={alphabet} />
-			{SecondaryBrowseField}
-			<MessageRow query={this.state.query} type={this.state.type}/>
-    		<div className="TermCardList_word padding">
-    			<TermCardList onReport={this.handleReport} matches={this.state.matches}/></div>
-    	</div>
-    	);
-  }
+	    	);
+    }
 }
 class Dictionary4Paragraph extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {query:'',display:'',matches:[],flagArray:[],selected:-1,report_query:[-1,-1]};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleReport = this.handleReport.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
-  }
-  handleChange(change) {
-    this.setState({query: change.query});
-    var obj=search_paragraph(change.query);
-    this.setState({matches:obj.matches, display:obj.markedString, flagArray:obj.flagArray});
-  }
-  handleReport(query) {
-  	this.setState({report_query:query});
-  }
-  handleMouseUp(pos) {
-  	const flagArray=this.state.flagArray;
-  	if(flagArray.length <= 0 || pos.start < 0 || pos.end > flagArray.length) return;
-  	var selected=-1;
-  	if(pos.end==pos.start) {
-  		selected=flagArray[pos.end];
-  	} else 
-  		for(var i=pos.start ; i < pos.end ; i++)
-  			if(flagArray[i]!=-1){ 
-  				selected=flagArray[i];break;}
+    constructor(props) {
+	    super(props);
+	    this._isMounted = false;
+	    this.state = {query:'',display:'',matches:[],flagArray:[],selected:-1,report_query:[-1,-1]};
+	    this.handleChange = this.handleChange.bind(this);
+	    this.handleReport = this.handleReport.bind(this);
+	    this.handleMouseUp = this.handleMouseUp.bind(this);
+    }
+    componentDidMount(){
+		this._isMounted = true;
+	}
+    componentWillUnmount(){
+		this._isMounted = false;
+	}
+    handleChange(change) {
+	    this._isMounted && this.setState({query: change.query});
+	    var obj=search_paragraph(change.query);
+	    this._isMounted && this.setState({matches:obj.matches, display:obj.markedString, flagArray:obj.flagArray});
+    }
+    handleReport(query) {
+  		this._isMounted && this.setState({report_query:query});
+    }
+    handleMouseUp(pos) {
+	  	const flagArray=this.state.flagArray;
+	  	if(flagArray.length <= 0 || pos.start < 0 || pos.end > flagArray.length) return;
+	  	var selected=-1;
+	  	if(pos.end==pos.start) {
+	  		selected=flagArray[pos.end];
+	  	} else 
+	  		for(var i=pos.start ; i < pos.end ; i++)
+	  			if(flagArray[i]!=-1){ 
+	  				selected=flagArray[i];break;}
 
-  	this.setState({selected:selected});
-  }
-  render() {
-  	var padding=this.state.matches.length>0? ' padding' : '';
-  	if(this.state.report_query[0]!=-1)
-  		return (
-  			<div className="flex">
-				<SearchBar4Paragraph status="disabled" onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
+	  	this._isMounted && this.setState({selected:selected});
+    }
+    render() {
+	  	var padding=this.state.matches.length > 0? ' padding' : '';
+	  	if(this.state.report_query[0]!=-1)
+	  		return (
+					<Report onBack={this.handleReport} query={this.state.report_query}/>
+	  			);
+
+		else return (
+			<div className="flex">
+				<SearchBar4Paragraph status="normal" query={this.state.query} onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
 				<div className={"TermCardList_para"+padding}>
-					<Report onBack={this.handleReport} query={this.state.report_query}/></div>
+					<TermCardList onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
 			</div>
-  			);
-
-	else return (
-		<div className="flex">
-			<SearchBar4Paragraph status="normal" onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
-			<div className={"TermCardList_para"+padding}>
-				<TermCardList onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
-		</div>
-	);
-  }
+		);
+    }
 }
 
 class SearchBar4Word extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this._isMounted = false;
 	    this.state={input:'',isToggled:false};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleBlur = this.handleBlur.bind(this);
 	}
+	componentDidMount(){
+		this._isMounted=true;
+	}
+	componentWillUnmount(){
+		this._isMounted=false;
+	}
 	handleChange(event) {
-		if(event.target.name!='guess') this.setState({isToggled:false});
+		if(event.target.name!='guess') this._isMounted && this.setState({isToggled:false});
 		var value=event.target.value;
 		var change=new Object();
 		change.query=value;
 		change.type="search";
-		this.setState({input:value});
+		this._isMounted && this.setState({input:value});
 	    this.props.onQueryChange(change);
 	}
 	handleBlur(event){
 		setTimeout(
 		    function() {
-		    	this.setState({isToggled:true});
+		    	this._isMounted && this.setState({isToggled:true});
 		    }.bind(this),200);
 	}
 	render() {
@@ -180,20 +204,32 @@ class SearchBar4Word extends React.Component {
 class SearchBar4Paragraph extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this._isMounted = false;
 	    this.state={pos:0};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleMouseUp = this.handleMouseUp.bind(this);
 	    this.getCaretPos = this.getCaretPos.bind(this);
 	}
+	componentDidMount(){
+		this._isMounted = true;
+		if(this.props.query.length > 0) $('#paragraph').val(this.props.query);
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
+	}
 	handleChange(event) {
+		const target=event.target;
+		target.style.height = 'inherit';
+    	target.style.height = `${target.scrollHeight}px`;
 		var change=new Object();
-		change.query=event.target.value;
+		change.query=target.value;
 		change.type="search";
 	    setTimeout(function(){
 	    	this.props.onQueryChange(change);
 	    }.bind(this),200);
 	}
 	handleMouseUp(event){
+		if(this._isMounted==false) return;
 		var pos=this.getCaretPos(event.target);
 		this.props.onMouseUp(pos);
 	}
@@ -222,8 +258,8 @@ class SearchBar4Paragraph extends React.Component {
 			return(
 				<div className="search-box-container">
 					<div className="search-box flex">
-						<div className="box-paragraph relative">
-							<textarea name="search" placeholder="Please paste the text here" disabled={this.props.status==="disabled"?true:false}
+						<div className="box-paragraph relative no-scroll-bar">
+							<textarea id="paragraph" name="search" placeholder="Please paste the text here" disabled={this.props.status==="disabled"?true:false}
 				        	onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
 				        	<div id="under-textarea" dangerouslySetInnerHTML={{__html: this.props.display}}></div>
 				        </div>
@@ -237,13 +273,20 @@ class SearchBar4Paragraph extends React.Component {
 class BrowseFeild extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this._isMounted=false;
 	    this.state = {current: ''};
 	    this.handleClick = this.handleClick.bind(this);
+	}
+	componentDidMount(){
+		this._isMounted = true;
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
 	}
 	handleClick(event){
 		var change=new Object();
 		var value=event.target.value;
-		this.setState({current:event.target.value});
+		this._isMounted && this.setState({current:event.target.value});
 		change.query=event.target.value;
 		change.type='letter';
 		this.props.onQueryChange(change);
@@ -312,13 +355,20 @@ class TermCardList extends React.Component {
 class TermCard extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this._isMounted=false;
 	    this.state = {isToggled: true};
 	    this.handleClick = this.handleClick.bind(this);
 	    this.handleCopy = this.handleCopy.bind(this);
 	    this.handleReport = this.handleReport.bind(this);
 	}
+	componentDidMount(){
+		this._isMounted = true;
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
+	}
 	handleClick(event){
-		if(this.props.query[1].length > 60) this.setState({isToggled:!this.state.isToggled});
+		if(this.props.query[1].length > 60) this._isMounted && this.setState({isToggled:!this.state.isToggled});
 	}
 	handleReport(){
 		this.props.onReport(this.props.query);
@@ -333,14 +383,7 @@ class TermCard extends React.Component {
 	render() {
 		const define=this.props.query[1];
 		var def=define.length > 60 && this.state.isToggled? define.substring(0,60)+"...":define;
-		if(this.props.type==="min")
-			return (
-				<div className="term-card-min">
-					<h2>{this.props.query[0]}</h2>
-					<p onClick={this.handleClick}>{def}</p>
-				</div>
-				);
-		else return(
+		return(
 			<div className={this.props.type==="selected"?"term-card term-card-selected":"term-card"}>
 				<h2>{this.props.query[0]}</h2>
 				<div className="iconset">
@@ -350,25 +393,58 @@ class TermCard extends React.Component {
 			</div>);
 	}
 }
-
+class TermCardMin extends React.Component {
+	constructor(props) {
+	    super(props);
+	    this._isMounted=false;
+	    this.state = {isToggled: true};
+	    this.handleClick = this.handleClick.bind(this);
+	}
+	componentDidMount(){
+		this._isMounted = true;
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
+	}
+	handleClick(event){
+		if(this.props.query[1].length > 60) this._isMounted && this.setState({isToggled:!this.state.isToggled});
+	}
+	render() {
+		const define=this.props.query[1];
+		var def=define.length > 60 && this.state.isToggled? define.substring(0,60)+"...":define;
+		return (
+			<div className="term-card-min">
+				<h2>{this.props.query[0]}</h2>
+				<p onClick={this.handleClick}>{def}</p>
+			</div>
+			);
+	}
+}
 //to report errors in existing terms
 class Report extends React.Component {
 	constructor(props) {
 		super(props);
+		this._isMounted=false;
 		this.state = {status:'input',error:'',comment:'',loading:false};
 		this.handleBack = this.handleBack.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+	componentDidMount(){
+		this._isMounted = true;
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
+	}
 	handleBack() {
 		this.props.onBack([-1,-1]);
 	}
 	handleChange(event) {
-		this.setState({comment:event.target.value});
+		this._isMounted && this.setState({comment:event.target.value});
 	}
 	handleSubmit(event) {
 	    event.preventDefault();
-	    this.setState({status:'loading'});
+	    this._isMounted && this.setState({status:'loading'});
 	    const formObj={type:'report',term:this.props.query[0],comment:this.state.comment};
 	    let json=JSON.stringify(formObj);
 		let u = new URLSearchParams(formObj).toString();
@@ -379,11 +455,10 @@ class Report extends React.Component {
 		    dataType: "json",
 		    data: json,
 		    success:function(e){
-				if(e.result==='success') this.setState({status:'submitted',error:''});
-				else this.setState({status:'error',error:e.error,name});
+				if(e.result==='success') this._isMounted && this.setState({status:'submitted',error:''});
+				else this._isMounted && this.setState({status:'error',error:e.error,name});
 			}.bind(this)
 		});
-		
 	 }
 	render(){
 		if(this.state.status==="loading"){
@@ -393,8 +468,7 @@ class Report extends React.Component {
 		}
 		else if(this.state.status==="submitted"){
 			return (
-				<div className="form">
-					<p onClick={this.handleBack} className="back-a">&larr;back</p>
+				<div className="form term-card">
 					<h3>Report Sent!</h3>
 					<p>Your report of incorrect information about <strong>{this.props.query[0]}</strong> has been sent! We will update the dictionary as soon as we can. 
 					<br/>💙 Thank you for your report and patient!</p>
@@ -403,17 +477,18 @@ class Report extends React.Component {
 				);
 		}
 		else return (
-				<div className="form">
-					<p onClick={this.handleBack} className="back-a">&larr;back</p>
+				<div className="form term-card">
+					<p onClick={this.handleBack}>{close_svg}</p>
 					<h3>Find something incorrect?</h3>
-					<TermCard type="min" query={this.props.query}/>
+					<TermCardMin query={this.props.query}/>
 					<form onSubmit={this.handleSubmit} action="" method="get">
-						<label htmlFor="comment">Please let us know what we can improve on: <strong>{this.props.query[0]}</strong></label>
+						<label htmlFor="comment">Tell us what we can improve on: <em>{this.props.query[0]}</em></label>
 						<div className="form-textarea" rows="4">
 							<textarea type="text" name="comment" onChange={this.handleChange}
 								placeholder="Tell us more about this problem" required></textarea></div>
-						<div className="right"><button onClick={this.handleBack} className="button-bright">Cancel</button>
-						<button type="submit" value="submit" className="button-dark">Send</button></div>
+						<div className="right">
+							<button onClick={this.handleBack} className="button-bright">Cancel</button>
+							<button type="submit" value="submit" className="button-dark">Send</button></div>
 					</form>
 				</div>);
 	}
@@ -432,6 +507,9 @@ function getData(data){
 	total=dictionary.length;
 }
 
+function numCompare(a,b) {
+	return a[0]-b[0];
+}
 function alphaCompare(a,b) {
 	return ('' + a[0]).localeCompare(''+b[0]);
 }
@@ -570,7 +648,7 @@ function search_paragraph(query) {
 	var matches = []
     var len=splitPoints.length;
     if(len==0) return obj;
-    splitPoints.sort(alphaCompare);
+    splitPoints.sort(numCompare);
     var start=0;
     for(var i=0;i<len;i++){
     	const match=splitPoints[i];
