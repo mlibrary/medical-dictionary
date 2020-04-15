@@ -111,24 +111,12 @@ strong{font-weight: 700;}
 em{font-style: italic;}
 mark{background-color: #FECB05;}
 
-label{font-weight: bold;}
-
-header {
-  margin-bottom: 2em;
-}
-
-footer {
-  margin-top: 3em;
-  font-size: 0.8em;
-  text-align: center;
-}
-
-aside {
+label{
+  font-weight: bold;
   display: block;
-  font-size: 0.9em;
-  font-style: italic;
-  margin-top: 1.5em;
+  margin-right: 1em;
 }
+
 
 input:focus, button:focus, a:focus{
   outline: none;
@@ -140,7 +128,17 @@ textarea{
   resize: none;
   padding: 0;
 }
-
+input{
+  width: 100%;
+  display: inline-block;
+  border:none;
+  text-decoration: none;
+  text-align: left;
+  background-color: transparent;
+}
+.capitalize{
+  text-transform: capitalize;
+}
 .relative{position: relative;}
 .center{
   margin:0 auto;
@@ -150,6 +148,11 @@ textarea{
   display: flex;
   justify-content: space-around;
   align-items: stretch;
+}
+.flex-center{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .shadow{box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.2);}
 .hide{display: none;}
@@ -249,14 +252,8 @@ button[class*="bright"]{
 /*/////word: search-box/////*/
 
 .search-box input{
-  display: inline-block;
   flex-grow: 1; /*take all rest space*/
-  border:none;
   height: 1em;
-  text-decoration: none;
-  text-align: left;
-  font-size: 1em;
-  background-color: transparent;
 }
 .search-box svg{
   margin-left: .5em;
@@ -399,15 +396,16 @@ button[class*="bright"]{
   color: rgba(33,33,33,.7);
   padding: 1em;
   margin-bottom: 1em;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   border-radius: .5em;
   cursor: pointer;
 }
 .form-textarea{
+  flex-grow: 1;
   border:1.5px solid #aaa;
   border-radius:.5em;
   padding: .2em .5em;
-  margin:.5em auto 1em auto;
+  margin-bottom: .8em;
 }
 .form-textarea textarea{
   height: 4em;
@@ -417,10 +415,12 @@ button[class*="bright"]{
   top: 0;
   width: 5em;
   margin-left: 1em;
+  margin-top: 1em;
   border-radius: 10em;
   transition-property: ease-out;
   transition: top .2s, box-shadow .2s;
 }
+.request button:hover,
 .form button:hover{
   top: -2px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
@@ -430,6 +430,24 @@ button[class*="bright"]{
   top:1.5em;
   right: 1.5em;
   width: 1em;
+}
+.loading{
+  cursor: wait;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.request{
+  position: relative;
+  top: 0;
+  color: #333;
+  justify-content: space-between;
+  align-items: center;
+}
+.request button{
+  position: relative;
+  border-radius: 5em;
+  padding:.3em 1em;
 }
 /*////////////////////////
 ////  svg & icons   /////
@@ -442,7 +460,7 @@ svg{
   background-color: transparent;
 }
 
-.search-icon{fill:#FECB05;}
+.search-icon{fill: #FECB05;}
 
 .regular-icon{
   fill: #aaa;
@@ -450,3 +468,31 @@ svg{
 }
 
 .regular-icon:hover{fill: #01274C;}
+
+.loading-animate{
+  height:.5em;
+  width: 12em;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  background-color: #01274C;
+}
+.loading-animate::before{
+  content: "";
+  background-color: #FECB05;
+  width: 0px;
+  left: 0;
+  height: .5em;
+  position: absolute;
+  z-index: 99;
+  animation-name: loading;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loading {
+  0%   {left:0px; width:1px;}
+  50%  {left:0px; width:12em;}
+  100% {left:12em; width:1px;}
+}

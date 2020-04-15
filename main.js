@@ -39,30 +39,25 @@ class DictionaryContainer extends React.Component {
 		this._isMounted && this.setState({status:event.target.value});
 	}
 	render(){
-		const body=this.state.status==="word"?<Dictionary4Word/>:<Dictionary4Paragraph/>;
 		return (
-			<div>
-				<h1>Plain Language Medical Dictionary <span>Application by the University of Michigan Library</span></h1>
 				<section id="main">
 					<div className="status">
 						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word">Word</button>
 						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
 					</div>
-					{body}
+					{this.state.status==="word"?<Dictionary4Word/>:<Dictionary4Paragraph/>}
 				</section>
-				<p id="copyright">This work was performed under a subcontract with the University of Illinois at Chicago and made possible by grant #N01-LM-6-3503 from National Library of Medicine (NLM) and its contents are solely the responsibility of the authors and do not necessarily represent the official views of the National Library of Medicine.
-This application is copyright 2014, The Regents of the University of Michigan.</p>
-			</div>);
+			);
 	}
 }
 class Dictionary4Word extends React.Component {
-  
     constructor(props) {
 	    super(props);
 	    this._isMounted = false;
-	    this.state = {query:'',type:'',matches:[],report_query:[-1,-1]};
+	    this.state = {query:'',type:'',matches:[],report_query:[-1,-1],request:false};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleReport = this.handleReport.bind(this);
+	    this.handleRequest = this.handleRequest.bind(this);
     }
     componentDidMount(){
 		this._isMounted = true;
@@ -71,28 +66,29 @@ class Dictionary4Word extends React.Component {
 		this._isMounted = false;
 	}
     handleChange(change) {
-	    this._isMounted && this.setState({query: change.query,type:change.type});
-	    var matches=change.query===''?[]:getMatches(change.query,change.type);
-	    this._isMounted && this.setState({matches:matches});
+    	var matches= change.query===''?[]:getMatches(change.query,change.type);
+	    this._isMounted && this.setState({query: change.query,type:change.type,matches:matches});
     }
     handleReport(query) {
   		this._isMounted && this.setState({report_query:query});
     }
+    handleRequest(boolean) {
+  		this._isMounted && this.setState({request:boolean});
+    }
     render() {
-	  	if(this.state.report_query[0]!=-1)
-	  		return (
-		    		<Report onBack={this.handleReport} query={this.state.report_query}/>
-	  			);
-	  	const SecondaryBrowseField= this.state.type==='letter'?
-	  		<BrowseFeild onQueryChange={this.handleChange} status="secondary" query={this.state.query} type={this.state.type} list={currentLetters} />:'';
-	    return (
+	  	if(this.state.report_query[0]!=-1){
+	  		const isReport= this.state.report_query[1]!=-1;
+	  		  		return <Report type={isReport?"report":"request"} onBack={this.handleReport} 
+	  		  			query={isReport? this.state.report_query:this.state.query}/>;}
+
+	    else return (
 	    	<div>
-	    		<SearchBar4Word onQueryChange={this.handleChange} status="word" query={this.state.query} type={this.state.type} matches={this.state.matches}/>
-				<BrowseFeild onQueryChange={this.handleChange} status="primary" query={this.state.query} type={this.state.type} list={alphabet} />
-				{SecondaryBrowseField}
-				<MessageRow query={this.state.query} type={this.state.type}/>
+	    		<SearchBar4Word onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} matches={this.state.matches}/>
+				<BrowseFeild onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
+				<BrowseFeildSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
+				<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/>
 	    		<div className="TermCardList_word padding">
-	    			<TermCardList onReport={this.handleReport} matches={this.state.matches}/></div>
+	    			<TermCardList4Word onReport={this.handleReport} onRequest={this.handleRequest} matches={this.state.matches} type={this.state.type}/></div>
 	    	</div>
 	    	);
     }
@@ -134,17 +130,15 @@ class Dictionary4Paragraph extends React.Component {
 	  	this._isMounted && this.setState({selected:selected});
     }
     render() {
-	  	var padding=this.state.matches.length > 0? ' padding' : '';
+	  	const padding=this.state.matches.length > 0? ' padding' : '';
 	  	if(this.state.report_query[0]!=-1)
-	  		return (
-					<Report onBack={this.handleReport} query={this.state.report_query}/>
-	  			);
+	  		return <Report type="report" onBack={this.handleReport} query={this.state.report_query}/>;
 
 		else return (
 			<div className="flex">
 				<SearchBar4Paragraph status="normal" query={this.state.query} onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
 				<div className={"TermCardList_para"+padding}>
-					<TermCardList onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
+					<TermCardList4Paragraph onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
 			</div>
 		);
     }
@@ -154,7 +148,7 @@ class SearchBar4Word extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this._isMounted = false;
-	    this.state={input:'',isToggled:false};
+	    this.state={input:'',isToggled:true};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleBlur = this.handleBlur.bind(this);
 	}
@@ -180,22 +174,25 @@ class SearchBar4Word extends React.Component {
 		    }.bind(this),200);
 	}
 	render() {
-		var matches=this.props.matches;
-		var len=matches.length;
+		var matches = this.props.matches;
+		var len = this.props.type==="search"? Math.min(4, matches.length):0;
+		//guess what the user try to search
+		const shadow=len>0? " shadow" : "";
 		var matchTerms=[];
-		matchTerms.push(<button key="fake">fake</button>);
-		for(var i=0;!this.state.isToggled && this.props.type!="letter" && i<4 && i<len;i++) 
-			matchTerms.push(<button key={i} name="guess" value={matches[i][0]} onClick={this.handleChange}>{matches[i][0]}</button>);
-	    const shadow=matchTerms.length>1?"shadow":""; 
-	    
+		if(this.props.type=="search" && !this.state.isToggled){
+			matchTerms.push(<button key="fake">fake</button>);
+			for (var i = 0 ; i < len; i++) 
+				matchTerms.push(<button key={i} name="guess" value={matches[i][0]} onClick={this.handleChange}>{matches[i][0]}</button>);
+		}
+	     
 	    return (
 	    	<div className="search-box-container relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
-			        <input type="text" name="search" disabled={this.props.status==="disabled"?true:false} placeholder="Search for a medical term" autoComplete="off" 
-			        	onChange={this.handleChange} value={this.props.type=="letter"?this.state.input:this.props.query}></input>
+			        <input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" 
+			        	onChange={this.handleChange} value={this.props.type==="search"?this.props.query:this.state.input}></input>
 			        {search_svg}
 			     </div>
-			     <div className={"search-box guess "+shadow}>{matchTerms}</div>
+			     <div className={"search-box guess"+shadow}>{matchTerms}</div>
 		     </div>
     	);
 	}
@@ -208,7 +205,6 @@ class SearchBar4Paragraph extends React.Component {
 	    this.state={pos:0};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleMouseUp = this.handleMouseUp.bind(this);
-	    this.getCaretPos = this.getCaretPos.bind(this);
 	}
 	componentDidMount(){
 		this._isMounted = true;
@@ -230,29 +226,8 @@ class SearchBar4Paragraph extends React.Component {
 	}
 	handleMouseUp(event){
 		if(this._isMounted==false) return;
-		var pos=this.getCaretPos(event.target);
+		var pos = getCaretPos(event.target);
 		this.props.onMouseUp(pos);
-	}
-	getCaretPos(target){
-		// IE < 9 Support
-		var pos=new Object();
-	    if (document.selection) {
-	        target.focus();
-	        var range = document.selection.createRange();
-	        var rangelen = range.text.length;
-	        range.moveStart('character', -target.value.length);
-	        var start = range.text.length - rangelen;
-	        pos.start=start;
-	        pos.end=start+ranglen;
-	    } // IE >=9 and other browsers
-	    else if (target.selectionStart || target.selectionStart == '0') {
-	        	pos.start=target.selectionStart;
-	        	pos.end=target.selectionEnd;
-	    } else {
-	    	pos.start=0;
-	    	pos.end=0;
-	    }
-	    return pos;
 	}
 	render() {
 			return(
@@ -273,45 +248,53 @@ class SearchBar4Paragraph extends React.Component {
 class BrowseFeild extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this._isMounted=false;
-	    this.state = {current: ''};
 	    this.handleClick = this.handleClick.bind(this);
-	}
-	componentDidMount(){
-		this._isMounted = true;
-	}
-	componentWillUnmount(){
-		this._isMounted = false;
 	}
 	handleClick(event){
 		var change=new Object();
 		var value=event.target.value;
-		this._isMounted && this.setState({current:event.target.value});
-		change.query=event.target.value;
-		change.type='letter';
+		change.query= value===this.props.query? "":value;
+		if(this.props.type==="letter" && value===this.props.query.charAt(0)) change.query= "";
+		change.type= value==="all"? 'all':'letter';
 		this.props.onQueryChange(change);
 	}
 	render() {
-		const boolean= this.props.type==='letter'?true:false;
-		var query=""
-		if(boolean){
-			query=this.props.query.length<3 && this.props.status==='primary'?this.props.query.charAt(0):this.props.query;
-		}
+		const query=this.props.type==='letter'? this.props.query.charAt(0) : "";
 	  	var listItems = this.props.list.map((letter)=>
-			<button key={letter} className={boolean && letter===query?"current-button":""} 
+			<button key={letter} className={letter===query?"current-button":""} 
 			value={letter} type="button" onClick={this.handleClick}>
 				{letter}</button>
 				);
-	  	if(this.props.status==='primary')
-	  	 	listItems.push(
-		  		<button key="all" className={boolean && 'all'===query?"current-button":""}
-		  		value='all' type="button" onClick={this.handleClick}>
-					{"view all "+total+" terms"}</button>
-					);
+  	 	listItems.push(
+	  		<button key="all" className={this.props.type==='all'?"current-button":""}
+	  		value='all' type="button" onClick={this.handleClick}>
+				{"view all "+total+" terms"}</button>
+				);
 	    return <div className="BrowseFeild">{listItems}</div>;
 	}
 }
-
+class BrowseFeildSecondary extends React.Component {
+	constructor(props) {
+	    super(props);
+	    this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(event){
+		var change=new Object();
+		var value=event.target.value;
+		change.query= value===this.props.query? value.charAt(0):value;
+		change.type= 'letter';
+		this.props.onQueryChange(change);
+	}
+	render() {
+		if(this.props.type!='letter' || this.props.query=='') return null;
+	  	var listItems = this.props.list.map((letter)=>
+			<button key={letter} className={letter===this.props.query?"current-button":""} 
+			value={letter} type="button" onClick={this.handleClick}>
+				{letter}</button>
+				);
+	    return <div className="BrowseFeild">{listItems}</div>;
+	}
+}
 
 class MessageRow extends React.Component {
 	constructor(props) {
@@ -319,13 +302,49 @@ class MessageRow extends React.Component {
 	}
 	render () {
 		if(this.props.query==='') return null;
-		if(this.props.query==='all' && this.props.type==='letter') return <p>All the terms we have:</p>;
-		const message= this.props.type==='letter'? "Terms started with ":"Possible matches for ";
-		return <p>{message}<strong>{this.props.query}</strong>:</p>
+		else if(this.props.length <= 0) //when there is no match for the query
+			return <p>Sorry, no match for <strong>{this.props.query}</strong>.</p>
+		else if(this.props.type==='all') 
+			return <p>All {total} terms we have:</p>;
+		else if(this.props.type==='letter')
+			return <p>{this.props.length} {this.props.length>1?"terms":"term"} started with <strong>{this.props.query}</strong>:</p>;
+		else 
+			return <p>Possible matches for <strong>{this.props.query}</strong>:</p>;
 	}
 }
 
-class TermCardList extends React.Component {
+class TermCardList4Word extends React.Component {
+	constructor(props) {
+	    super(props);
+	    this.handleReport=this.handleReport.bind(this);
+	    this.handleRequest=this.handleRequest.bind(this);
+	  }
+	handleReport(query){
+		this.props.onReport(query);
+	}
+	handleRequest(event){
+		if(event.target.name==="request") this.props.onReport(["request",-1]);
+	}
+	render() {
+		if(this.props.matches.length <= 0) return null;
+
+		const list = this.props.matches.map(
+			(item)=> <TermCard onReport={this.handleReport} key={item[0]} query={item} />
+			);
+		if(this.props.type!='search') return <div>{list}</div>;
+		else return (
+			<div>
+				{list}
+				<div className="term-card-min request flex">
+					<h3>Didn't find the term you need?</h3>
+					<button name="request" className="button-dark" onClick={this.handleRequest}>Request Term</button>
+				</div>
+			</div>
+			);
+	}
+}
+
+class TermCardList4Paragraph extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.handleScroll=this.handleScroll.bind(this);
@@ -425,13 +444,14 @@ class Report extends React.Component {
 	constructor(props) {
 		super(props);
 		this._isMounted=false;
-		this.state = {status:'input',error:'',comment:'',loading:false};
+		this.state = {status:'input',error:'',comment:'',loading:false, query:this.props.query[0]};
 		this.handleBack = this.handleBack.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount(){
 		this._isMounted = true;
+		if(this.props.type==="request") this.setState({query:this.props.query});
 	}
 	componentWillUnmount(){
 		this._isMounted = false;
@@ -440,12 +460,14 @@ class Report extends React.Component {
 		this.props.onBack([-1,-1]);
 	}
 	handleChange(event) {
-		this._isMounted && this.setState({comment:event.target.value});
+		const target=event.target;
+		if(target.name==="comment") this._isMounted && this.setState({comment:target.value});
+		if(target.name==="term") this._isMounted && this.setState({query:target.value});
 	}
 	handleSubmit(event) {
 	    event.preventDefault();
 	    this._isMounted && this.setState({status:'loading'});
-	    const formObj={type:'report',term:this.props.query[0],comment:this.state.comment};
+	    const formObj={type:this.props.type,term:this.state.query,comment:this.state.comment};
 	    let json=JSON.stringify(formObj);
 		let u = new URLSearchParams(formObj).toString();
 		let result={};
@@ -461,38 +483,59 @@ class Report extends React.Component {
 		});
 	 }
 	render(){
+		const isReport= this.props.type==="report"? true:false;
 		if(this.state.status==="loading"){
 			return (
-				<div className="blank">loading</div>
+				<div className="loading center"><p>Sending your {this.props.type}...</p><div className="loading-animate"></div></div>
 				);
 		}
 		else if(this.state.status==="submitted"){
 			return (
 				<div className="form term-card">
-					<h3>Report Sent!</h3>
-					<p>Your report of incorrect information about <strong>{this.props.query[0]}</strong> has been sent! We will update the dictionary as soon as we can. 
-					<br/>💙 Thank you for your report and patient!</p>
+					<h3 className="capitalize">{this.props.type} sent!</h3>
+					<p>Your {isReport? "report of incorrect information about":"for the definition of"} <strong>{this.state.query}</strong> has been sent! We will update the dictionary as soon as we can.</p>
+					{isReport? "":<p>At the mean time, please reach out to you health advisor for more information</p>}
+					<p>💙 Thank you for your {this.props.type} and patience!</p>
 					<div onClick={this.handleBack} className="right"><button className="button-dark">Back</button></div>
-				</div>
-				);
+				</div>);
 		}
-		else return (
+		else if(isReport) 
+			return (
 				<div className="form term-card">
 					<p onClick={this.handleBack}>{close_svg}</p>
 					<h3>Find something incorrect?</h3>
 					<TermCardMin query={this.props.query}/>
 					<form onSubmit={this.handleSubmit} action="" method="get">
 						<label htmlFor="comment">Tell us what we can improve on: <em>{this.props.query[0]}</em></label>
-						<div className="form-textarea" rows="4">
+						<div className="form-textarea">
 							<textarea type="text" name="comment" onChange={this.handleChange}
-								placeholder="Tell us more about this problem" required></textarea></div>
+								placeholder="Tell us more about this problem" rows="4" required></textarea></div>
 						<div className="right">
-							<button onClick={this.handleBack} className="button-bright">Cancel</button>
+							<button type="reset" onClick={this.handleBack} className="button-bright">Cancel</button>
+							<button type="submit" value="submit" className="button-dark">Send</button></div>
+					</form>
+				</div>);
+		else return(
+				<div className="form term-card">
+					<p onClick={this.handleBack}>{close_svg}</p>
+					<h3>Didn't find the term yoou need?</h3>
+					<form onSubmit={this.handleSubmit} action="" method="get">
+						<label htmlFor="term">Request definition for </label>
+						<div className="form-textarea">
+							<input type="text" name="term" autoComplete="off" 
+			        			onChange={this.handleChange} value={this.state.query} required></input></div>
+						<label htmlFor="comment">Add a note about the request (optional)</label>
+						<div className="form-textarea">
+							<textarea type="text" name="comment" onChange={this.handleChange}
+								placeholder="Tell us more about this term" rows="4"></textarea></div>
+						<div className="right">
+							<button type="reset" onClick={this.handleBack} className="button-bright">Cancel</button>
 							<button type="submit" value="submit" className="button-dark">Send</button></div>
 					</form>
 				</div>);
 	}
 }
+
 
 	///////////////////
    //// FUNCTIONS ////
@@ -519,21 +562,21 @@ function distanceCompare(a,b) {
 }
 // Run an anonymous funtion if a value is close enough to another value.
 function getMatches(query,type){
-	  	const letterBrowse=type=='letter'? true:false;
 	  	const len=query.length;
 	  	var matches_out=[];
-	    if(letterBrowse){
-	    	if(len>2){
-	    		matches_out=dictionary;
-	    		currentLetters=[];
-	    	}	
-	    	else{
-    			var matches=search_letter(query)
+	  	if(len <= 0) {
+	  		currentLetters=[];
+	  		return matches_out;
+	  	}	  	
+	  	if(query==="all" && type==="all") matches_out=dictionary;
+	  	else if(type==="letter"){
+    			const matches=search_letter(query)
     			matches_out=matches[0];
-    			if(len==1){currentLetters=matches[1];}
+    			if(len==1){
+    				currentLetters=matches[1];
+    			}
 	    	}
-	    }
-	    else{matches_out=search_query(query);}
+	    else { matches_out=search_query(query); }
 	    return matches_out;
 }
 function filter_matches(matches, center, range) {
@@ -544,35 +587,33 @@ function filter_matches(matches, center, range) {
         if(matches[i][2]<=max) output.push(matches[i]);
       return output.sort(distanceCompare);
     }
-//list=dictionary for 1 letter, list=matches for 2 letters
+//letter browsing
 function search_letter(query){
 	var list=dictionary;
-	var len=query.length;
-	var lenList=list.length;
 	var letter=query.toLowerCase();
 	var matches=[];
 	var matches_sub=[];
-	if(len==1)
-		for(var i=0 ; i < lenList; i++){
+	var flag=false;
+
+	if(query.length==1)
+		for(var i=0; i < total; i++){
 			var item=list[i][0].toLowerCase();
-			if(item.charAt(0)==letter){
+			if(item.charAt(0)===letter){
+				flag=true;
 				matches.push(list[i]);
 				if(item.charAt(1).match(/[a-z]/i) && (matches_sub.length==0 || item.charAt(1)!=matches_sub[matches_sub.length-1].charAt(1)))
 					matches_sub.push(query+item.charAt(1));
-				if(i<lenList-1)
-					if(list[i+1][0].toLowerCase().charAt(0)!=letter) break;
 			}
+			else if(flag) break;
 		}
-	if(len==2)
-		for(var i=0 ; i < lenList ; i++){
-			var item=list[i][0].toLowerCase().substring(0,2);
-			if(item==letter) {
-				matches.push(list[i]);i++;
-				var item_next=list[i][0].toLowerCase().substring(0,2);
-				if(item_next==letter) matches.push(list[i]);
-				else break;
+	else if(query.length==2)
+		for(var i=0; i < total; i++){
+			var item = list[i][0].toLowerCase().substring(0,2);
+			if(item === letter) {
+				flag=true;
+				matches.push(list[i]);
 			}
-			
+			else if(flag) break;
 		}
 	return [matches,matches_sub];
 }	
@@ -585,7 +626,7 @@ function search_query(query) {
     // Set the initial acceptable score range.
     var best_score  = 0
     var score_range = 3
-    var perfect=false;//if there is perfect match for the query in our dictionary
+    var perfect = false;//whether there is perfect match for the query in our dictionary
     // Split the query, search through word by word.
     var query_low = query.toLowerCase();
     var query_words = query_low.split(splittable_chars);
@@ -623,7 +664,7 @@ function search_query(query) {
     return matches;
 }
 
-//query is plain text, pos is caret position
+//query is plain text, return a marked html
 function search_paragraph(query) {
 	var obj=new Object();
 	const array_raw=[]
@@ -667,6 +708,27 @@ function search_paragraph(query) {
     return obj;
 }
 
+function getCaretPos(target){
+	// IE < 9 Support
+	var pos=new Object();
+    if (document.selection) {
+        target.focus();
+        var range = document.selection.createRange();
+        var rangelen = range.text.length;
+        range.moveStart('character', -target.value.length);
+        var start = range.text.length - rangelen;
+        pos.start=start;
+        pos.end=start+ranglen;
+    } // IE >=9 and other browsers
+    else if (target.selectionStart || target.selectionStart == '0') {
+        	pos.start=target.selectionStart;
+        	pos.end=target.selectionEnd;
+    } else {
+    	pos.start=0;
+    	pos.end=0;
+    }
+    return pos;
+}
 
 	///////////////////
    ////// RENDER /////
