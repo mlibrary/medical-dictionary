@@ -359,8 +359,7 @@ button[class*="bright"]{
   background-color: white;
   border-radius: .5em;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .24);
-  
-  overflow: hidden;
+
   cursor:pointer;
   z-index: 10;
 }
@@ -380,6 +379,33 @@ button[class*="bright"]{
   padding: 0;
   margin: 0;
   margin-left: .8em;
+}
+
+.message-copied{
+  position: relative;
+}
+.message-copied::before{
+  content: "Copied!";
+  color: white;
+  background-color: #01274C;
+  opacity: 0;
+  border-radius: 4px;
+  padding:.2em .5em;
+  right: -1em;
+  top:-1.5em;
+  position: absolute;
+  z-index: 99;
+  animation-name: pop;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+}
+
+@keyframes pop {
+  0%   {top:-1.5em; opacity:0;}
+  12%  {top:-2em; opacity:.8;}
+  50% {top:-3em; opacity:0;}
+  100% {top:-3em; opacity:0;}
 }
 
 /*//////////////////////////

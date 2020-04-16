@@ -331,16 +331,18 @@ class TermCardList4Word extends React.Component {
 		const list = this.props.matches.map(
 			(item)=> <TermCard onReport={this.handleReport} key={item[0]} query={item} />
 			);
-		if(this.props.type!='search') return <div>{list}</div>;
-		else return (
-			<div>
-				{list}
-				<div className="term-card-min request flex">
-					<h3>Didn't find the term you need?</h3>
-					<button name="request" className="button-dark" onClick={this.handleRequest}>Request Term</button>
+		
+		if(this.props.type=='search' && this.props.matches[0][2]!=0) 
+			return (
+				<div>
+					{list}
+					<div className="term-card-min request flex">
+						<h3>Didn't find the term you need?</h3>
+						<button name="request" className="button-dark" onClick={this.handleRequest}>Request Term</button>
+					</div>
 				</div>
-			</div>
-			);
+				);
+		else return <div>{list}</div>;
 	}
 }
 
@@ -375,7 +377,7 @@ class TermCard extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this._isMounted=false;
-	    this.state = {isToggled: true};
+	    this.state = {isToggled: true, copied:false};
 	    this.handleClick = this.handleClick.bind(this);
 	    this.handleCopy = this.handleCopy.bind(this);
 	    this.handleReport = this.handleReport.bind(this);
@@ -394,11 +396,17 @@ class TermCard extends React.Component {
 	}
 	handleCopy(event){
 		var target=event.target;
-		target.focus();
-		document.execCommand("copy");
- 		alert("Copied the text: " + this.props.query[1]);
+		this._isMounted && this.setState({copied:false});
+		navigator.clipboard.writeText(this.props.query).then(function() {
+		    /* success */
+		    this._isMounted && this.setState({copied:true});
+		    console.log("success")
+		  }.bind(this), function(error) {
+		    /* failure */
+		    console.log("Error message: " + error)
+		    window.alert(error);
+		  });
 	}
-	
 	render() {
 		const define=this.props.query[1];
 		var def=define.length > 60 && this.state.isToggled? define.substring(0,60)+"...":define;
@@ -407,7 +415,7 @@ class TermCard extends React.Component {
 				<h2>{this.props.query[0]}</h2>
 				<div className="iconset">
 					<button onClick={this.handleReport} title="Report incorrect definition">{report_svg}</button>
-					<button onClick={this.handleCopy} title="Copy this definition to clipboard">{copy_svg}</button></div>
+					<button className={this.state.copied?"message-copied":""} onClick={this.handleCopy} title="Copy this definition to clipboard">{copy_svg}</button></div>
 				<p onClick={this.handleClick}>{def}</p>
 			</div>);
 	}
