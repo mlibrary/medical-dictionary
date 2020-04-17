@@ -26,13 +26,11 @@ class DictionaryContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this._isMounted=false;
-		this.lastScrollTop=0;
 		this.state={status:"word"};
 		this.handleStatusChange=this.handleStatusChange.bind(this);
 	}
 	componentDidMount(){
 		this._isMounted = true;
-		if(this.state.status==="word") this.offset=$('#main>p').offsetTop;
 	}
 	componentWillUnmount(){
 		this._isMounted = false;
@@ -40,22 +38,10 @@ class DictionaryContainer extends React.Component {
 	handleStatusChange(event){
 		this._isMounted && this.setState({status:event.target.value});
 	}
-	handleScroll(){//only for word search
-		const main=document.querySelector('main');
-		const message=document.getElementById('messageRow');
-		const top=Math.ceil(main.scrollTop());
-		console.log('here')
-		if ( top > this.lastScrollTop) {
-			consle.log('down');
-		    message.classList.add("sticky");
-		  } else {
-		    message.classList.remove("sticky");
-		  }
-		this.lastScrollTop=top;
-	}
+	
 	render(){
 		return (
-				<section className="no-scroll-bar" onScroll={this.state.status==="word"?this.handleScroll:()=>{}}>
+				<section className="relative">
 					<div className="status">
 						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word">Word</button>
 						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
@@ -69,19 +55,28 @@ class Dictionary4Word extends React.Component {
     constructor(props) {
 	    super(props);
 	    this._isMounted = false;
+		this.lastScrollTop=0;
+		this.panelHeight=0;
 	    this.state = {query:'',type:'',matches:[],report_query:[-1,-1],request:false};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleReport = this.handleReport.bind(this);
 	    this.handleRequest = this.handleRequest.bind(this);
+		this.handleScroll=this.handleScroll.bind(this);
     }
     componentDidMount(){
 		this._isMounted = true;
+		this.lastScrollTop = Math.ceil(document.querySelector('main').scrollTop);
+		document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	}
 	componentWillUnmount(){
 		this._isMounted = false;
+		document.querySelector('main').removeEventListener('scroll', this.handleScroll);
 	}
     handleChange(change) {
     	var matches= change.query===''?[]:getMatches(change.query,change.type);
+    	this.panelHeight=document.querySelector('#panel').offsetHeight;
+	    this.resume();
+	    $('main').scrollTop(0);
 	    this._isMounted && this.setState({query: change.query,type:change.type,matches:matches});
     }
     handleReport(query) {
@@ -90,6 +85,40 @@ class Dictionary4Word extends React.Component {
     handleRequest(boolean) {
   		this._isMounted && this.setState({request:boolean});
     }
+    handleScroll(){
+		const main=document.querySelector('main');
+		const top=Math.ceil(main.scrollTop);
+		if (top > document.querySelector('.status').offsetHeight){
+			const message=document.querySelector('#messageRow');
+			const panel=document.querySelector('#panel');
+			const cardList=document.querySelector('.TermCardList_word');
+			const messageTop=message.offsetTop
+
+			if ( top > this.lastScrollTop && messageTop > 0 && top > messageTop) {
+		    	message.classList.add("sticky");
+		    	cardList.style.marginTop=message.offsetHeight+"px"; 
+			    panel.classList.remove("sticky");
+			} else if( top < this.lastScrollTop ){
+			    message.classList.remove("sticky");
+			    cardList.style.marginTop="0px";
+			    if (top > 0) {
+			    	cardList.style.marginTop=2*this.panelHeight+"px";
+			    	panel.classList.add("sticky");
+			    }
+			  }
+		}
+		else this.resume();
+		
+		this.lastScrollTop = top;
+	}
+	resume(){
+		const panel=document.querySelector('#panel');
+		const message=document.querySelector('#messageRow');
+		const cardList=document.querySelector('.TermCardList_word');
+		if(panel) panel.classList.remove("sticky");
+	    if(message) message.classList.remove("sticky");
+	    if(cardList) cardList.style.marginTop="0px";
+	}
     render() {
 	  	if(this.state.report_query[0]!=-1){
 	  		const isReport= this.state.report_query[1]!=-1;
@@ -98,11 +127,13 @@ class Dictionary4Word extends React.Component {
 
 	    else return (
 	    	<div>
+	    		<div id='panel'>
 	    		<SearchBar4Word onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} matches={this.state.matches}/>
 				<BrowseFeild onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
 				<BrowseFeildSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
 				<div id='messageRow'>
 					<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/></div>
+				</div>
 	    		<div className="TermCardList_word hasCard">
 	    			<TermCardList4Word onReport={this.handleReport} onRequest={this.handleRequest} matches={this.state.matches} type={this.state.type}/></div>
 	    	</div>

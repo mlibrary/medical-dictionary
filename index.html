@@ -34,13 +34,13 @@
 			main.scroll(function(){
 			  	
 			  	let top=Math.ceil(main.scrollTop());
-			  	if (top > lastScrollTop){
-			  		$('h1').css('font-size','1em');
-			  		$('h1 span').css('display','none');
+			  	if (top > lastScrollTop ){
+			  		// $('h1').css('font-size','1em');
+			  		// $('h1 span').css('display','none');
 			  		$('footer p').css('height','1em');
 			  	} else if (top < lastScrollTop) {
-			  		$('h1').css('font-size','1.5em');
-			  		$('h1 span').css('display','block');
+			  		// $('h1').css('font-size','1.5em');
+			  		// $('h1 span').css('display','block');
 			  		$('footer p').css('height','auto');
 			  	}
 				lastScrollTop = top;
