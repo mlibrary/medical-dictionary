@@ -17,32 +17,37 @@
 	</header>
 	<main id="root" class="no-scroll-bar"></main>
 	<footer>
-		<p id="copyright">This work was performed under a subcontract with the University of Illinois at Chicago and made possible by grant #N01-LM-6-3503 from National Library of Medicine (NLM) and its contents are solely the responsibility of the authors and do not necessarily represent the official views of the National Library of Medicine. <br>This application is copyright 2020, The Regents of the University of Michigan.</p>
+		<p>This work was performed under a subcontract with the University of Illinois at Chicago and made possible by grant #N01-LM-6-3503 from National Library of Medicine (NLM) and its contents are solely the responsibility of the authors and do not necessarily represent the official views of the National Library of Medicine. <br>This application is copyright 2020, The Regents of the University of Michigan.</p>
 	</footer>
 	<!-- react.js -->
 	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
  	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
  	<!-- components -->
 	<script type="text/babel" src="main.js"></script>
+
+	<!-- scroll motion control for word search -->
 	<script type="text/javascript">
 		$( document ).ready(function() {
-		  // Handler for .ready() called.
-		  let lastScrollTop=0;
-
-		  $('main').scroll(function(){
-		  	
-		  	const row=$('#word-main>p');
-		  	var height=row.offsetTop;
-		  	if ($('main').offsetTop > height) {
-		  		console.log('hey')
-			    row.classList.add("sticky");
-			} else {
-			    if(row.hasClass('sticky')) row.classList.remove("sticky");
-			}
-			lastScrollTop = height <= 0 ? 0 : height;
-		  })
+			let lastScrollTop=0;
+			const main=$('main');
+			
+			main.scroll(function(){
+			  	
+			  	let top=Math.ceil(main.scrollTop());
+			  	if (top > lastScrollTop){
+			  		$('h1').css('font-size','1em');
+			  		$('h1 span').css('display','none');
+			  		$('footer p').css('height','1em');
+			  	} else if (top < lastScrollTop) {
+			  		$('h1').css('font-size','1.5em');
+			  		$('h1 span').css('display','block');
+			  		$('footer p').css('height','auto');
+			  	}
+				lastScrollTop = top;
+			});
 
 		});
+
 	</script>
 </body>
 </html>

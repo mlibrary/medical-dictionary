@@ -26,7 +26,7 @@ class DictionaryContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this._isMounted=false;
-		this.offset=0;
+		this.lastScrollTop=0;
 		this.state={status:"word"};
 		this.handleStatusChange=this.handleStatusChange.bind(this);
 	}
@@ -41,16 +41,21 @@ class DictionaryContainer extends React.Component {
 		this._isMounted && this.setState({status:event.target.value});
 	}
 	handleScroll(){//only for word search
-		console.log(this.offset)
-		if (window.pageYOffset > this.offset) {
-		    header.classList.add("sticky");
+		const main=document.querySelector('main');
+		const message=document.getElementById('messageRow');
+		const top=Math.ceil(main.scrollTop());
+		console.log('here')
+		if ( top > this.lastScrollTop) {
+			consle.log('down');
+		    message.classList.add("sticky");
 		  } else {
-		    header.classList.remove("sticky");
+		    message.classList.remove("sticky");
 		  }
+		this.lastScrollTop=top;
 	}
 	render(){
 		return (
-				<section>
+				<section className="no-scroll-bar" onScroll={this.state.status==="word"?this.handleScroll:()=>{}}>
 					<div className="status">
 						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word">Word</button>
 						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
@@ -92,11 +97,12 @@ class Dictionary4Word extends React.Component {
 	  		  			query={isReport? this.state.report_query:this.state.query}/>;}
 
 	    else return (
-	    	<div id="word-main">
+	    	<div>
 	    		<SearchBar4Word onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} matches={this.state.matches}/>
 				<BrowseFeild onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
 				<BrowseFeildSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
-				<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/>
+				<div id='messageRow'>
+					<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/></div>
 	    		<div className="TermCardList_word hasCard">
 	    			<TermCardList4Word onReport={this.handleReport} onRequest={this.handleRequest} matches={this.state.matches} type={this.state.type}/></div>
 	    	</div>
