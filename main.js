@@ -26,11 +26,13 @@ class DictionaryContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this._isMounted=false;
+		this.offset=0;
 		this.state={status:"word"};
 		this.handleStatusChange=this.handleStatusChange.bind(this);
 	}
 	componentDidMount(){
 		this._isMounted = true;
+		if(this.state.status==="word") this.offset=$('#main>p').offsetTop;
 	}
 	componentWillUnmount(){
 		this._isMounted = false;
@@ -38,9 +40,17 @@ class DictionaryContainer extends React.Component {
 	handleStatusChange(event){
 		this._isMounted && this.setState({status:event.target.value});
 	}
+	handleScroll(){//only for word search
+		console.log(this.offset)
+		if (window.pageYOffset > this.offset) {
+		    header.classList.add("sticky");
+		  } else {
+		    header.classList.remove("sticky");
+		  }
+	}
 	render(){
 		return (
-				<section id="main">
+				<section>
 					<div className="status">
 						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word">Word</button>
 						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
@@ -82,12 +92,12 @@ class Dictionary4Word extends React.Component {
 	  		  			query={isReport? this.state.report_query:this.state.query}/>;}
 
 	    else return (
-	    	<div>
+	    	<div id="word-main">
 	    		<SearchBar4Word onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} matches={this.state.matches}/>
 				<BrowseFeild onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
 				<BrowseFeildSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
 				<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/>
-	    		<div className="TermCardList_word padding">
+	    		<div className="TermCardList_word hasCard">
 	    			<TermCardList4Word onReport={this.handleReport} onRequest={this.handleRequest} matches={this.state.matches} type={this.state.type}/></div>
 	    	</div>
 	    	);
@@ -119,6 +129,7 @@ class Dictionary4Paragraph extends React.Component {
     handleMouseUp(pos) {
 	  	const flagArray=this.state.flagArray;
 	  	if(flagArray.length <= 0 || pos.start < 0 || pos.end > flagArray.length) return;
+
 	  	var selected=-1;
 	  	if(pos.end==pos.start) {
 	  		selected=flagArray[pos.end];
@@ -128,16 +139,20 @@ class Dictionary4Paragraph extends React.Component {
 	  				selected=flagArray[i];break;}
 
 	  	this._isMounted && this.setState({selected:selected});
+	  	if(selected!=-1 && this.state.matches.length>2){
+	  		  	var height=document.getElementById('card-container').children[selected].offsetTop;
+	  			$('.TermCardList_para').scrollTop(height-32);
+	  			console.log(height);}
     }
     render() {
-	  	const padding=this.state.matches.length > 0? ' padding' : '';
+	  	const hasCard=this.state.matches.length > 0? ' hasCard' : '';
 	  	if(this.state.report_query[0]!=-1)
 	  		return <Report type="report" onBack={this.handleReport} query={this.state.report_query}/>;
 
 		else return (
 			<div className="flex">
 				<SearchBar4Paragraph status="normal" query={this.state.query} onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
-				<div className={"TermCardList_para"+padding}>
+				<div className={"TermCardList_para"+hasCard}>
 					<TermCardList4Paragraph onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
 			</div>
 		);
@@ -215,7 +230,7 @@ class SearchBar4Paragraph extends React.Component {
 	}
 	handleChange(event) {
 		const target=event.target;
-		target.style.height = 'inherit';
+		target.style.height = 'inherit';//to auto set textarea's height
     	target.style.height = `${target.scrollHeight}px`;
 		var change=new Object();
 		change.query=target.value;
@@ -225,7 +240,6 @@ class SearchBar4Paragraph extends React.Component {
 	    }.bind(this),200);
 	}
 	handleMouseUp(event){
-		if(this._isMounted==false) return;
 		var pos = getCaretPos(event.target);
 		this.props.onMouseUp(pos);
 	}
@@ -304,7 +318,7 @@ class MessageRow extends React.Component {
 		if(this.props.query==='') return null;
 		else if(this.props.length <= 0) //when there is no match for the query
 			return <p>Sorry, no match for <strong>{this.props.query}</strong>.</p>
-		else if(this.props.type==='all') 
+		else if(this.props.type==='all')
 			return <p>All {total} terms we have:</p>;
 		else if(this.props.type==='letter')
 			return <p>{this.props.length} {this.props.length>1?"terms":"term"} started with <strong>{this.props.query}</strong>:</p>;
@@ -349,27 +363,21 @@ class TermCardList4Word extends React.Component {
 class TermCardList4Paragraph extends React.Component {
 	constructor(props) {
 	    super(props);
-	    this.handleScroll=this.handleScroll.bind(this);
 	    this.handleReport=this.handleReport.bind(this);
 	  }
 	handleReport(query){
 		this.props.onReport(query);
 	}
-	handleScroll(){
-		element.scroll({
-		  top: 100,
-		  behavior: 'smooth'
-		});
-	}
 	render() {
 		if(this.props.matches.length <= 0) return null;
+		
 		var selected='';
 		if(this.props.selected!=-1 && this.props.selected < this.props.matches.length) 
 			selected=this.props.matches[this.props.selected][0];
 		const list = this.props.matches.map(
 			(item)=> <TermCard type={selected===item[0]?"selected":"normal"} onReport={this.handleReport} key={item[0]} query={item} />
 			);
-		return <div>{list}</div>;
+		return <div id="card-container">{list}</div>;
 	}
 }
 

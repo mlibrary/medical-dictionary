@@ -65,9 +65,24 @@ body {
   min-width: 30em;
   margin: 1em auto;
   border: .2em solid #eee;
+  overflow-y: scroll;
 }
-#main{
-  padding: 1em;
+main{
+  max-height: 500px;
+  overflow-y: scroll;
+  padding: 0 1em;
+}
+
+#word-main{
+  position: relative;
+}
+#word-main>p{ 
+  background-color: white; 
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
 }
 
 h1 {
@@ -161,6 +176,7 @@ input{
   height: 10em;
   background-color: white;
 }
+
 .no-scroll-bar{
   -ms-overflow-style: none;
 }
@@ -205,10 +221,8 @@ button[class*="bright"]{
 //////////////////////*/
 
 .status{
-  width: 36%;
-  min-width: 12em;
-  margin: 0 auto;
-  margin-bottom: 1em;
+  width: 12em;
+  margin: 1em auto;
 }
 .status button{
   width: 50%;
@@ -293,8 +307,7 @@ button[class*="bright"]{
 .search-box .box-paragraph{
   flex-grow: 1;
   display: inline-block;
-  min-height: 50vh;
-  max-height: 70vh;
+  height: 50vh;
   overflow-y: scroll;
 }
 
@@ -311,6 +324,7 @@ button[class*="bright"]{
 .box-paragraph textarea{
   display: inline-block;
   position: absolute;
+  height: auto;
   top:.0;
   left:0;
   z-index: 99;
@@ -329,21 +343,25 @@ button[class*="bright"]{
 /*//////////////////////////
 ////    TermCardList   ////
 ////////////////////////*/
-
-/*.TermCardList_para,
+/*
+.TermCardList_para,
 .TermCardList_word{
   max-height: 20em;
-  overflow-y: scroll;
+  overflow-y: scroll; 
+  -ms-overflow-style: none;
 }*/
 
 .TermCardList_para{
   max-width: 48%;
-  max-height: 70vh;
+  max-height: 50vh;
+  position: relative;/*required for getting offsetTop*/
   overflow-y: scroll;
-  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+ 
 }
-.padding{
+.hasCard{
   padding: 0 .5em;
+  min-width: 48%;
 }
 .TermCardList_para::-webkit-scrollbar {
   display: none;
@@ -353,7 +371,7 @@ button[class*="bright"]{
   width: 100%;
   position: relative;
   padding: 1em;
-  margin: .5em auto;
+  margin: .5em auto .2em auto;
   margin-bottom: 1em;
 
   background-color: white;
