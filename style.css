@@ -320,7 +320,7 @@ button[class*="bright"]{
 .search-box .box-paragraph{
   flex-grow: 1;
   display: inline-block;
-  height: 50vh;
+  height: 24em;
   overflow-y: scroll;
 }
 
@@ -366,11 +366,11 @@ button[class*="bright"]{
 
 .TermCardList_para{
   max-width: 48%;
-  max-height: 50vh;
+  max-height: 25em;
   position: relative;/*required for getting offsetTop*/
   overflow-y: scroll;
   scroll-behavior: smooth;
- 
+  margin-top: .5em;
 }
 .hasCard{
   padding: 0 .5em;
