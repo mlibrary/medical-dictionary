@@ -88,35 +88,42 @@ class Dictionary4Word extends React.Component {
     handleScroll(){
 		const main=document.querySelector('main');
 		const top=Math.ceil(main.scrollTop);
+		//when the user scroll down
 		if (top > document.querySelector('.status').offsetHeight){
 			const message=document.querySelector('#messageRow');
-			const panel=document.querySelector('#panel');
+			// const panel=document.querySelector('#panel');
 			const cardList=document.querySelector('.TermCardList_word');
 			const messageTop=message.offsetTop
 
 			if ( top > this.lastScrollTop && messageTop > 0 && top > messageTop) {
 		    	message.classList.add("sticky");
+		    	// message.style.backgroundColor='#eee';
 		    	cardList.style.marginTop=message.offsetHeight+"px"; 
-			    panel.classList.remove("sticky");
+			    // panel.classList.remove("sticky");
 			} else if( top < this.lastScrollTop ){
 			    message.classList.remove("sticky");
 			    cardList.style.marginTop="0px";
-			    if (top > 0) {
-			    	cardList.style.marginTop=2*this.panelHeight+"px";
-			    	panel.classList.add("sticky");
-			    }
+			    message.style.backgroundColor='transparent';
+			    // if (top > 0) {
+			    // 	cardList.style.marginTop=2*this.panelHeight+"px";
+			    // 	// panel.classList.add("sticky");
+			    // }
 			  }
 		}
+		//when the user scroll up
 		else this.resume();
 		
 		this.lastScrollTop = top;
 	}
 	resume(){
-		const panel=document.querySelector('#panel');
+		// const panel=document.querySelector('#panel');
 		const message=document.querySelector('#messageRow');
 		const cardList=document.querySelector('.TermCardList_word');
-		if(panel) panel.classList.remove("sticky");
-	    if(message) message.classList.remove("sticky");
+		// if(panel) panel.classList.remove("sticky");
+	    if(message) {
+	    	message.classList.remove("sticky");
+	    	message.style.backgroundColor='transparent';
+	    }
 	    if(cardList) cardList.style.marginTop="0px";
 	}
     render() {
@@ -229,7 +236,7 @@ class SearchBar4Word extends React.Component {
 		var matches = this.props.matches;
 		var len = this.props.type==="search"? Math.min(4, matches.length):0;
 		//guess what the user try to search
-		const shadow=len>0? " shadow" : "";
+		const shadow= len>0 && !this.state.isToggled? " shadow" : "";
 		var matchTerms=[];
 		if(this.props.type=="search" && !this.state.isToggled){
 			matchTerms.push(<button key="fake">fake</button>);
@@ -240,7 +247,7 @@ class SearchBar4Word extends React.Component {
 	    return (
 	    	<div className="search-box-container relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
-			        <input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" 
+			        <input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
 			        	onChange={this.handleChange} value={this.props.type==="search"?this.props.query:this.state.input}></input>
 			        {search_svg}
 			     </div>
@@ -285,7 +292,7 @@ class SearchBar4Paragraph extends React.Component {
 				<div className="search-box-container">
 					<div className="search-box flex">
 						<div className="box-paragraph relative no-scroll-bar">
-							<textarea id="paragraph" name="search" placeholder="Please paste the text here" disabled={this.props.status==="disabled"?true:false}
+							<textarea id="paragraph" name="search" placeholder="Please paste the text here" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
 				        	onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
 				        	<div id="under-textarea" dangerouslySetInnerHTML={{__html: this.props.display}}></div>
 				        </div>
@@ -454,14 +461,19 @@ class TermCard extends React.Component {
 	}
 	render() {
 		const define=this.props.query[1];
-		var def=define.length > 60 && this.state.isToggled? define.substring(0,60)+"...":define;
+		let def=<p>{define}</p>;
+		if(define.length > 60){
+			def=(
+				<p>{this.state.isToggled? define.substring(0,60)+"... ":define+" "}
+					<a href="#" onClick={this.handleClick}>{this.state.isToggled?"expand":"collapse"}</a></p>);
+		}
 		return(
 			<div className={this.props.type==="selected"?"term-card term-card-selected":"term-card"}>
 				<h2>{this.props.query[0]}</h2>
 				<div className="iconset">
 					<button onClick={this.handleReport} title="Report incorrect definition">{report_svg}</button>
 					<button className={this.state.copied?"message-copied":""} onClick={this.handleCopy} title="Copy this definition to clipboard">{copy_svg}</button></div>
-				<p onClick={this.handleClick}>{def}</p>
+				{def}
 			</div>);
 	}
 }
@@ -546,7 +558,7 @@ class Report extends React.Component {
 			return (
 				<div className="form term-card">
 					<h3 className="capitalize">{this.props.type} sent!</h3>
-					<p>Your {isReport? "report of incorrect information about":"for the definition of"} <strong>{this.state.query}</strong> has been sent! We will update the dictionary as soon as we can.</p>
+					<p>Your {isReport? "report of incorrect information about":"request for the definition of"} <strong>{this.state.query}</strong> has been sent! We will update the dictionary as soon as we can.</p>
 					{isReport? "":<p>At the mean time, please reach out to you health advisor for more information</p>}
 					<p>💙 Thank you for your {this.props.type} and patience!</p>
 					<div onClick={this.handleBack} className="right"><button className="button-dark">Back</button></div>

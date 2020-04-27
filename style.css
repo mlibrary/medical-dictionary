@@ -59,6 +59,10 @@ input,textarea,button,body,label{
   font: 300 16px/150% "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
+input,textarea{
+  padding: 0;
+  width: 100%;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -78,14 +82,12 @@ main{
 }
 
 footer{
-  padding:1em 2em;
+  padding:.8em auto;
 }
 
 footer p{
   font-size: .6em;
-  line-height: 133%;
   text-align: center;
-  overflow: hidden;
   color: #bbb;
 }
 .sticky{
@@ -140,25 +142,26 @@ label{
   margin-right: 1em;
 }
 
-
-input:focus, button:focus, a:focus{
-  outline: none;
+a{
+  font-size: .8em;
+  color: #00B5AF;
 }
+/*input:focus, button:focus, a:focus{
+  outline: none;
+}*/
 textarea{
-  width: 100%;
   outline: none;
   border: none;
   resize: none;
   padding: 0;
 }
 input{
-  width: 100%;
   display: inline-block;
   border:none;
-  text-decoration: none;
-  text-align: left;
   background-color: transparent;
 }
+
+
 .capitalize{
   text-transform: capitalize;
 }
@@ -177,7 +180,10 @@ input{
   justify-content: space-between;
   align-items: center;
 }
-.shadow{box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.2);}
+
+.shadow{
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
+}
 .hide{display: none;}
 .blank{
   width: 100%;
@@ -234,7 +240,7 @@ button[class*="bright"]{
 
 .status{
   width: 12em;
-  margin: 1em auto .5em auto;
+  margin: 1em auto 0 auto;
 }
 .status button{
   width: 50%;
@@ -268,10 +274,10 @@ button[class*="bright"]{
   width: 100%;
   position: relative;
   margin: 0;
-  margin-top: .5em;
+  margin-top: .8em;
   padding: .5em .8em;
   border-radius: 1.2em;
-  border: 2px solid #FECB05;
+  border: 1.5px solid #FECB05;
   background-color: white;
   z-index: 9999;
 }
@@ -280,9 +286,9 @@ button[class*="bright"]{
 
 .search-box input{
   flex-grow: 1; /*take all rest space*/
-  height: 1em;
 }
 .search-box svg{
+  margin-top: .25em;
   margin-left: .5em;
   min-width: 1em;
   flex-grow: 0;
@@ -342,6 +348,7 @@ button[class*="bright"]{
   left:0;
   z-index: 99;
   background-color: transparent;
+  height: 1.5em;
 }
 
 
@@ -389,15 +396,16 @@ button[class*="bright"]{
 
   background-color: white;
   border-radius: .5em;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .24);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
 
   cursor:pointer;
   z-index: 10;
 }
 .term-card-selected{
   top:-2px;
-  border:1.5px solid #FECB05;
-  box-shadow: 0 1px 6px 0 rgba(254, 203, 5, 1);
+  /*background-color: rgba(254, 203, 5, .09);*/
+  /*border:1px solid #FECB05;*/
+  box-shadow: 0 1px 10px 0 rgba(254, 203, 5, 1);
 }
 
 .iconset{
@@ -418,7 +426,7 @@ button[class*="bright"]{
 .message-copied::before{
   content: "Copied!";
   color: white;
-  background-color: #01274C;
+  background-color: #00274C;
   opacity: 0;
   border-radius: 4px;
   padding:.2em .5em;
@@ -445,6 +453,7 @@ button[class*="bright"]{
 
 .form{
   padding: 1.5em;
+  margin-top: .8em;
   cursor: auto;
 }
 
