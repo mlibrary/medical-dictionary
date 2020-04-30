@@ -599,7 +599,7 @@ function getData(data){
 	var obj=data['definitions'];
 	for(var key in obj)
 		if(obj[key]!='')
-			dictionary.push([key,obj[key]]);
+			dictionary.push([strip(key),strip(obj[key])]);
 	dictionary=dictionary.sort(alphaCompare);
 	total=dictionary.length;
 }
@@ -694,8 +694,11 @@ function search_query(query) {
     	var term_low= term[0].toLowerCase();
       	var term_syn = term_low.search(",")!=-1? term_low.split(","):[term_low];
       	var distance = [10,10];
-
-      	for (const term_s of term_syn){
+      	if(query_low === term_low){//perfect match
+	      		distance=[0,0];
+	      		perfect=true;
+	      	}
+      	else for (const term_s of term_syn){
 	      	if(query_low === strip(term_s)){//perfect match
 	      		distance=[0,0];
 	      		perfect=true;
