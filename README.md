@@ -22,22 +22,22 @@ The widget is responsive with a min-width of 320px, max-width of 768px and max-h
 1. Letter browsing
 
 By clicking on the button of letter, the user can view the terms with the same initials.
-<img style="height:160px" src="img/rdm_f1.PNG"/>
+![](img/rdm_f1.PNG =160px)
 
 2. "Word Search": for short terms
 
 Under the "word" mode, as the user typing in the search box, the search results would be displayed below immediately.
-<img style="height:160px" src="img/rdm_f2.PNG"/>
+![](img/rdm_f2.PNG =160px)
 
 3. "Paragraph Search": for longer text
 
 Users can paste or type in a paragraph or an article and the medical terms included would be marked. When a user clicks on the marked term in the textarea, the term card would be highlighted and scrolled in view accorddingly.
-<img style="height:160px" src="img/rdm_f3.PNG"/>
+![](img/rdm_f3.PNG =160px)
 
 4. Report incorrect definitions & Request more medical terms
 
 To further enrich our repository and keep this product updated, we designed this updating system that allows users to request definitions of terms we do not have and report information they think are incorrect. We will collect these feedback and update the repository sustainably. 
-<img style="height:160px" src="img/rdm_f4.PNG"/>
+![](img/rdm_f4.PNG =160px)
 
 ## Development
 
