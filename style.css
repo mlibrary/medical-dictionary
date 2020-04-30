@@ -85,11 +85,11 @@ header,footer{
 header{
   top:0;
   background-color: #00274C;
-  border-bottom: .2em solid #FECB05;
+  border-bottom: 4px solid #FECB05;
 }
 footer{
   bottom:0;
-  padding:.8em auto;
+  padding: 1em auto;
   background-color: white;
   color: #bbb;
 }
@@ -144,7 +144,9 @@ p{margin-top: .5em;}
 
 strong{font-weight: 700;}
 em{font-style: italic;}
-mark{background-color: #FECB05;}
+mark{
+  background-color: rgba(255,203,5,0.48);
+}
 
 label{
   font-weight: bold;
