@@ -63,56 +63,66 @@ input,textarea{
   padding: 0;
   width: 100%;
 }
+body,header,footer{
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+}
 body {
-  display: flex;
-  flex-direction: column;
-  width: 40em;
-  max-height: 640px;
-  margin: 1em auto;
-  border: .2em solid #eee;
-}
-header{
-  flex-grow: 0;
-}
-main{
-  flex-grow: 1;
   position: relative;
+  height: 100vh;
+  max-height: 700px;
+  background-color: white;
+  scroll-behavior: smooth;
+}
+
+header,footer{
+  position: fixed;
+  z-index: 9999;
+  text-align: center;
+}
+
+header{
+  top:0;
+  background-color: #00274C;
+  border-bottom: .2em solid #FECB05;
+}
+footer{
+  bottom:0;
+  padding:.8em auto;
+  background-color: white;
+  color: #bbb;
+}
+footer p{
+  font-size: .6em;
+}
+
+main{
+  position: relative;
+  width: 100%;
+  margin:0 auto;
+  margin-bottom: 2em;
   padding: 0 1em;
   overflow-y: scroll;
 }
 
-footer{
-  padding:.8em auto;
-}
-
-footer p{
-  font-size: .6em;
-  text-align: center;
-  color: #bbb;
-}
 .sticky{
   position: fixed;
-  left: auto;
-  right: auto;
-  width: 38em;
-  top: 6em;
   background-color: white;
-  z-index: 999;
+  z-index: 9999;
+  width: 100%;
 }
 
 
 h1 {
+  line-height: 120%;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: white;
   padding: .5em 0;
-  text-align: center;
-  background-color: #00274C;
-  border-bottom: .2em solid #FECB05;
 }
 
 h1 span {
-  display: block;
   font-weight: 200;
   font-size: .6em;
 }
@@ -124,7 +134,7 @@ h2 {
 h3 {
   font-size: 1.2em;
   font-weight: bold;
-  line-height: 100%;
+  line-height: 120%;
   margin-bottom: .5em;
 }
 
@@ -185,6 +195,9 @@ input{
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
 }
 .hide{display: none;}
+.invisible{
+  visibility: hidden;
+}
 .blank{
   width: 100%;
   height: 10em;
@@ -269,9 +282,8 @@ button[class*="none"]{
 ////    search box   ////
 //////////////////////*/
 
-.search-box-container{
-  width: 48%;
-  min-width: 12em;
+.search-box-container,.TermCardList_para{
+  width: 100%;
   position: relative;
   margin:0 auto;
 }
@@ -284,7 +296,7 @@ button[class*="none"]{
   border-radius: 1.2em;
   border: 1.5px solid #FECB05;
   background-color: white;
-  z-index: 9999;
+  z-index: 999;
 }
 
 /*/////word: search-box/////*/
@@ -328,10 +340,15 @@ button[class*="none"]{
 }
 
 /*/////paragraph: search-box/////*/
+.flex[class*="paragraph"]{
+  flex-direction: column;
+}
 .search-box .box-paragraph{
   flex-grow: 1;
   display: inline-block;
-  height: 24em;
+  max-height: 20em;
+  min-height: 15em;
+  height: 80vw;
   overflow-y: scroll;
 }
 
@@ -368,29 +385,22 @@ button[class*="none"]{
 /*//////////////////////////
 ////    TermCardList   ////
 ////////////////////////*/
-/*
-.TermCardList_para,
-.TermCardList_word{
-  max-height: 20em;
-  overflow-y: scroll; 
-  -ms-overflow-style: none;
-}*/
 
-.TermCardList_para{
-  max-width: 48%;
-  max-height: 25em;
+.TermCardList_para{ /*same size as the search-box-container*/
+  display: none;
+  max-height: 20em;
   position: relative;/*required for getting offsetTop*/
   overflow-y: scroll;
+  height: 80vw;
   scroll-behavior: smooth;
   margin-top: .5em;
 }
 .hasCard{
-  padding: 0 .5em;
+  display: block;
+  padding: 0 .2em 10em .2em;
   min-width: 48%;
 }
-.TermCardList_para::-webkit-scrollbar {
-  display: none;
-}
+
 
 .term-card{
   width: 100%;
@@ -569,4 +579,46 @@ svg{
   0%   {left:0px; width:1px;}
   50%  {left:0px; width:12em;}
   100% {left:12em; width:1px;}
+}
+
+@media only screen and (min-width: 600px) {
+  body,header,footer{
+    max-width: 768px;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  .flex[class*="paragraph"]{
+    flex-direction: row;
+  }
+  .TermCardList_para{ /*same size as the search-box-container*/
+    max-height: 68vh;
+    height: 68vh;
+  }
+  .search-box-container,.TermCardList_para{
+    width: 50%;
+  }
+  .search-box .box-paragraph{
+    flex-grow: 1;
+    display: inline-block;
+    min-height: 20em;
+    max-height: 64vh;
+    height: 64vh;
+    overflow-y: scroll;
+  }
+  .hasCard{
+    padding: 0 .2em 10em 1em;
+  }
+  .TermCardList_word{
+    padding: 0 .2em 10em .2em;
+  }
+}
+
+@media screen and (prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after {
+      animation-duration: 0.001s !important;
+      transition-duration: 0.001s !important;
+    }
 }

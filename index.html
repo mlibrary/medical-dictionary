@@ -13,7 +13,7 @@
 </head>
 <body>
 	<header>
-		<h1>Plain Language Medical Dictionary <span>Application by the University of Michigan Library</span></h1>
+		<h1>Plain Language Medical Dictionary<br><span>Application by the University of Michigan Library</span></h1>
 	</header>
 	<main id="root" class="no-scroll-bar"></main>
 	<footer>
@@ -26,28 +26,18 @@
 	<script type="text/babel" src="main.js"></script>
 
 	<!-- scroll motion control for word search -->
-<!-- 	<script type="text/javascript">
+	<script type="text/javascript">
+		function handleResize() {
+			$('main').css('padding-top',$('header').outerHeight(true)+'px');
+		}
 		$( document ).ready(function() {
 			let lastScrollTop=0;
 			const main=$('main');
-			
-			main.scroll(function(){
-			  	
-			  	let top=Math.ceil(main.scrollTop());
-			  	if (top > lastScrollTop ){
-			  		// $('h1').css('font-size','1em');
-			  		// $('h1 span').css('display','none');
-			  		$('footer p').css('height','1em');
-			  	} else if (top < lastScrollTop) {
-			  		// $('h1').css('font-size','1.5em');
-			  		// $('h1 span').css('display','block');
-			  		$('footer p').css('height','auto');
-			  	}
-				lastScrollTop = top;
-			});
+			handleResize();
+			window.onresize = handleResize;
 
 		});
 
-	</script> -->
+	</script>
 </body>
 </html>

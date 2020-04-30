@@ -38,7 +38,6 @@ class DictionaryContainer extends React.Component {
 	handleStatusChange(event){
 		this._isMounted && this.setState({status:event.target.value});
 	}
-	
 	render(){
 		return (
 				<section className="relative">
@@ -65,18 +64,15 @@ class Dictionary4Word extends React.Component {
     }
     componentDidMount(){
 		this._isMounted = true;
-		this.lastScrollTop = Math.ceil(document.querySelector('main').scrollTop);
-		document.querySelector('main').addEventListener('scroll', this.handleScroll);
+		this.lastScrollTop = Math.ceil(window.scrollTop);
+		window.addEventListener('scroll', this.handleScroll);
 	}
 	componentWillUnmount(){
 		this._isMounted = false;
-		document.querySelector('main').removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('scroll', this.handleScroll);
 	}
     handleChange(change) {
     	var matches= change.query===''?[]:getMatches(change.query,change.type);
-    	this.panelHeight=document.querySelector('#panel').offsetHeight;
-	    this.resume();
-	    $('main').scrollTop(0);
 	    this._isMounted && this.setState({query: change.query,type:change.type,matches:matches});
     }
     handleReport(query) {
@@ -86,53 +82,26 @@ class Dictionary4Word extends React.Component {
   		this._isMounted && this.setState({request:boolean});
     }
     handleScroll(){
-		const main=document.querySelector('main');
-		const top=Math.ceil(main.scrollTop);
+		const top=Math.ceil(window.scrollY);
 		const cardList=document.querySelector('.TermCardList_word');
+		if(!cardList) return;
+
 		const message=document.querySelector('#messageRow');
-		const messageTop=message.offsetTop
-		if (messageTop > 0 && top > messageTop){
-				message.classList.add("sticky");
-				cardList.style.marginTop=message.offsetHeight+"px";
-			} else {
-				message.classList.remove("sticky");
-				cardList.style.marginTop="0px";
-			}
-		// //when the user scroll down
-		// if (top > document.querySelector('.status').offsetHeight){
-			
-		// 	// const panel=document.querySelector('#panel');
-			
-			
-			
-		// 	// if ( top > this.lastScrollTop && ) {
-		//  //    	// message.style.backgroundColor='#eee';
-		    	 
-		// 	//     // panel.classList.remove("sticky");
-		// 	// } else if( top < this.lastScrollTop ){
-			    
-		// 	//     // if (top > 0) {
-		// 	//     // 	cardList.style.marginTop=2*this.panelHeight+"px";
-		// 	//     // 	// panel.classList.add("sticky");
-		// 	//     // }
-		// 	//   }
-		// }
-		// //when the user scroll up
-		// else this.resume();
+		const messageTop=cardList.offsetTop - message.offsetHeight;
 		
+		if (messageTop > 0 && top > messageTop){
+			message.classList.add("sticky");
+			message.style.top = document.querySelector('header').offsetHeight+'px';
+			cardList.style.marginTop=message.offsetHeight+'px';
+		} else {
+			message.classList.remove("sticky");
+			message.style.top = '0px';
+			cardList.style.marginTop='0px';
+		}
+	
 		this.lastScrollTop = top;
 	}
-	resume(){
-		// const panel=document.querySelector('#panel');
-		const message=document.querySelector('#messageRow');
-		const cardList=document.querySelector('.TermCardList_word');
-		// if(panel) panel.classList.remove("sticky");
-	    if(message) {
-	    	message.classList.remove("sticky");
-	    	message.style.backgroundColor='white';
-	    }
-	    if(cardList) cardList.style.marginTop="0px";
-	}
+	
     render() {
 	  	if(this.state.report_query[0]!=-1){
 	  		const isReport= this.state.report_query[1]!=-1;
@@ -141,14 +110,12 @@ class Dictionary4Word extends React.Component {
 
 	    else return (
 	    	<div>
-	    		<div id='panel'>
 	    		<SearchBar4Word onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} matches={this.state.matches}/>
 				<BrowseFeild onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
 				<BrowseFeildSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
 				<div id='messageRow'>
 					<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/></div>
-				</div>
-	    		<div className="TermCardList_word hasCard">
+				<div className="TermCardList_word hasCard">
 	    			<TermCardList4Word onReport={this.handleReport} onRequest={this.handleRequest} matches={this.state.matches} type={this.state.type}/></div>
 	    	</div>
 	    	);
@@ -190,7 +157,7 @@ class Dictionary4Paragraph extends React.Component {
 	  				selected=flagArray[i];break;}
 
 	  	this._isMounted && this.setState({selected:selected});
-	  	if(selected!=-1 && this.state.matches.length>2){
+	  	if(selected!=-1 && selected < this.state.matches.length && this.state.matches.length>2){
 	  		  	var height=document.getElementById('card-container').children[selected].offsetTop;
 	  			$('.TermCardList_para').scrollTop(height-32);
 	  			console.log(height);}
@@ -201,9 +168,9 @@ class Dictionary4Paragraph extends React.Component {
 	  		return <Report type="report" onBack={this.handleReport} query={this.state.report_query}/>;
 
 		else return (
-			<div className="flex">
+			<div className="flex paragraph">
 				<SearchBar4Paragraph status="normal" query={this.state.query} onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display}/>
-				<div className={"TermCardList_para"+hasCard}>
+				<div className={"no-scroll-bar TermCardList_para"+hasCard}>
 					<TermCardList4Paragraph onReport={this.handleReport} matches={this.state.matches} selected={this.state.selected}/></div>
 			</div>
 		);
@@ -513,13 +480,17 @@ class TermCardMin extends React.Component {
 	}
 	render() {
 		const define=this.props.query[1];
-		var def=define.length > 60 && this.state.isToggled? define.substring(0,60)+"...":define;
-		return (
+		let def=<p>{define}</p>;
+		if(define.length > 70){
+			def=(
+				<p>{this.state.isToggled? define.substring(0,60)+"... ":define+" "}
+					<a href="#" onClick={this.handleClick}>{this.state.isToggled?"expand":"collapse"}</a></p>);
+		}
+		return(
 			<div className="term-card-min">
 				<h2>{this.props.query[0]}</h2>
-				<p onClick={this.handleClick}>{def}</p>
-			</div>
-			);
+				{def}
+			</div>);
 	}
 }
 //to report errors in existing terms
