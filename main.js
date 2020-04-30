@@ -43,8 +43,8 @@ class DictionaryContainer extends React.Component {
 		return (
 				<section className="relative">
 					<div className="status">
-						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word">Word</button>
-						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph">Paragraph</button>
+						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word" title="For short medical terms">Word</button>
+						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph" title="For medical terms in a paragraph">Paragraph</button>
 					</div>
 					{this.state.status==="word"?<Dictionary4Word/>:<Dictionary4Paragraph/>}
 				</section>
@@ -88,30 +88,37 @@ class Dictionary4Word extends React.Component {
     handleScroll(){
 		const main=document.querySelector('main');
 		const top=Math.ceil(main.scrollTop);
-		//when the user scroll down
-		if (top > document.querySelector('.status').offsetHeight){
-			const message=document.querySelector('#messageRow');
-			// const panel=document.querySelector('#panel');
-			const cardList=document.querySelector('.TermCardList_word');
-			const messageTop=message.offsetTop
-
-			if ( top > this.lastScrollTop && messageTop > 0 && top > messageTop) {
-		    	message.classList.add("sticky");
-		    	// message.style.backgroundColor='#eee';
-		    	cardList.style.marginTop=message.offsetHeight+"px"; 
-			    // panel.classList.remove("sticky");
-			} else if( top < this.lastScrollTop ){
-			    message.classList.remove("sticky");
-			    cardList.style.marginTop="0px";
-			    message.style.backgroundColor='transparent';
-			    // if (top > 0) {
-			    // 	cardList.style.marginTop=2*this.panelHeight+"px";
-			    // 	// panel.classList.add("sticky");
-			    // }
-			  }
-		}
-		//when the user scroll up
-		else this.resume();
+		const cardList=document.querySelector('.TermCardList_word');
+		const message=document.querySelector('#messageRow');
+		const messageTop=message.offsetTop
+		if (messageTop > 0 && top > messageTop){
+				message.classList.add("sticky");
+				cardList.style.marginTop=message.offsetHeight+"px";
+			} else {
+				message.classList.remove("sticky");
+				cardList.style.marginTop="0px";
+			}
+		// //when the user scroll down
+		// if (top > document.querySelector('.status').offsetHeight){
+			
+		// 	// const panel=document.querySelector('#panel');
+			
+			
+			
+		// 	// if ( top > this.lastScrollTop && ) {
+		//  //    	// message.style.backgroundColor='#eee';
+		    	 
+		// 	//     // panel.classList.remove("sticky");
+		// 	// } else if( top < this.lastScrollTop ){
+			    
+		// 	//     // if (top > 0) {
+		// 	//     // 	cardList.style.marginTop=2*this.panelHeight+"px";
+		// 	//     // 	// panel.classList.add("sticky");
+		// 	//     // }
+		// 	//   }
+		// }
+		// //when the user scroll up
+		// else this.resume();
 		
 		this.lastScrollTop = top;
 	}
@@ -122,7 +129,7 @@ class Dictionary4Word extends React.Component {
 		// if(panel) panel.classList.remove("sticky");
 	    if(message) {
 	    	message.classList.remove("sticky");
-	    	message.style.backgroundColor='transparent';
+	    	message.style.backgroundColor='white';
 	    }
 	    if(cardList) cardList.style.marginTop="0px";
 	}
@@ -210,6 +217,7 @@ class SearchBar4Word extends React.Component {
 	    this.state={input:'',isToggled:true};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleBlur = this.handleBlur.bind(this);
+	    this.handleClear = this.handleClear.bind(this);
 	}
 	componentDidMount(){
 		this._isMounted=true;
@@ -232,23 +240,33 @@ class SearchBar4Word extends React.Component {
 		    	this._isMounted && this.setState({isToggled:true});
 		    }.bind(this),200);
 	}
+	handleClear(){
+		document.querySelector("input").value="";
+		var change=new Object();
+		change.query='';
+		change.type="search";
+	    this.props.onQueryChange(change);
+	    this._isMounted && this.setState({isToggled:true,input:""});
+	}
 	render() {
 		var matches = this.props.matches;
 		var len = this.props.type==="search"? Math.min(4, matches.length):0;
 		//guess what the user try to search
-		const shadow= len>0 && !this.state.isToggled? " shadow" : "";
+		const shadow = len>0 && !this.state.isToggled? " shadow" : "";
+		const value = this.props.type==="search"? this.props.query:this.state.input;
 		var matchTerms=[];
 		if(this.props.type=="search" && !this.state.isToggled){
 			matchTerms.push(<button key="fake">fake</button>);
 			for (var i = 0 ; i < len; i++) 
 				matchTerms.push(<button key={i} name="guess" value={matches[i][0]} onClick={this.handleChange}>{matches[i][0]}</button>);
 		}
-	     
+	    
 	    return (
 	    	<div className="search-box-container relative" onBlur={this.handleBlur}>
 		    	<div className="search-box flex"> 
 			        <input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
-			        	onChange={this.handleChange} value={this.props.type==="search"?this.props.query:this.state.input}></input>
+			        	onChange={this.handleChange} value={value}></input>
+			        {value.length>0? <button className="button-none" onClick={this.handleClear} title="clear search field">{close_svg}</button>:null}
 			        {search_svg}
 			     </div>
 			     <div className={"search-box guess"+shadow}>{matchTerms}</div>
@@ -362,9 +380,9 @@ class MessageRow extends React.Component {
 		if(this.props.query==='') return null;
 		else if(this.props.length <= 0) //when there is no match for the query
 			return <p>Sorry, no match for <strong>{this.props.query}</strong>.</p>
-		else if(this.props.type==='all')
+		else if(this.props.type==='all') //display all terms
 			return <p>All {total} terms we have:</p>;
-		else if(this.props.type==='letter')
+		else if(this.props.type==='letter') //letter browsing
 			return <p>{this.props.length} {this.props.length>1?"terms":"term"} started with <strong>{this.props.query}</strong>:</p>;
 		else 
 			return <p>Possible matches for <strong>{this.props.query}</strong>:</p>;
@@ -441,7 +459,7 @@ class TermCard extends React.Component {
 		this._isMounted = false;
 	}
 	handleClick(event){
-		if(this.props.query[1].length > 60) this._isMounted && this.setState({isToggled:!this.state.isToggled});
+		this._isMounted && this.setState({isToggled:!this.state.isToggled});
 	}
 	handleReport(){
 		this.props.onReport(this.props.query);
@@ -462,7 +480,7 @@ class TermCard extends React.Component {
 	render() {
 		const define=this.props.query[1];
 		let def=<p>{define}</p>;
-		if(define.length > 60){
+		if(define.length > 70){
 			def=(
 				<p>{this.state.isToggled? define.substring(0,60)+"... ":define+" "}
 					<a href="#" onClick={this.handleClick}>{this.state.isToggled?"expand":"collapse"}</a></p>);
@@ -614,7 +632,9 @@ function getData(data){
 	dictionary=dictionary.sort(alphaCompare);
 	total=dictionary.length;
 }
-
+function strip(str) {
+	return str.replace(/^\s+|\s+$/g, '')
+}
 function numCompare(a,b) {
 	return a[0]-b[0];
 }
@@ -622,8 +642,12 @@ function alphaCompare(a,b) {
 	return ('' + a[0]).localeCompare(''+b[0]);
 }
 function distanceCompare(a,b) {
-	if(a[2]==b[2]) return ('' + a[0]).localeCompare(''+b[0]);
-	else return a[2]-b[2];
+	if(a[2][0]!=b[2][0]) return a[2][0]-b[2][0];
+	else if(a[2][1]!=b[2][1]) return a[2][1]-b[2][1];
+	else return ('' + a[0].toLowerCase()).localeCompare(''+b[0].toLowerCase());
+}
+function isLetter(str) {
+  return str.length === 1 && str.toLowerCase().match(/[a-z]/i);
 }
 // Run an anonymous funtion if a value is close enough to another value.
 function getMatches(query,type){
@@ -682,54 +706,58 @@ function search_letter(query){
 		}
 	return [matches,matches_sub];
 }	
-	
+
 function search_query(query) {
     var len = query.length
     if(len<=0) return false;
     var matches = []
     var splittable_chars = /[ ()[\]<>{}]/
-    // Set the initial acceptable score range.
-    var best_score  = 0
-    var score_range = 3
+	// Set the initial acceptable score range.
+    var score_range = 0.5
     var perfect = false;//whether there is perfect match for the query in our dictionary
     // Split the query, search through word by word.
-    var query_low = query.toLowerCase();
+    var query_low = strip(query.toLowerCase());
     var query_words = query_low.split(splittable_chars);
+
     for(const term of dictionary){
     	var term_low= term[0].toLowerCase();
-      	var term_words = term_low.split(splittable_chars);
-      	var len_t=term_words.length;
-      	var len_q=query_words.length;
-      	var a=query_low.search(term_low)!=-1? 1:-1;
-      	var b=term_low.search(query_low)!=-1? 1:-1;
-      	var distance = 10;
-      	//if term or query is not the same
-      	if(a+b>0){
-      		distance=0;
-      		perfect=true;}
-      	if(a+b==0)
-      		if(len_t!=len_q) distance=0.1*Math.abs(len_t - len_q)+1;
-      		else distance=0.1*levenshteinDistance(term_low,query_low);
-      	else {
-      		if(len_t*len_q==1){
-      			var levenDistance=levenshteinDistance(term_low,query_low);
-      			distance=levenDistance > Math.max(term_low.length-2,len-2)?10:0.5*levenDistance;
-      		} else for(const term_word of term_words)
-			          for(const query_word of query_words){
-	      				var levenDistance=levenshteinDistance(term_word,query_word);
-	                	distance = levenDistance < distance? levenDistance : distance;
+      	var term_syn = term_low.search(",")!=-1? term_low.split(","):[term_low];
+      	var distance = [10,10];
+
+      	for (const term_s of term_syn){
+	      	if(query_low === strip(term_s)){//perfect match
+	      		distance=[0,0];
+	      		perfect=true;
+	      	} else {//no perfect match, find possible matches
+	      		var distance_avg=0;
+	      		var term_words = term_s.split(splittable_chars);
+	      		for(const term_word of term_words)
+				    for(const query_word of query_words){
+	      				var levenDistance=levenshteinDistance(term_word,query_word)/Math.max(term_word.length, query_word.length);
+	      				distance_avg = distance_avg+levenDistance;
+	                	distance[0] = Math.min( levenDistance , distance[0], term_word.search(query_word)===0?0.1:10);
 	                }
-		    if(distance > best_score+score_range) continue;}
+	            distance[1]=Math.min(distance_avg/(term_words.length*query_words.length),distance[1]);
+			}
+      	}
+
+		if(distance[0] > score_range || ( perfect && distance[0] > 0)) continue;
     	var termD=term;
-    	termD[2]=distance;
+    	term[2]=distance;
     	matches.push(termD);
       }
-    if(perfect && matches.length>=10) matches=matches.sort(distanceCompare).slice(0,10);
-    else if(matches.length>=30) matches=matches.sort(distanceCompare).slice(0,30);
+    var matches_len=matches.length
+    matches=matches.sort(distanceCompare);//sort matches according to distance
+    if(perfect){ 
+    	for(var i=matches_len-1;i>0;i--)
+    		if(matches[i][2][0]>0 || matches[i][2][1]>0.8) matches.pop();
+    } else if(matches_len>=20) matches=matches.slice(0,20);
+    
     return matches;
 }
 
-//query is plain text, return a marked html
+//query is plain text, return a marked html, list of matches and position of matches
+//if there are perfect matches in the paragraph, mark the term
 function search_paragraph(query) {
 	var obj=new Object();
 	const array_raw=[]
@@ -743,17 +771,25 @@ function search_paragraph(query) {
     
     var query_low = query.toLowerCase();
     for(const term of dictionary){
-      	var term_low = term[0].toLowerCase()
-      	var position=query.search(term_low);
-      	if(position!=-1){
-      		splitPoints.push([position,position+term_low.length,term]);
+    	var term_low = term[0].toLowerCase();
+      	var term_syn = term_low.search(",")!=-1? term_low.split(","):[term_low];
+      	for (var term_s of term_syn){
+      		term_s=strip(term_s)
+      		var position=query_low.search(term_s);
+	      	if(position!=-1)
+	      		if(term_s.length <= 4 && (isLetter(query_low.charAt(position-1)) || isLetter(query_low.charAt(position+term_s.length))))
+	      			continue;
+	      		else {
+	      			splitPoints.push([position,position+term_s.length,term]); break;}
       	}
+      	
       }
 	
+	var len=splitPoints.length;
+    if(len==0) return obj;
+
     var markedString="";
 	var matches = []
-    var len=splitPoints.length;
-    if(len==0) return obj;
     splitPoints.sort(numCompare);
     var start=0;
     for(var i=0;i<len;i++){

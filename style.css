@@ -233,6 +233,11 @@ button[class*="bright"]{
   color: #00274C;
   background-color: white;
 }
+button[class*="none"]{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
 
 /*////////////////////////
 ////  status button  ////
@@ -400,6 +405,9 @@ button[class*="bright"]{
 
   cursor:pointer;
   z-index: 10;
+}
+.term-card h2{
+  width: 80%;
 }
 .term-card-selected{
   top:-2px;
