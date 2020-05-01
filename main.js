@@ -571,7 +571,7 @@ class Report extends React.Component {
 				</div>);
 		else return(
 				<div className="form term-card">
-					<button type="reset" className="button-none" onClick={this.handleBack}>{close_svg}</button>
+					<p onClick={this.handleBack}>{close_svg}</p>
 					<h3>Didn't find the term yoou need?</h3>
 					<form onSubmit={this.handleSubmit} action="" method="get">
 						<label htmlFor="term">Request definition for </label>
