@@ -111,8 +111,8 @@ class Dictionary4Word extends React.Component {
 	    else return (
 	    	<div>
 	    		<SearchBar4Word onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} matches={this.state.matches}/>
-				<BrowseFeild onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
-				<BrowseFeildSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
+				<BrowseField onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={alphabet} />
+				<BrowseFieldSecondary onQueryChange={this.handleChange} query={this.state.query} type={this.state.type} list={currentLetters} />
 				<div id='messageRow'>
 					<MessageRow query={this.state.query} type={this.state.type} length={this.state.matches.length}/></div>
 				<div className="TermCardList_word hasCard">
@@ -288,7 +288,7 @@ class SearchBar4Paragraph extends React.Component {
 	}
 } 
 
-class BrowseFeild extends React.Component {
+class BrowseField extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.handleClick = this.handleClick.bind(this);
@@ -313,10 +313,10 @@ class BrowseFeild extends React.Component {
 	  		value='all' type="button" onClick={this.handleClick}>
 				{"view all "+total+" terms"}</button>
 				);
-	    return <div className="BrowseFeild">{listItems}</div>;
+	    return <div className="BrowseField">{listItems}</div>;
 	}
 }
-class BrowseFeildSecondary extends React.Component {
+class BrowseFieldSecondary extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.handleClick = this.handleClick.bind(this);
@@ -335,7 +335,7 @@ class BrowseFeildSecondary extends React.Component {
 			value={letter} type="button" onClick={this.handleClick}>
 				{letter}</button>
 				);
-	    return <div className="BrowseFeild">{listItems}</div>;
+	    return <div className="BrowseField">{listItems}</div>;
 	}
 }
 
@@ -538,12 +538,11 @@ class Report extends React.Component {
 	 }
 	render(){
 		const isReport= this.props.type==="report"? true:false;
-		if(this.state.status==="loading"){
+		if(this.state.status==="loading"){ //waiting for the form to be sent
 			return (
 				<div className="loading center"><p>Sending your {this.props.type}...</p><div className="loading-animate"></div></div>
 				);
-		}
-		else if(this.state.status==="submitted"){
+		} else if(this.state.status==="submitted"){ //when the form is submitted successfully
 			return (
 				<div className="form term-card">
 					<h3 className="capitalize">{this.props.type} sent!</h3>
@@ -552,8 +551,7 @@ class Report extends React.Component {
 					<p>💙 Thank you for your {this.props.type} and patience!</p>
 					<div onClick={this.handleBack} className="right"><button className="button-dark">Back</button></div>
 				</div>);
-		}
-		else if(isReport) 
+		} else if(isReport) //the form for report (when a user find something wrong with the term/definition)
 			return (
 				<div className="form term-card">
 					<p onClick={this.handleBack}>{close_svg}</p>
@@ -569,7 +567,7 @@ class Report extends React.Component {
 							<button type="submit" value="submit" className="button-dark">Send</button></div>
 					</form>
 				</div>);
-		else return(
+		else return( //the form for request (when a user did't find the term he/she needs)
 				<div className="form term-card">
 					<p onClick={this.handleBack}>{close_svg}</p>
 					<h3>Didn't find the term yoou need?</h3>
@@ -595,6 +593,7 @@ class Report extends React.Component {
    //// FUNCTIONS ////
   ///////////////////
 
+//read data stored in json file and return a array
 function getData(data){
 	var obj=data['definitions'];
 	for(var key in obj)
@@ -603,6 +602,16 @@ function getData(data){
 	dictionary=dictionary.sort(alphaCompare);
 	total=dictionary.length;
 }
+//read data stored in json file and return a array
+function getData_img(data, imgSrc){
+	var obj=data['definitions'];
+	for(var key in obj)
+		if(obj[key]!='' )
+			dictionary.push([strip(key),strip(obj[key]),imgSrc[key]!=''? imgSrc[key]:-1]);
+	dictionary=dictionary.sort(alphaCompare);
+	total=dictionary.length;
+}
+
 function strip(str) {
 	return str.replace(/^\s+|\s+$/g, '')
 }
