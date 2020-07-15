@@ -90,12 +90,18 @@ header{
 footer{
   bottom:0;
   padding: 1em auto;
-  background-color: white;
-  color: #bbb;
+  background-color: #00274C;
+  border-top: 4px solid #fecb05;
+  color: #fff;
+  text-align:left;
 }
+
 footer p{
-  font-size: .6em;
+  margin-right: 1.5em;
+  margin-left: 1.5em;
+  font-size: 0.7em;
 }
+
 
 main{
   position: relative;
