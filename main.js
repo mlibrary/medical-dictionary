@@ -426,6 +426,7 @@ class TermCard extends React.Component {
     this._isMounted = false;
   }
   handleClick(event){
+    event.preventDefault();
     this._isMounted && this.setState({isToggled:!this.state.isToggled});
   }
   handleReport(){

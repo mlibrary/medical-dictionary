@@ -86,7 +86,15 @@ header{
   top:0;
   background-color: #00274C;
   border-bottom: 4px solid #FECB05;
+  color: white;
 }
+
+header h2{
+  margin: 0;
+  padding-bottom: 16px;
+  font-size: 1rem;
+}
+
 footer{
   bottom:0;
   padding: 1em auto;
@@ -418,14 +426,12 @@ button[class*="none"]{
   padding: 1em;
   margin: .5em auto .2em auto;
   margin-bottom: 1em;
-
   background-color: white;
   border-radius: .5em;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
-
-  cursor:pointer;
   z-index: 10;
 }
+
 .term-card h2{
   width: 80%;
 }
