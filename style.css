@@ -19,7 +19,7 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 16px;
   font: inherit;
   vertical-align: baseline;
 }
@@ -312,7 +312,7 @@ button[class*="none"]{
   margin-top: .8em;
   padding: .5em .8em;
   border-radius: 1.2em;
-  border: 1.5px solid #FECB05;
+  border: 1.5px solid #00274C;
   background-color: white;
   z-index: 999;
 }
@@ -560,7 +560,7 @@ svg{
   background-color: transparent;
 }
 
-.search-icon{fill: #FECB05;}
+.search-icon{fill: #00274C;}
 
 .regular-icon{
   fill: #aaa;
