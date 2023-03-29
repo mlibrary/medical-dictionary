@@ -309,7 +309,7 @@ button[class*="none"]{
   width: 100%;
   position: relative;
   margin: 0;
-  margin-top: .8em;
+  margin: 1rem 0;
   padding: .5em .8em;
   border-radius: 1.2em;
   border: 1.5px solid #00274C;
@@ -518,11 +518,10 @@ button[class*="none"]{
   margin-top: 1em;
   border-radius: 10em;
   transition-property: ease-out;
-  transition: top .2s, box-shadow .2s;
+  transition: box-shadow .2s;
 }
 .request button:hover,
 .form button:hover{
-  top: -2px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 .form svg{
