@@ -85,7 +85,7 @@ header,footer{
 header{
   top:0;
   background-color: #00274C;
-  border-bottom: 4px solid #FECB05;
+  border-bottom: 4px solid #FFCB05;
   color: white;
 }
 
@@ -99,7 +99,7 @@ footer{
   bottom:0;
   padding: 1em auto;
   background-color: #00274C;
-  border-top: 4px solid #fecb05;
+  border-top: 4px solid #FFCB05;
   color: #fff;
   text-align:left;
 }
@@ -396,8 +396,8 @@ button[class*="none"]{
 ////    BrowseField    ////
 ////////////////////////*/
 
-.BrowseFeild{
-  margin-top: .8em;
+.browseField{
+  margin-top: 1rem;
 }
 
 /*//////////////////////////
