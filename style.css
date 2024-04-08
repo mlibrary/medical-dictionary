@@ -19,7 +19,7 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 16px;
   font: inherit;
   vertical-align: baseline;
 }
@@ -86,7 +86,15 @@ header{
   top:0;
   background-color: #00274C;
   border-bottom: 4px solid #FECB05;
+  color: white;
 }
+
+header h2{
+  margin: 0;
+  padding-bottom: 16px;
+  font-size: 1rem;
+}
+
 footer{
   bottom:0;
   padding: 1em auto;
@@ -301,10 +309,10 @@ button[class*="none"]{
   width: 100%;
   position: relative;
   margin: 0;
-  margin-top: .8em;
+  margin: 1rem 0;
   padding: .5em .8em;
   border-radius: 1.2em;
-  border: 1.5px solid #FECB05;
+  border: 1.5px solid #00274C;
   background-color: white;
   z-index: 999;
 }
@@ -418,14 +426,12 @@ button[class*="none"]{
   padding: 1em;
   margin: .5em auto .2em auto;
   margin-bottom: 1em;
-
   background-color: white;
   border-radius: .5em;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
-
-  cursor:pointer;
   z-index: 10;
 }
+
 .term-card h2{
   width: 80%;
 }
@@ -512,11 +518,10 @@ button[class*="none"]{
   margin-top: 1em;
   border-radius: 10em;
   transition-property: ease-out;
-  transition: top .2s, box-shadow .2s;
+  transition: box-shadow .2s;
 }
 .request button:hover,
 .form button:hover{
-  top: -2px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 .form svg{
@@ -554,7 +559,7 @@ svg{
   background-color: transparent;
 }
 
-.search-icon{fill: #FECB05;}
+.search-icon{fill: #00274C;}
 
 .regular-icon{
   fill: #aaa;
