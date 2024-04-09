@@ -428,7 +428,7 @@ button[class*="none"]{
   margin-bottom: 1em;
   background-color: white;
   border-radius: .5em;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   z-index: 10;
 }
 
