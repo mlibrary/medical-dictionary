@@ -58,7 +58,6 @@ class DictionaryContainer extends React.Component {
 	render(){
 		return (
 				<section className="relative">
-					<ImageBox query={this.state.query} onClose={this.handleImage}/>
 					<div className="status">
 						<button className={this.state.status==="word"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="word" title="For short medical terms">Word</button>
 						<button className={this.state.status==="paragraph"?"button-dark":"button-bright"} onClick={this.handleStatusChange} value="paragraph" title="For medical terms in a paragraph">Paragraph</button>
@@ -74,35 +73,6 @@ class DictionaryContainer extends React.Component {
 			);
 	}
 }
-class ImageBox extends React.Component {
-	constructor(props) {
-	    super(props);
-		this.handleClose = this.handleClose.bind(this);
-	}
-	handleClose(){
-		this.props.onClose("");
-	}
-	render(){
-		const item = {
-			term: this.props.query[0],
-			definition: this.props.query[1],
-			imageURL: this.props.query[2],
-		};
-		if(this.props.query){
-			return (
-				<div className="image-box" onClick={this.handleClose}>
-					<p onClick={this.handleClose}>{close_svg}</p>
-					<img className="image" src={item.imageURL}/>
-					<h3>{item.term}</h3>
-					<p>{item.definition}</p>
-				</div>
-			);
-		} else {
-			return "";
-		}
-		
-	}
-};
 
 class Dictionary4Word extends React.Component {
     constructor(props) {
@@ -551,16 +521,17 @@ class TermCard extends React.Component {
 		const item = {
 			term: this.props.query[0],
 			definition: this.props.query[1],
-			imageURL: this.props.query[2],
+			imgURL: this.props.query[2],
 		};
+    
 		//definition with chars more than "max", will be collapsed by default
 		const max = 90; 
 		//terms with short definition and no image would always be expanded
-		const disabled = (!item.imageURL) && (item.definition.length <= max);
+		const disabled = (!item.imgURL) && (item.definition.length <= max);
 
 		//Toggle or expand: different status for image and definitions
 		//=======
-		let img = item.imageURL?(<img className="image" src={item.imageURL} onClick={this.handleImage}/>):"";
+		let img = item.imgURL?(<img className="image" src={item.imgURL} />):"";
 		let content = {
 			collapse: (
 				item.definition.length > max?(
@@ -568,7 +539,7 @@ class TermCard extends React.Component {
 				):(<p>{item.definition}</p>)
 			),
 			expand: (
-				item.imageURL?(
+				item.imgURL?(
 					<div className="row">
 						<p className="text-col">{item.definition}</p>
 						<div className="image-col">{img}</div>
@@ -578,7 +549,7 @@ class TermCard extends React.Component {
 		};
 		
 		return(
-			<div className={this.props.type==="selected"?"term-card term-card-selected":"term-card"}>
+			<div className={this.props.type==="selected"?"term-card term-card-selected":"term-card"} onClick={this.handleClick} >
 				<div className="flex-center">
 					<div className="row flex-start">
 						<h2>{item.term}</h2>
@@ -596,8 +567,7 @@ class TermCard extends React.Component {
 								{copy_svg}
 						</button>
 						<button 
-							className={this.state.isToggled?"":"rotate180"}
-							onClick={this.handleClick} 
+							className={this.state.isToggled?"rotateButton":"rotateButton rotate180"}
 							title="Expand or collapse card content"
 							disabled={disabled}>
 								{arrow_svg}
@@ -748,7 +718,8 @@ function getData(dataJSON){
 		dictionary.push([
 			strip(item["term"]),
 			strip(item["definition"]),
-			strip(item["imageURL"])
+			strip(item["imgURL"]),
+			strip(item["altText"]),
 		]);
 	});
 	dictionary = dictionary.sort(alphaCompare);

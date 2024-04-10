@@ -419,6 +419,22 @@ button[class*="none"]{
   min-width: 48%;
 }
 
+.image{
+  width: 100%;
+}
+
+.rotateButton{
+  transition: transform .3s ease-in-out;
+}
+
+.rotateButton:disabled{
+  display: none;
+}
+
+.rotate180{
+  transform: rotate(180deg);
+  transition: .3s linear;
+}
 
 .term-card{
   width: 100%;
@@ -430,6 +446,10 @@ button[class*="none"]{
   border-radius: .5em;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   z-index: 10;
+}
+
+.term-card-expandable{
+  cursor: pointer;
 }
 
 .term-card h2{

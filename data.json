@@ -9,7 +9,7 @@
         {
             "term": "abatement",
             "definition": "Remove or cover a dangerous material, such as lead or mercury, from water, paint, or air, or other places.",
-            "imgURL": null,
+            "imgURL": "/img/trachea.jpg",
             "altText": null
         },
         {
@@ -10083,7 +10083,7 @@
         {
             "term": "trachea",
             "definition": "The tube that comes from your mouth to your lungs. Also called \"windpipe.\"",
-            "imgURL": "/img/trachea.jpg",
+            "imgURL": "",
             "altText": null
         },
         {
