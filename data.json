@@ -9,7 +9,7 @@
         {
             "term": "abatement",
             "definition": "Remove or cover a dangerous material, such as lead or mercury, from water, paint, or air, or other places.",
-            "imgURL": "/img/trachea.jpg",
+            "imgURL": null,
             "altText": null
         },
         {
@@ -5463,7 +5463,7 @@
         {
             "term": "joint",
             "definition": "Where 2 or more bones come together,like your shoulder or ankle.",
-            "imgURL": null,
+            "imgURL": "/img/Bursa_of_elbow_joint.jpg",
             "altText": null
         },
         {
@@ -9261,7 +9261,7 @@
         {
             "term": "skull",
             "definition": "The bones of your head bones.",
-            "imgURL": null,
+            "imgURL": "/img/703_Parts_of_Skull-01.jpg",
             "altText": null
         },
         {
@@ -9831,7 +9831,7 @@
         {
             "term": "teeth, tooth",
             "definition": "The 32 bone-like objects in our jaw.",
-            "imgURL": null,
+            "imgURL": "/img/Bleibende_Zähne_beim_Menschen_eingefärbt.png",
             "altText": null
         },
         {

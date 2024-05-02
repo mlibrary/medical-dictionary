@@ -18,7 +18,7 @@
 	</header>
 	<main id="root" class="no-scroll-bar"></main>
 	<footer>
-		<p>&copy; This application is copyright 2020, The Regents of the University of Michigan.</p>
+		<p>&copy; This application is copyright <span id="year">2024</span>, The Regents of the University of Michigan.</p>
     <p>
 If you would like to embed this widget in your website, please use the following code:
 <br>
@@ -32,6 +32,11 @@ If you would like to embed this widget in your website, please use the following
  	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
  	<!-- components -->
 	<script type="text/babel" src="main.js"></script>
+	<script type="text/javascript">
+		const d = new Date();
+		let year = d.getFullYear();
+		document.getElementById('year').innerHTML = year;
+	</script>
 
 	<!-- scroll motion control for word search -->
 	<script type="text/javascript">
