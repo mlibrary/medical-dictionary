@@ -420,6 +420,7 @@ button[class*="none"]{
 
 .image{
   max-height: 500px;
+  max-width: 100%;
 }
 
 .image-col{

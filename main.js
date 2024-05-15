@@ -207,7 +207,6 @@ class Dictionary4Paragraph extends React.Component {
 		if (selected != -1 && selected < this.state.matches.length && this.state.matches.length > 2) {
 			var height = document.getElementById('card-container').children[selected].offsetTop;
 			$('.TermCardList_para').scrollTop(height - 32);
-			console.log(height);
 		}
 	}
 	handleImage(query) {
@@ -436,8 +435,7 @@ class TermCardList4Word extends React.Component {
 		const list = this.props.matches.map(
 			(item) => <TermCard onReport={this.handleReport} onImage={this.handleImage} key={item[0]} query={item} />
 		);
-
-		if (this.props.type == 'search' && this.props.matches[0][2] != 0)
+		if (this.props.type == 'search' && this.props.matches[0][4] != 0)
 			return (
 				<div>
 					{list}
@@ -537,7 +535,6 @@ class TermCard extends React.Component {
 			altText: this.props.query[3]
 		};
 
-		console.log(item.imgURL);
 		//definition with chars more than "max", will be collapsed by default
 		const max = 90;
 		//terms with short definition and no image would always be expanded
@@ -725,7 +722,7 @@ class Report extends React.Component {
 ///////////////////
 
 // read data stored in json file and return a array
-// format [ term, definition, imageURL ]
+// format [ term, definition, imageURL, altText ]
 function getData(dataJSON) {
 	let data = dataJSON['definitions'];
 	data.forEach(item => {
@@ -751,8 +748,8 @@ function alphaCompare(a, b) {
 	return ('' + a[0]).localeCompare('' + b[0]);
 }
 function distanceCompare(a, b) {
-	if (a[2][0] != b[2][0]) return a[2][0] - b[2][0];
-	else if (a[2][1] != b[2][1]) return a[2][1] - b[2][1];
+	if (a[4][0] != b[4][0]) return a[4][0] - b[4][0];
+	else if (a[4][1] != b[4][1]) return a[4][1] - b[4][1];
 	else return ('' + a[0].toLowerCase()).localeCompare('' + b[0].toLowerCase());
 }
 function isLetter(str) {
@@ -777,14 +774,7 @@ function getMatches(query, type) {
 	else { matches_out = search_query(query); }
 	return matches_out;
 }
-function filter_matches(matches, center, range) {
-	var output = []
-	var len = matches.length;
-	var max = center + range;
-	for (var i = 0; i < len; i++)
-		if (matches[i][2] <= max) output.push(matches[i]);
-	return output.sort(distanceCompare);
-}
+
 //letter browsing
 function search_letter(query) {
 	var list = dictionary;
@@ -816,6 +806,7 @@ function search_letter(query) {
 	return [matches, matches_sub];
 }
 
+//search input
 function search_query(query) {
 	var len = query.length
 	if (len <= 0) return false;
@@ -855,14 +846,15 @@ function search_query(query) {
 
 		if (distance[0] > score_range || (perfect && distance[0] > 0)) continue;
 		var termD = term;
-		term[2] = distance;
+		term[4] = distance;
 		matches.push(termD);
 	}
 	var matches_len = matches.length
 	matches = matches.sort(distanceCompare);//sort matches according to distance
 	if (perfect) {
-		for (var i = matches_len - 1; i > 0; i--)
-			if (matches[i][2][0] > 0 || matches[i][2][1] > 0.8) matches.pop();
+		for (var i = matches_len - 1; i > 0; i--) {
+			if (matches[i][4][0] > 0 || matches[i][4][1] > 0.8) matches.pop();
+		}
 	} else if (matches_len >= 20) matches = matches.slice(0, 20);
 
 	return matches;

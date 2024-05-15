@@ -7,6 +7,12 @@
     ],
     "definitions": [
         {
+            "term": "24-hour coverage",
+            "definition": "When many health plans or programs are combined into one plan that can cover someone for the whole day.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "abatement",
             "definition": "Remove or cover a dangerous material, such as lead or mercury, from water, paint, or air, or other places.",
             "imgURL": null,
@@ -86,7 +92,7 @@
         },
         {
             "term": "accessibility",
-            "definition": "To be easily able to get to something or to comply with federal laws and standards to help people with disabilities .",
+            "definition": "Buildings, facilities, and technology are usable by all persons.",
             "imgURL": null,
             "altText": null
         },
@@ -117,6 +123,18 @@
         {
             "term": "accordingly",
             "definition": "So or for that reason.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "accountable care organization",
+            "definition": "Groups of doctors or hospitals that work together to make quality of care better.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "accreditation",
+            "definition": "When an organization is reviewed by a professional organization to make sure it meets certain rules.",
             "imgURL": null,
             "altText": null
         },
@@ -171,6 +189,12 @@
         {
             "term": "acetaminophen",
             "definition": "An over-the-counter (OTC) drug that relieves many types of pain. A brand name for this drug is Tylenol.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "Achille's tendon",
+            "definition": "Connects muscles in the back of the lower leg to the back part of the foot.",
             "imgURL": null,
             "altText": null
         },
@@ -289,8 +313,20 @@
             "altText": null
         },
         {
+            "term": "admission date",
+            "definition": "The day that the hospital started treating the patient.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "adrenal gland",
             "definition": "Controls your sex drive and stress.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "advance beneficiary notice",
+            "definition": "When your provider lets you know before a certain treatment that they think that Medicare won't pay for it.",
             "imgURL": null,
             "altText": null
         },
@@ -349,6 +385,18 @@
             "altText": null
         },
         {
+            "term": "Affordable Care Act (ACA)",
+            "definition": "A law that increases health insurance for people who are not insured and expands Medicaid.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "agender",
+            "definition": "Neither male or female; genderless.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "aggravate",
             "definition": "In illness, to make worse or harm. In emotions, anger or hurt.",
             "imgURL": null,
@@ -357,6 +405,12 @@
         {
             "term": "aggregate",
             "definition": "To put together or combine.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "aggregate deductible",
+            "definition": "When the whole family must pay costs for medical bills before the insurance company covers any of the cost. Also called \"out-of-pocket\" costs. See also \"embedded deductible.\"",
             "imgURL": null,
             "altText": null
         },
@@ -511,6 +565,12 @@
             "altText": null
         },
         {
+            "term": "ambulatory care facility",
+            "definition": "When medical care can be given outside of the hospital, without a person being admitted (outpatient care).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "ameliorate",
             "definition": "To improve or make better.",
             "imgURL": null,
@@ -577,6 +637,18 @@
             "altText": null
         },
         {
+            "term": "ancillary services",
+            "definition": "Things that help support treatment, like tests, imaging, or therapy.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "androgen insensitivity",
+            "definition": "Condition that blocks the body from using male hormones. Person with androgen insensitivity may have physical traits of a female but the genetics of a male.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "anemia",
             "definition": "A low red-blood count. Your blood does not have enough of the cells that carry oxygen (hemaglobin) to your body. Also called \"tired blood\"or \"low iron\".",
             "imgURL": null,
@@ -589,6 +661,12 @@
             "altText": null
         },
         {
+            "term": "anesthetic",
+            "definition": "A substance that is used to reduce sensitivity to pain. See also \"anesthesia.\"",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "aneurysm",
             "definition": "A bulge in the wall of an artery. If it gets large, it can burst and cause serious bleeding.",
             "imgURL": null,
@@ -597,6 +675,12 @@
         {
             "term": "angina",
             "definition": "Chest pain or disconfort that you feel when there is not enough blood flowing to your heart. Stable angina is also called \"angina pectoris\".",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "annual maximum",
+            "definition": "A limit that insurance companies set for how much they are willing to pay a patient in healthcare costs for the entire year a the patient is enrolled in that plan. This is no longer allowed under the law for long-term plans.",
             "imgURL": null,
             "altText": null
         },
@@ -621,6 +705,12 @@
         {
             "term": "anterior",
             "definition": "The front of the body.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "anterior cruciate ligament (ACL)",
+            "definition": "A band of tissue that is in the middle of the knee.",
             "imgURL": null,
             "altText": null
         },
@@ -675,6 +765,12 @@
         {
             "term": "antigen",
             "definition": "An abnormal substance in your body that must be fought off by antibodies.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "antimicrobial",
+            "definition": "Describes something that kills or slows things like bacteria, viruses, and fungi.",
             "imgURL": null,
             "altText": null
         },
@@ -783,6 +879,12 @@
         {
             "term": "arrhythmia",
             "definition": "A problem with the rate of your heart or when your heart doesn’t have a steady beat.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "arrythmia",
+            "definition": "When a heartbeat is irregular, or the rate or rhythm of the heart is too fast or too slow.",
             "imgURL": null,
             "altText": null
         },
@@ -1015,6 +1117,12 @@
             "altText": null
         },
         {
+            "term": "balance billing",
+            "definition": "This happens when a healthcare provider is not in the network of a patient's healthcare insurance. They will bill the patient any costs that is not covered by insurance.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "behavior problems",
             "definition": "When you act in an angry way or have trouble paying attention or sitting still.",
             "imgURL": null,
@@ -1023,6 +1131,12 @@
         {
             "term": "beneficial",
             "definition": "Something that is helpful or good.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "beneficiary",
+            "definition": "Someone you pick to receive benefits if you die.",
             "imgURL": null,
             "altText": null
         },
@@ -1171,14 +1285,20 @@
             "altText": null
         },
         {
-            "term": "body mass index",
-            "definition": "A way to measure your body fat based on your height and weight. Also called BMI.",
+            "term": "blood sugar",
+            "definition": "The main sugar in the blood that comes from food and is the main source of energy for the body,",
             "imgURL": null,
             "altText": null
         },
         {
-            "term": "bones",
-            "definition": "The solid tissues that help you to move and support your body. They grow and change during your life.",
+            "term": "blood vessel",
+            "definition": "Tiny tubes that move blood around the body. Includes three main types (arteries, veins, capillaries).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "body mass index",
+            "definition": "A way to measure your body fat based on your height and weight. Also called BMI.",
             "imgURL": null,
             "altText": null
         },
@@ -1213,6 +1333,12 @@
             "altText": null
         },
         {
+            "term": "bones",
+            "definition": "The solid tissues that help you to move and support your body. They grow and change during your life.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "booster shot",
             "definition": "A shot that you get months or years after your first vaccine shot, to help keep you safe from certain diseases.",
             "imgURL": null,
@@ -1237,6 +1363,12 @@
             "altText": null
         },
         {
+            "term": "brain",
+            "definition": "The organ that controls your thoughts, memory, speech, and movements. It also controls the functions of many organs.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "breakthrough infection",
             "definition": "Getting ill even though you've been protected against the disease.",
             "imgURL": null,
@@ -1245,12 +1377,6 @@
         {
             "term": "breastfeeding",
             "definition": "Feeding a baby with milk from the breast; nursing.",
-            "imgURL": null,
-            "altText": null
-        },
-        {
-            "term": "brain",
-            "definition": "The organ that controls your thoughts, memory, speech, and movements. It also controls the functions of many organs.",
             "imgURL": null,
             "altText": null
         },
@@ -1335,6 +1461,18 @@
         {
             "term": "calculus",
             "definition": "A hard crusty coating on teeth or a \"stone\" in an organ (kidney or bladder stones, for example).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "calf",
+            "definition": "The back part of the lower leg.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "calvarium",
+            "definition": "The top of the skull bone. Also called skull cap.",
             "imgURL": null,
             "altText": null
         },
@@ -1435,6 +1573,12 @@
             "altText": null
         },
         {
+            "term": "carpals",
+            "definition": "The bones in the wrist that connect to the bones in the middle of the hand.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "carrier",
             "definition": "A person who is sick and can get other people sick.",
             "imgURL": null,
@@ -1503,6 +1647,12 @@
         {
             "term": "catheterize",
             "definition": "To put a tube into a part of your body.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "caudal",
+            "definition": "Towards the bottom of the body, away from the head.",
             "imgURL": null,
             "altText": null
         },
@@ -1717,6 +1867,12 @@
             "altText": null
         },
         {
+            "term": "cisgender",
+            "definition": "Person who identifies as the gender assigned to them at birth.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "clavicle",
             "definition": "Your collarbone.",
             "imgURL": null,
@@ -1735,6 +1891,12 @@
             "altText": null
         },
         {
+            "term": "clitoroplasty",
+            "definition": "Surgery that changes the appearance of a clitorus (female sex organ).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "co-operate, cooperate",
             "definition": "To help or work together.",
             "imgURL": null,
@@ -1743,6 +1905,12 @@
         {
             "term": "coagulate",
             "definition": "When blood cells clot or clump together.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "coccyx",
+            "definition": "The last bone at the bottom of the spine. Also called tailbone.",
             "imgURL": null,
             "altText": null
         },
@@ -1761,6 +1929,12 @@
         {
             "term": "cognizant of",
             "definition": "To be aware of.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "coinsurance",
+            "definition": "The percentage of a healthcare plan that is not covered by the insurance company. For example, a 30% coinsurance for a $100 bill means that you would pay $30 yourself.",
             "imgURL": null,
             "altText": null
         },
@@ -1999,6 +2173,12 @@
             "altText": null
         },
         {
+            "term": "concussion",
+            "definition": "A head injury caused by a big impact or shaking.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "condition",
             "definition": "A medical problem, like a disease or an illness.",
             "imgURL": null,
@@ -2017,8 +2197,20 @@
             "altText": null
         },
         {
+            "term": "congenital adrenal hyperplasia",
+            "definition": "A group of genetic conditions that limit hormone production in the adrenal glands (above the kindeys).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "congenital, congenital anomaly",
             "definition": "Something that you are born with, such as a heart problem or cleft palate.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "congestion",
+            "definition": "When the nose area is filled up with fluid or mucus. The nose canfeel stuffy or it can be hard to breathe.",
             "imgURL": null,
             "altText": null
         },
@@ -2227,6 +2419,12 @@
             "altText": null
         },
         {
+            "term": "copay",
+            "definition": "The amount that you pay yourself (out-of-pocket) for a service when it is given.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "COPD",
             "definition": "A lung disease that makes breathing hard. Also known as chronic obstructive pulmonary disease, emphysema, or chronic bronchitis.",
             "imgURL": null,
@@ -2299,14 +2497,32 @@
             "altText": null
         },
         {
+            "term": "coverage",
+            "definition": "The amount of risk that is protected and paid for by the insurance company.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "COVID-19",
             "definition": "A new disease caused by a new germ (a virus called SARS-CoV-2) that causes fever, cough and difficulty breathing. It was first noticed in late 2019 in Wuhan, China. Also called 2019 Novel Coronavirus or coronavirus disease. It seems to have begun in bats and then moved to humans who worked closely with wild animals.",
             "imgURL": null,
             "altText": null
         },
         {
+            "term": "coxal bone",
+            "definition": "The big bones that make up the hips, or where the upper body meets the legs.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "cradle cap",
             "definition": "A type of dandruff that babies get.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "cranium",
+            "definition": "The bones that are part of the head.",
             "imgURL": null,
             "altText": null
         },
@@ -2349,6 +2565,18 @@
         {
             "term": "crucial",
             "definition": "Very important.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "CT scan (CAT scan)",
+            "definition": "Takes many X-ray pictures to combine into a better image. Stands for \"computerized tomography scan.\"",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "cultural competence",
+            "definition": "The ability of an individual to understand and respect values, attitudes, and beliefs that differ across cultures, and to consider and respond appropriately to these differences.",
             "imgURL": null,
             "altText": null
         },
@@ -2467,6 +2695,12 @@
             "altText": null
         },
         {
+            "term": "deductible",
+            "definition": "The amount of money that you have to pay, out of your own pocket, before the insurance company will make any payments.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "deem",
             "definition": "To think or believe.",
             "imgURL": null,
@@ -2475,6 +2709,12 @@
         {
             "term": "deep vein thrombosis",
             "definition": "A blood clot that forms in a vein deep in your body.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "Defibrillator",
+            "definition": "A device that gives the heart an electrical shock to make it start beating normally again.",
             "imgURL": null,
             "altText": null
         },
@@ -2755,8 +2995,20 @@
             "altText": null
         },
         {
+            "term": "diastolic",
+            "definition": "The bottom number of a blood pressure measurement. Describes the pressure in the blood vessels when the heart is at rest.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "dietary supplements",
             "definition": "Vitamins, minerals, herbs, and many other products.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "differences of sex development",
+            "definition": "Type of condition where a person is born with reproductive or sexual anatomy that doesn't fit the typical definitions of female or male.",
             "imgURL": null,
             "altText": null
         },
@@ -2775,6 +3027,12 @@
         {
             "term": "digestive diseases",
             "definition": "Any of the diseases that occur in your stomach or intestinal tract.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "digestive system",
+            "definition": "Describe the group of organs that process and break down food into things the body can use as energy, like sugar.",
             "imgURL": null,
             "altText": null
         },
@@ -2829,6 +3087,24 @@
         {
             "term": "directed to",
             "definition": "To be told to do something.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "disability",
+            "definition": "A condition of the body or mind that makes living in the world more difficult.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "disability plan",
+            "definition": "When someone has a disability that prevents them from working, an insurance company may give them some income.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "disabled",
+            "definition": "Affected by a disability.",
             "imgURL": null,
             "altText": null
         },
@@ -2965,6 +3241,10 @@
             "altText": null
         },
         {
+            "term": "diversity",
+            "definition": "The range of percieved identities. This can be different cultures, ethnicities, sexual orientations, as well as religeous backgrounds."
+        },
+        {
             "term": "diverticulitis",
             "definition": "Occurs when one or a few of the pouches in the wall of your colon become inflamed.",
             "imgURL": null,
@@ -2997,6 +3277,12 @@
         {
             "term": "donate, donation",
             "definition": "To give away.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "dorsal",
+            "definition": "The back of the body.",
             "imgURL": null,
             "altText": null
         },
@@ -3181,6 +3467,18 @@
             "altText": null
         },
         {
+            "term": "electrocardiogram (EKG or ECG)",
+            "definition": "A test that records electrical signals in the heart.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "electroencephalogram (EEG)",
+            "definition": "A test that records electrical signals in the brain.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "electrolytes",
             "definition": "A group of minerals (mainly salt) in your blood.",
             "imgURL": null,
@@ -3225,6 +3523,12 @@
         {
             "term": "emaciated",
             "definition": "Someone who is very thin or starving.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "embedded deductible",
+            "definition": "When family members can pay their out-of-pocket costs individually, so each person only has to meet their own out-of-pocket costs to get the insurance company to cover part of the cost. See also \"aggregate deductible.\"",
             "imgURL": null,
             "altText": null
         },
@@ -3386,7 +3690,7 @@
         },
         {
             "term": "endoscopy",
-            "definition": "A way to look inside your body, using a small instrument (called a scope) with a camera on one end.",
+            "definition": "A procedure where a long, tiny tube with a camera goes inside the body to look at something up close.",
             "imgURL": null,
             "altText": null
         },
@@ -3469,6 +3773,12 @@
             "altText": null
         },
         {
+            "term": "epidural",
+            "definition": "A shot of medicine in the lower back that causes pain to be dulled in some parts of the body.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "epilepsy",
             "definition": "A brain disorder that causes seizures (jerking of muscles) or loss of conciousness (to appear to be asleep).",
             "imgURL": null,
@@ -3495,6 +3805,12 @@
         {
             "term": "equitable",
             "definition": "Something that is fair.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "equity",
+            "definition": "Addressing imbalance in society to give everyone the support they need.",
             "imgURL": null,
             "altText": null
         },
@@ -3889,8 +4205,20 @@
             "altText": null
         },
         {
+            "term": "fibula",
+            "definition": "A thin bone in the bottom half of the leg.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "finalize",
             "definition": "To complete or finish.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "first responder",
+            "definition": "People that are specially trained to be the first to arrive and help when an emergency happens. Ex. EMTs, paramedics, firefighters, etc.",
             "imgURL": null,
             "altText": null
         },
@@ -3969,6 +4297,12 @@
         {
             "term": "forfeit",
             "definition": "To give up or lose.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "formulary",
+            "definition": "A list of prescription medication or drugs that are covered by a health insurance plan.",
             "imgURL": null,
             "altText": null
         },
@@ -4099,6 +4433,36 @@
             "altText": null
         },
         {
+            "term": "gender",
+            "definition": "A person's identity; different than biological sex.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "gender dysphoria",
+            "definition": "A condition where a person's biological sex does not match their gender identity. Can cause distress.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "gender fluid",
+            "definition": "A person who's gender identity is not permanent.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "gender-affirming hormone therapy",
+            "definition": "Treatment that help someone gain the physical appearance of their gender identity.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "gender-affirming surgery",
+            "definition": "Surgery that help someone gain the physical appearance of their gender identity.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "general anesthesia",
             "definition": "To put to \"sleep\" before surgery or anotehr medical procedure.",
             "imgURL": null,
@@ -4225,6 +4589,12 @@
             "altText": null
         },
         {
+            "term": "gonadal dysgenesis",
+            "definition": "A baby's gonads (ovaries or testes) did not form corrrectly during pregnancy.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "gonorrhea",
             "definition": "A disease caused by a germ (a bacteria) that you get through sex.",
             "imgURL": null,
@@ -4239,6 +4609,12 @@
         {
             "term": "gravid",
             "definition": "Pregnant.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "group health plan",
+            "definition": "A plan in which an organization like a company provides and maintains health insurance coverage for a large group of people, like their employees.",
             "imgURL": null,
             "altText": null
         },
@@ -4297,6 +4673,12 @@
             "altText": null
         },
         {
+            "term": "hamstring",
+            "definition": "A group of muscles that move from the back of the top part of the leg to below the knee.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "hand hygiene",
             "definition": "When and how to wash your hands.",
             "imgURL": null,
@@ -4305,6 +4687,12 @@
         {
             "term": "Hansen's disease",
             "definition": "A long-term disease caused by a germ (a bacteria) that affects the nerves around the outside of the body, skin, and eyes. Also called leprosy.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "harm reduction",
+            "definition": "An approach to treatment that is meant to minimize harm and lessen consequences of human behaviors, both legal and illegal. Example: addiction treatment centers providing clean needles.",
             "imgURL": null,
             "altText": null
         },
@@ -4341,6 +4729,24 @@
         {
             "term": "health disparities",
             "definition": "Differences in health among groups of people.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "health equity",
+            "definition": "Achieving the best health care possible, regardless of background.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "health reimbursement arrangement (HRA)",
+            "definition": "When employers or companies make it possible for employees to pay for some of their family member's healthcare and medical expenses through a health insurance plan.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "health savings account (HSA)",
+            "definition": "A bank account for saving where money taken out is not taxed if it is being used to pay for qualified medical expenses.",
             "imgURL": null,
             "altText": null
         },
@@ -4413,6 +4819,12 @@
         {
             "term": "hemoglobin A1C",
             "definition": "A blood test to look at your blood sugar levels now or over time.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "hemolysis",
+            "definition": "Describes when red blood cells start breaking down before they are supposed to.",
             "imgURL": null,
             "altText": null
         },
@@ -4537,8 +4949,20 @@
             "altText": null
         },
         {
+            "term": "hip abductor",
+            "definition": "The muscles that help legs lift. Located on the outside edge of the hips, where the top half of the body meets the legs.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "hirsutism",
             "definition": "In women, when more hair grows on your body.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "HMO plan (health maintenance organization)",
+            "definition": "A plan where coverage is limited to a set group of doctors or hospitals, who agree to lower some costs in exchange for a fee from the insurance company.",
             "imgURL": null,
             "altText": null
         },
@@ -4573,6 +4997,12 @@
             "altText": null
         },
         {
+            "term": "hormone replacement therapy (HRT)",
+            "definition": "Often a treatment plan to reduce the symptoms of menopause. A person's body isn't producing enough hormones and it causes uncomfortable symptoms.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "host",
             "definition": "A person, animal, or plant that another living thing lives off of.",
             "imgURL": null,
@@ -4597,8 +5027,20 @@
             "altText": null
         },
         {
+            "term": "humerus",
+            "definition": "The bone in the upper arm that connects the shoulder to the elbow.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "humidify",
             "definition": "To moisten air.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "hyoid",
+            "definition": "A small U-shaped bone at the top of the neck, underneath the jaw.",
             "imgURL": null,
             "altText": null
         },
@@ -4694,7 +5136,13 @@
         },
         {
             "term": "hysterectomy",
-            "definition": "Surgery to remove ta woman's womb (or uterus).",
+            "definition": "Surgery to remove the uterus.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "idenity-first language",
+            "definition": "Language that emphasizes the disability a person has. Example: \"Autistic person\"",
             "imgURL": null,
             "altText": null
         },
@@ -4761,6 +5209,12 @@
         {
             "term": "immunize, immunization",
             "definition": "To protect again diseases, often by a shot.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "immunoglobin",
+            "definition": "Molecules made by white blood cells that help fight bacteria and viruses. Also known as antibodies.",
             "imgURL": null,
             "altText": null
         },
@@ -4897,6 +5351,12 @@
             "altText": null
         },
         {
+            "term": "in-network",
+            "definition": "When you are being treated by someone within a group of doctors or providers that have a contract with an insurance company. See also \"Preferred Provider Organization (PPO).\"",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "inability",
             "definition": "Not able to.",
             "imgURL": null,
@@ -4981,6 +5441,12 @@
             "altText": null
         },
         {
+            "term": "inclusion",
+            "definition": "The practice of equal access to opportunities and resources, regardless of background.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "incorrect",
             "definition": "Not right or wrong.",
             "imgURL": null,
@@ -5047,6 +5513,12 @@
             "altText": null
         },
         {
+            "term": "infarction",
+            "definition": "The process of tissue becoming injured or dying because there wasn't enough blood flowing there.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "infect",
             "definition": "A disease spread by germs or to spread a disease",
             "imgURL": null,
@@ -5071,6 +5543,12 @@
             "altText": null
         },
         {
+            "term": "inferior",
+            "definition": "Towards the bottom of the body, away from the head.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "infertile",
             "definition": "When you are not able to get pregnant. Also called being sterile.",
             "imgURL": null,
@@ -5090,7 +5568,7 @@
         },
         {
             "term": "inflammation",
-            "definition": "Painful swelling.",
+            "definition": "Redness or swelling of the body while it tries to heal or fight off bacteria and viruses.",
             "imgURL": null,
             "altText": null
         },
@@ -5215,6 +5693,12 @@
             "altText": null
         },
         {
+            "term": "inpatient",
+            "definition": "A patient who lives at the hospital during treatment.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "inquire",
             "definition": "To ask.",
             "imgURL": null,
@@ -5263,6 +5747,12 @@
             "altText": null
         },
         {
+            "term": "insurance",
+            "definition": "When another organization or company agrees to cover part of a patient's future medical bills, if they make a contract together.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "intake",
             "definition": "What you eat or drink.",
             "imgURL": null,
@@ -5275,6 +5765,12 @@
             "altText": null
         },
         {
+            "term": "integumentary system",
+            "definition": "The organs that forms the outermost layer of the body, including the skin, glands, hair, and nails.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "intent, intention",
             "definition": "An aim, goal or purpose.",
             "imgURL": null,
@@ -5283,6 +5779,12 @@
         {
             "term": "interface",
             "definition": "To meet or work with.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "interferon",
+            "definition": "A protein that signals the body that viruses or bacteria are inside.",
             "imgURL": null,
             "altText": null
         },
@@ -5325,6 +5827,12 @@
         {
             "term": "interrupt",
             "definition": "To stop, often for a short time.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "intersex",
+            "definition": "A person born with a combination of female and male traits.",
             "imgURL": null,
             "altText": null
         },
@@ -5395,6 +5903,12 @@
             "altText": null
         },
         {
+            "term": "invoice",
+            "definition": "A summary of what's on your medical bill.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "iron",
             "definition": "A mineral that can helps your body work in many ways. For example, it help blood carry oxygen and muscles to use oxygen.",
             "imgURL": null,
@@ -5421,6 +5935,12 @@
         {
             "term": "irritant",
             "definition": "Something that is a bother or a pain.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "ischemia",
+            "definition": "When blood supply to an organ or a body part isn't enough, especially the heart.",
             "imgURL": null,
             "altText": null
         },
@@ -5485,6 +6005,12 @@
             "altText": null
         },
         {
+            "term": "kidney",
+            "definition": "You have 2 kidneys that filter your blood, removing wastes and the extra water that becomes surine.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "kidney diseases",
             "definition": "Most kidney diseases attack the the very small structures that filter waste (called nephrons). Also known as renal diseases.",
             "imgURL": null,
@@ -5503,8 +6029,14 @@
             "altText": null
         },
         {
-            "term": "kidney",
-            "definition": "You have 2 kidneys that filter your blood, removing wastes and the extra water that becomes surine.",
+            "term": "knee",
+            "definition": "The joint that connects the top and bottom of the leg, located where the leg bends.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "labiaplasty",
+            "definition": "A surgery to create or alter the labia minora and labia majora (sex organs). It is a type of volvoplasty.",
             "imgURL": null,
             "altText": null
         },
@@ -5547,6 +6079,12 @@
         {
             "term": "landlord",
             "definition": "Someone who owns a house or apartment and rents it to other people.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "laparoscopy",
+            "definition": "A type of small surgery where a tiny tube with a camera is put into a small cut in the stomach to look at organs.",
             "imgURL": null,
             "altText": null
         },
@@ -5647,6 +6185,18 @@
             "altText": null
         },
         {
+            "term": "lethargy",
+            "definition": "A feeling of low energy, low motivation, or sleepiness.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "letter of medical necessity (LMN)",
+            "definition": "A written summary from a doctor or physician that explains a need for certain medical services or supplies so that the patient is able to receive these things from their insurance company.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "leukemia",
             "definition": "A cancer of the blood. Caused when white blood cells grow quickly and crowd out other types of blood cells. There are different types, including acute lymphocytic leukemia acute myeloid leukemia, chronic lymphocytic leukemia, and chronic myeloid leukemia.",
             "imgURL": null,
@@ -5673,6 +6223,12 @@
         {
             "term": "life support",
             "definition": "Treatments that can help your body when it has a serious disease or has been in an accident. It can include machines to help you breathe (ventilator) or to clean your blood (dialysis).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "lifetime maximum",
+            "definition": "A limit that insurance companies set for how much they are willing to pay a patient in healthcare costs for the entire time the patient was enrolled in that plan. This is no longer allowed under the law for long-term plans.",
             "imgURL": null,
             "altText": null
         },
@@ -5725,14 +6281,14 @@
             "altText": null
         },
         {
-            "term": "Liver spots",
-            "definition": "Flat brown or black spots that appear in your skin that is exposed to the sun. They are not related to your liver. They are common as you age.",
+            "term": "liver",
+            "definition": "The largest organ inside your body. It helps to digest food, store energy, and remove poisons from your body.",
             "imgURL": null,
             "altText": null
         },
         {
-            "term": "liver",
-            "definition": "The largest organ inside your body. It helps to digest food, store energy, and remove poisons from your body.",
+            "term": "Liver spots",
+            "definition": "Flat brown or black spots that appear in your skin that is exposed to the sun. They are not related to your liver. They are common as you age.",
             "imgURL": null,
             "altText": null
         },
@@ -5947,6 +6503,18 @@
             "altText": null
         },
         {
+            "term": "managed care",
+            "definition": "Different ways used to lower price and increase quality of healthcare.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "managed care principles",
+            "definition": "When hospitals and providers pay special attention to increasing quality and efficiency of care.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "mandible",
             "definition": "The lower jaw.",
             "imgURL": null,
@@ -6007,8 +6575,26 @@
             "altText": null
         },
         {
+            "term": "medial",
+            "definition": "Towards the middle of the body.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "Medicaid",
+            "definition": "A government health insurance program that provides care to people with limited income or resources.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "medical facilities",
             "definition": "Any place where medical treatmet is provided, such as your doctor’s office, hospitals, clinics, nursing homes, and labs for patient test and procedures.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "Medicare",
+            "definition": "A government health insurance program that provides care to people who are 65 or older, or certain people under 65 who have disabilities.",
             "imgURL": null,
             "altText": null
         },
@@ -6021,6 +6607,12 @@
         {
             "term": "medicine",
             "definition": "A drug.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "melanin",
+            "definition": "A brown to black pigment that occurs in hair, skin, and eyecolor. Melanin is also responsible for tanning when exposed to sunlight.",
             "imgURL": null,
             "altText": null
         },
@@ -6091,6 +6683,12 @@
             "altText": null
         },
         {
+            "term": "metacarpals",
+            "definition": "The bones in the middle of the hand, where the palm is.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "metastasize",
             "definition": "To spread. Often used with cancer when it moves from one area of your body to another.",
             "imgURL": null,
@@ -6103,8 +6701,20 @@
             "altText": null
         },
         {
+            "term": "metatarsals",
+            "definition": "The bones in the middle of the foot, connecting the heel to the toes.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "methods",
             "definition": "How a science study was carried out.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "metiodioplasty",
+            "definition": "A surgery that uses tissue from a hormone-enlarged clitoris to create a penis.",
             "imgURL": null,
             "altText": null
         },
@@ -6302,7 +6912,7 @@
         },
         {
             "term": "mucus",
-            "definition": "A slimy substance, often seen in your nose and throat, but it can also be found in other areas of your body. Also called phlegm or snot.",
+            "definition": "A thin, slippery liquid that the body makes to protect organs from bacteria and viruses.",
             "imgURL": null,
             "altText": null
         },
@@ -6319,14 +6929,14 @@
             "altText": null
         },
         {
-            "term": "muscles",
-            "definition": "The soft tissues that help you to move and helps your body to work properly. They are in your arms and legs, but also your stomach and heart.",
+            "term": "muscle contraction",
+            "definition": "A muscle twitch or movement.",
             "imgURL": null,
             "altText": null
         },
         {
-            "term": "muscle contraction",
-            "definition": "A muscle twitch or movement.",
+            "term": "muscles",
+            "definition": "The soft tissues that help you to move and helps your body to work properly. They are in your arms and legs, but also your stomach and heart.",
             "imgURL": null,
             "altText": null
         },
@@ -6369,6 +6979,12 @@
         {
             "term": "narcotic",
             "definition": "A drug to treat moderate to severe pain. Also called opiates.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "nasal",
+            "definition": "Things that are related to the nose.",
             "imgURL": null,
             "altText": null
         },
@@ -6541,6 +7157,12 @@
             "altText": null
         },
         {
+            "term": "non-verbal",
+            "definition": "When a person cannot use speech (or spoken words).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "nonalcoholic fatty liver disease",
             "definition": "Occurs when fat builds up in your liver and it does not work as well as it should. Also called NAFLD.",
             "imgURL": null,
@@ -6679,6 +7301,12 @@
             "altText": null
         },
         {
+            "term": "occipital bone",
+            "definition": "The bottom of the back of the skull.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "occlude, occlusion",
             "definition": "To block or be blocked.",
             "imgURL": null,
@@ -6747,6 +7375,12 @@
         {
             "term": "onset",
             "definition": "The start.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "oophorectomy",
+            "definition": "A surgery to remove one or both ovaries. Often treatment for ovarian cancer.",
             "imgURL": null,
             "altText": null
         },
@@ -6829,6 +7463,12 @@
             "altText": null
         },
         {
+            "term": "orchiectomy",
+            "definition": "A surgery to remove the testes. Often treatment for prostate cancer.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "orchitis",
             "definition": "Swelling of 1 or both testicles. It is often a side effect of mumps.",
             "imgURL": null,
@@ -6877,6 +7517,12 @@
             "altText": null
         },
         {
+            "term": "ossicles",
+            "definition": "Tiny bones in the middle of the ear canal.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "ossification",
             "definition": "How bones are formed.",
             "imgURL": null,
@@ -6919,6 +7565,30 @@
             "altText": null
         },
         {
+            "term": "out-of-area",
+            "definition": "Doctors and healthcare providers that are not within a certain location on a map included in a health insurance plan.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "out-of-network",
+            "definition": "Doctors and healthcare providers that are not part of an identified group of doctors or providers that are part of a health insurance plan.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "out-of-pocket",
+            "definition": "Anything you pay that is not included or covered by the insurance company.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "out-of-pocket Maximum",
+            "definition": "A limit on the amount of money a patient has to pay for healthcare in a year. If a patient reaches this limit, the insurance company will pay for 100% of costs the rest of the year.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "outbreak",
             "definition": "The start or increase in the number of cases of a disease.",
             "imgURL": null,
@@ -6933,6 +7603,12 @@
         {
             "term": "outermost",
             "definition": "Something that is farthest away or on the outside.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "outpatient",
+            "definition": "Patient who lives outside of the hospital during treatment.",
             "imgURL": null,
             "altText": null
         },
@@ -7225,8 +7901,20 @@
             "altText": null
         },
         {
+            "term": "penectomy",
+            "definition": "A surgery that removes the penis. Often treatment of penile cancer.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "peptic ulcers",
             "definition": "A sore on the lining of your stomach or the first part of your small interstine . Also called stomach ulcers.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "percutaneous",
+            "definition": "A medical method where the body's inner area is accessed by poking a needle through the skin.",
             "imgURL": null,
             "altText": null
         },
@@ -7351,6 +8039,12 @@
             "altText": null
         },
         {
+            "term": "person-first language",
+            "definition": "Language that emphazises the personhood of someone who has a disability. Example: \"Person with autism\" or \"person who uses a wheelchair.\"",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "personal protective equipment",
             "definition": "Clothing that protects health workers from germs or from bits of dangerous chemicals or noises. This includes gowns, face shields, gloves, face masks, and respirators. Also called PPE.",
             "imgURL": null,
@@ -7413,6 +8107,18 @@
         {
             "term": "petechiae",
             "definition": "Tiny red or purple spots on your skin that are caused by bleeding under your skin.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "phalanges",
+            "definition": "The bones that make up the fingers and the toes.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "phalloplasty",
+            "definition": "A surgery that creates or modifies a penis. Occassionally referred to as penis enlargement.",
             "imgURL": null,
             "altText": null
         },
@@ -7605,6 +8311,12 @@
         {
             "term": "platelet",
             "definition": "A small blood clotting cell.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "pleura",
+            "definition": "A thin tissue that covers the lungs and the inside of the chest.",
             "imgURL": null,
             "altText": null
         },
@@ -7819,6 +8531,12 @@
             "altText": null
         },
         {
+            "term": "preferred provider organization (PPO)",
+            "definition": "A group of doctors or other clinicians that have a contract with an insurance company to keep costs lower for insurance members if the patient visits them.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "pregnancy",
             "definition": "When you are expecting a baby.",
             "imgURL": null,
@@ -7833,6 +8551,12 @@
         {
             "term": "premenstrual yndrome",
             "definition": "A group of symptoms the you may get 1 to 2 weeks before your period and that are strong enough that they get in the way of you doing your everydaay tasks.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "premium",
+            "definition": "What a patient pays to the insurance company every month in exchange for coverage, like a monthly subscription fee.",
             "imgURL": null,
             "altText": null
         },
@@ -7951,6 +8675,12 @@
             "altText": null
         },
         {
+            "term": "prion",
+            "definition": "A protein that is not made (or \"folded\") correctly that can make other proteins fold work wrong. Can be spread by infection.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "prior to",
             "definition": "Earlier or before.",
             "imgURL": null,
@@ -8047,8 +8777,20 @@
             "altText": null
         },
         {
+            "term": "pronation",
+            "definition": "When a foot or lower arm turns down. For example, when your palm is down.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "prone",
             "definition": "Lying face down or on your stomach.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "pronoun(s)",
+            "definition": "A noun that refers to person(s).",
             "imgURL": null,
             "altText": null
         },
@@ -8299,6 +9041,12 @@
             "altText": null
         },
         {
+            "term": "quadriceps",
+            "definition": "A group of muscles on the front of the top part of the leg or thigh.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "quadriplegia",
             "definition": "When your arms and legs cannot move on their own.",
             "imgURL": null,
@@ -8307,6 +9055,12 @@
         {
             "term": "qualified",
             "definition": "Has the training to perform a task.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "qualified medical expenses",
+            "definition": "Money spent on medical services for a condition, injury, or illness that can be deducted on an income tax return.",
             "imgURL": null,
             "altText": null
         },
@@ -8355,6 +9109,12 @@
         {
             "term": "radiology",
             "definition": "The study of diseases using X-rays.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "radius",
+            "definition": "A bone in the lower part of the arm, towards the outside edge.",
             "imgURL": null,
             "altText": null
         },
@@ -8899,6 +9659,12 @@
             "altText": null
         },
         {
+            "term": "rib",
+            "definition": "A bone in the chest that acts as a cage for the heart and lungs.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "rickets",
             "definition": "A disease that causes soft bones in children if they don't get enough",
             "imgURL": null,
@@ -8989,6 +9755,12 @@
             "altText": null
         },
         {
+            "term": "sacrum",
+            "definition": "A triangle-shaped bone at the bottom of the spine and connected to the hips.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "saliva",
             "definition": "Spit. It is made in salivary glands and keeps your food moist and helps to digest it.",
             "imgURL": null,
@@ -9037,6 +9809,12 @@
             "altText": null
         },
         {
+            "term": "scapula",
+            "definition": "A wide, flat bone at the back of the shoulder.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "scarlatina",
             "definition": "Scarlet fever, a disease caused by a germ (or virus) that gives you a red rash.",
             "imgURL": null,
@@ -9063,6 +9841,12 @@
         {
             "term": "screening",
             "definition": "A medical test to find out if a person has a disease or illness.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "scrotoplasty",
+            "definition": "A surgery that creates or modifies a scrotum.",
             "imgURL": null,
             "altText": null
         },
@@ -9181,6 +9965,12 @@
             "altText": null
         },
         {
+            "term": "service area",
+            "definition": "An area on a map where a patient must live in order to get a specific healthcare insurance. Different companies have different service areas.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "several",
             "definition": "A few or some.",
             "imgURL": null,
@@ -9271,8 +10061,20 @@
             "altText": null
         },
         {
+            "term": "social determinants of health",
+            "definition": "The economic and social conditions that influence individual and group differences in health status",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "social distancing",
             "definition": "Ways to try to keep a disease from spreading by asking them to stay at home or stay away from large group sof people.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "social worker",
+            "definition": " Social workers help relieve people's suffering, fight for social justice, and improve lives and communities",
             "imgURL": null,
             "altText": null
         },
@@ -9463,6 +10265,12 @@
             "altText": null
         },
         {
+            "term": "sternum",
+            "definition": "A bone in the middle of the chest that connects the first couple ribs. Also called breastbone.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "steroid",
             "definition": "A kind of drug that reduces swelling and helps your body’s natural defense against sickness (your immune system). Also called corticosteroids or glucocorticoids.",
             "imgURL": null,
@@ -9537,6 +10345,12 @@
         {
             "term": "stroke",
             "definition": "A stroke, bleeding that occurs in your brain. Also called cerebral accident or cerebrovascular accident or CVA. An ischemic stroke, caused by a blood clot that blocks a blood vessel in the brain. A hemorrhagic stroke is caused by a blood vessel that breaks and bleeds into the brain.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "structural racism",
+            "definition": "The ways society allow for racism to occur, reinforced by beliefs and customs.",
             "imgURL": null,
             "altText": null
         },
@@ -9643,8 +10457,20 @@
             "altText": null
         },
         {
+            "term": "superior",
+            "definition": "Towards the top half of the body, where the head is.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "supersede",
             "definition": "To replace or take the place of something.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "supination",
+            "definition": "The upward rotation of the lower arm or foot. Describes when the palm is up, or the foot is leaning outward.",
             "imgURL": null,
             "altText": null
         },
@@ -9727,6 +10553,12 @@
             "altText": null
         },
         {
+            "term": "Swyer syndrome",
+            "definition": "A person with an X and Y chromosome who looks female.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "symptom",
             "definition": "A sign of disease or sickness.",
             "imgURL": null,
@@ -9775,6 +10607,18 @@
             "altText": null
         },
         {
+            "term": "systemic racism",
+            "definition": "Systems and organizations within society that have racist practices. Example: certain economic and medical practices have had racist outcomes.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "systolic",
+            "definition": "The top number of a blood pressure measurement. Describes the pressure in the blood vessels when the heart is beating.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "tachycardia",
             "definition": "A very fast heart beat.",
             "imgURL": null,
@@ -9807,6 +10651,12 @@
         {
             "term": "tardive dyskinesia",
             "definition": "Movements that you can't stop.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "tarsals",
+            "definition": "The bones in the back of the foot, where the heel is.",
             "imgURL": null,
             "altText": null
         },
@@ -9873,6 +10723,12 @@
         {
             "term": "tendinitis",
             "definition": "When the tissues that connect muscles to bones swell and cause pain.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "tendon",
+            "definition": "A type of tissue that connects muscle to bone.",
             "imgURL": null,
             "altText": null
         },
@@ -9991,6 +10847,12 @@
             "altText": null
         },
         {
+            "term": "tibia",
+            "definition": "A bigger bone in the bottom half of the leg that connects the ankle to the knee.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "tick bites",
             "definition": "Small bugs (paracites) that suck blood and can pass on diseases, including Lyme disease or Rocky Mountain spotted fever.",
             "imgURL": null,
@@ -10083,7 +10945,7 @@
         {
             "term": "trachea",
             "definition": "The tube that comes from your mouth to your lungs. Also called \"windpipe.\"",
-            "imgURL": "",
+            "imgURL": null,
             "altText": null
         },
         {
@@ -10101,6 +10963,12 @@
         {
             "term": "transform",
             "definition": "To change or alter something.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "transgender",
+            "definition": "A person who identifies as a gender different than their biological sex.",
             "imgURL": null,
             "altText": null
         },
@@ -10225,6 +11093,12 @@
             "altText": null
         },
         {
+            "term": "Turner syndrome",
+            "definition": "A condition where a person's X chromosome is missing or partly missing. Only occurs in females.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "ulcer",
             "definition": "An open sore that can develop in many areas of your body.",
             "imgURL": null,
@@ -10233,6 +11107,12 @@
         {
             "term": "ulcerative colitis",
             "definition": "Causes inflammation and sores (also called ulcers), in the lining of the rectum and colon.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "ulna",
+            "definition": "A bone in the lower part of the arm, closer to the body.",
             "imgURL": null,
             "altText": null
         },
@@ -10333,6 +11213,12 @@
             "altText": null
         },
         {
+            "term": "urethroplasty (urethral lengthening)",
+            "definition": "Lenthening the urethra by creating a bladder tube. This allows for a cathetar to be placed without urine leaking.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "urinalysis",
             "definition": "A test of your urine to check for diseases, such as diabetes, urinary tract infections, or kidney problems.",
             "imgURL": null,
@@ -10429,8 +11315,20 @@
             "altText": null
         },
         {
+            "term": "vaginectomy",
+            "definition": "A surgery to remove all or part of a vagina (female sex organ).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "vaginitis",
             "definition": "When the vagina is swollen, painful, and itchy. It can becaused caused by bacteria, yeasts, or parasites.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "vaginoplasty",
+            "definition": "A surgery for the creation or modification of a vagina (female sex organ).",
             "imgURL": null,
             "altText": null
         },
@@ -10573,6 +11471,12 @@
             "altText": null
         },
         {
+            "term": "ventral",
+            "definition": "Front side of the body",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "verbatim",
             "definition": "Something that has been written down or repeated word for word.",
             "imgURL": null,
@@ -10581,6 +11485,12 @@
         {
             "term": "verify",
             "definition": "To check or find something out.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "vertebra, vertebrae",
+            "definition": "The bones that make up the spine.",
             "imgURL": null,
             "altText": null
         },
@@ -10711,6 +11621,12 @@
             "altText": null
         },
         {
+            "term": "vulvoplasty",
+            "definition": "A surgery for the creation or modification of a vulva (female sex organ).",
+            "imgURL": null,
+            "altText": null
+        },
+        {
             "term": "walleye",
             "definition": "When both of your eyes do not look in the same direction. Also called strabismus.",
             "imgURL": null,
@@ -10803,6 +11719,12 @@
         {
             "term": "witness",
             "definition": "To see or observe.",
+            "imgURL": null,
+            "altText": null
+        },
+        {
+            "term": "worker's compensation program",
+            "definition": "Insurance from an employer that may give money and medical care if someone is injured while working.",
             "imgURL": null,
             "altText": null
         },
