@@ -6,7 +6,7 @@ const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const search_svg = (<svg role="img" focusable="false" aria-hidden="true" className="search-icon" xmlns="http://www.w3.org/2000/svg" width="18.895" height="18.9" viewBox="0 0 18.895 18.9">
 	<path id="union2" data-name="union2" className="cls-1" d="M-85.811,405.607-90.1,401.32A7.941,7.941,0,0,1-95,403a7.943,7.943,0,0,1-5.656-2.343,8.009,8.009,0,0,1,0-11.314A7.944,7.944,0,0,1-95,387a7.95,7.95,0,0,1,5.657,2.343,8.014,8.014,0,0,1,.663,10.563l4.287,4.287a1,1,0,0,1,0,1.414,1,1,0,0,1-.707.293A1,1,0,0,1-85.811,405.607Zm-13.435-14.849a6.007,6.007,0,0,0,0,8.485A5.957,5.957,0,0,0-95,401a5.957,5.957,0,0,0,4.243-1.757A5.961,5.961,0,0,0-89,395a5.961,5.961,0,0,0-1.758-4.243A5.961,5.961,0,0,0-95,389,5.961,5.961,0,0,0-99.247,390.758Z" transform="translate(103 -387)" />
 </svg>);
-const report_svg = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+const report_svg = (<svg role="img" className="regular-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 	<title>Reprt incorrect definition</title>
 	<path d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>);
 const copy_svg = (<svg role="img" className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="17.325" height="19" viewBox="0 0 17.325 19">
@@ -16,12 +16,6 @@ const copy_svg = (<svg role="img" className="regular-icon" xmlns="http://www.w3.
 const close_svg = (<svg className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
 	<path id="close" d="M-88.321,403.116l-6.265-6.265-6.265,6.265a1.016,1.016,0,0,1-1.437,0,1.017,1.017,0,0,1,0-1.436l6.266-6.266-6.266-6.266a1.017,1.017,0,0,1,0-1.436,1.016,1.016,0,0,1,1.437,0l6.265,6.265,6.265-6.265a1.016,1.016,0,0,1,1.437,0,1.015,1.015,0,0,1,0,1.436l-6.266,6.266,6.266,6.266a1.015,1.015,0,0,1,0,1.436,1.013,1.013,0,0,1-.719.3A1.013,1.013,0,0,1-88.321,403.116Z" transform="translate(102.586 -387.414)" />
 </svg>);
-const arrow_svg = (
-	<svg className="regular-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<rect width="24" height="24" fill="transparent" />
-		<path fillRule="evenodd" clipRule="evenodd" d="M4.29289 7.29289C4.68342 6.90237 5.31658 6.90237 5.70711 7.29289L12 13.5858L18.2929 7.29289C18.6834 6.90237 19.3166 6.90237 19.7071 7.29289C20.0976 7.68342 20.0976 8.31658 19.7071 8.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L4.29289 8.70711C3.90237 8.31658 3.90237 7.68342 4.29289 7.29289Z" />
-	</svg>
-);
 const image_svg = (
 	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect width="24" height="24" fill="transparent" />
@@ -165,6 +159,7 @@ class Dictionary4Word extends React.Component {
 		);
 	}
 }
+
 class Dictionary4Paragraph extends React.Component {
 	constructor(props) {
 		super(props);
@@ -220,7 +215,7 @@ class Dictionary4Paragraph extends React.Component {
 		else return (
 			<div className="flex paragraph">
 				<SearchBar4Paragraph status="normal" query={this.state.query} onQueryChange={this.handleChange} onMouseUp={this.handleMouseUp} display={this.state.display} />
-				<div className={"no-scroll-bar TermCardList_para" + hasCard}>
+				<div className={"TermCardList_para" + hasCard}>
 					<TermCardList4Paragraph
 						onReport={this.handleReport}
 						onImage={this.handleImage}
@@ -292,41 +287,6 @@ class SearchBar4Word extends React.Component {
 					{search_svg}
 				</div>
 				<div className={"search-box guess" + shadow}>{matchTerms}</div>
-			</div>
-		);
-	}
-}
-
-class ReturnToTop extends React.Component {
-	constructor(props){
-		super(props);
-		this._isMounted = false;
-	}
-	componentDidMount() {
-		this._isMounted = true;
-		window.addEventListener('scroll', this.handleScroll);
-	}
-	componentWillUnmount() {
-		this._isMounted = false;
-		 window.removeEventListener('scroll', this.handleScroll);
-	}
-	handleScroll(event) {
-		let scrollTop = event.srcElement.body.scrollTop,
-			itemTranslate = Math.min(0, scrollTop/3 - 60);
-
-		this.setState({
-			transform: itemTranslate
-		});
-	}
-
-	handleMouseUp(event) {
-		document.body.scrollTop = 0; // For Safari
-  		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-	}
-	render() {
-		return (
-			<div class="scrollToTopButton">
-
 			</div>
 		);
 	}
@@ -496,8 +456,6 @@ class TermCardList4Paragraph extends React.Component {
 		this.props.onImage(query);
 	}
 	render() {
-		if (this.props.matches.length <= 0) return null;
-
 		var selected = '';
 		if (this.props.selected != -1 && this.props.selected < this.props.matches.length)
 			selected = this.props.matches[this.props.selected][0];
@@ -510,9 +468,17 @@ class TermCardList4Paragraph extends React.Component {
 					key={item[0]}
 					query={item} />
 			));
-		return (
-			<div id="card-container">{list}</div>
-		);
+		if(list.length > 0){
+			return (
+				<div id="card-container">{list}</div>
+			);
+		}
+		else{
+			return(
+				<div className="directions">If any terms from the pasted text are in this dictionary, the terms will be highlighted in the pasted text and the definitions will appear here.</div>
+			)
+		}
+		
 	}
 }
 
@@ -547,9 +513,9 @@ class TermCard extends React.Component {
 	}
 	//copy term and definition to clipboard
 	handleCopy(event) {
-		var target = event.target;
 		this._isMounted && this.setState({ copied: false });
-		navigator.clipboard.writeText(this.props.query).then(function () {
+		console.log(this.props.query);
+		navigator.clipboard.writeText(this.props.query[0] + ": " + this.props.query[1]).then(function () {
 			/* success */
 			this._isMounted && this.setState({ copied: true });
 			console.log("success")
@@ -568,36 +534,14 @@ class TermCard extends React.Component {
 			imgURL: this.props.query[2],
 			altText: this.props.query[3]
 		};
-
-		//definition with chars more than "max", will be collapsed by default
-		const max = 90;
-		//terms with short definition and no image would always be expanded
-		const disabled = (!item.imgURL) && (item.definition.length <= max);
-
-		//Toggle or expand: different status for image and definitions
-		//=======
-		let img = item.imgURL != null ? (<div className="image-col"><img className="image" src={item.imgURL} alt={item.altText} /></div>) : "";
-		let content = {
-			collapse: (
-				item.definition.length > max ? (
-					<p>{item.definition.substring(0, max - 10)}...</p>
-				) : (<p>{item.definition}</p>)
-			),
-			expand: (
-				item.imgURL ? (
-					<div className="row">
-						<p className="text-col">{item.definition}</p>
-						{img}
-					</div>
-				) : (<p>{item.definition}</p>)
-			)
-		};
+		
+		let img = item.imgURL != "" ? (<div className="image-col"><img className="image" src={item.imgURL} alt={item.altText} /></div>) : "";
 
 		return (
 			<div className={this.props.type === "selected" ? "term-card term-card-selected" : "term-card"} onClick={this.handleClick} >
 				<div className="flex-center">
 					<div className="row flex-start">
-						<h2>{item.term} {item.imgURL != "" && image_svg}</h2>
+						<h2>{item.term}</h2>
 					</div>
 					<div className="iconset">
 						<button
@@ -611,15 +555,10 @@ class TermCard extends React.Component {
 							title="Copy this definition to clipboard">
 							{copy_svg}
 						</button>
-						<button
-							className={this.state.isToggled ? "rotateButton" : "rotateButton rotate180"}
-							title="Expand or collapse card content"
-							disabled={disabled}>
-							{arrow_svg}
-						</button>
 					</div>
 				</div>
-				{this.state.isToggled ? content.collapse : content.expand}
+				<p class="definitionParagraph">{item.definition}</p>
+				{img}
 			</div>
 		);
 	}

@@ -129,12 +129,9 @@ main{
   max-width: 740px;
 }
 
-.scrollToTopButton{
-  width: 100px;
-  height: 100px;
-  background-color: red;
+.definitionParagraph{
+  max-width: 38rem;
 }
-
 
 h1 {
   line-height: 120%;
@@ -397,6 +394,10 @@ button[class*="none"]{
   height: 1.5em;
 }
 
+.directions{
+  padding: 1em;
+}
+
 
 /*//////////////////////////
 ////    BrowseField    ////
@@ -411,14 +412,15 @@ button[class*="none"]{
 ////////////////////////*/
 
 .TermCardList_para{ /*same size as the search-box-container*/
-  display: none;
   max-height: 20em;
   position: relative;/*required for getting offsetTop*/
   overflow-y: scroll;
   height: 80vw;
   scroll-behavior: smooth;
   margin-top: .5em;
+  overflow: auto;
 }
+
 .hasCard{
   display: block;
   padding: 0 .2em 10em .2em;
@@ -428,6 +430,7 @@ button[class*="none"]{
 .image{
   max-height: 500px;
   max-width: 100%;
+  padding: 1em 0;
 }
 
 .image-col{
@@ -531,8 +534,8 @@ button[class*="none"]{
   margin-bottom: 1em;
   background-color: #f0f0f0;
   border-radius: .5em;
-  cursor: pointer;
 }
+
 .form-textarea{
   flex-grow: 1;
   border:1.5px solid #aaa;
@@ -662,7 +665,7 @@ svg{
     overflow-y: scroll;
   }
   .hasCard{
-    padding: 0 .2em 10em 1em;
+    padding: 0 .2em 0em 1em;
   }
   .TermCardList_word{
     padding: 0 .2em 10em .2em;
