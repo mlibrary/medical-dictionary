@@ -5983,7 +5983,7 @@
         {
             "term": "joint",
             "definition": "Where 2 or more bones come together,like your shoulder or ankle.",
-            "imgURL": "/docs/assets/images/Bursa_of_elbow_joint.jpg",
+            "imgURL": "/assets/images/Bursa_of_elbow_joint.jpg",
             "altText": null
         },
         {
@@ -10051,7 +10051,7 @@
         {
             "term": "skull",
             "definition": "The bones of your head bones.",
-            "imgURL": "/docs/assets/images/703_Parts_of_Skull-01.jpg",
+            "imgURL": "/assets/images/703_Parts_of_Skull-01.jpg",
             "altText": null
         },
         {
@@ -10681,7 +10681,7 @@
         {
             "term": "teeth, tooth",
             "definition": "The 32 bone-like objects in our jaw.",
-            "imgURL": "/docs/assets/images/Bleibende_Zähne_beim_Menschen_eingefärbt.png",
+            "imgURL": "/assets/images/Bleibende_Zähne_beim_Menschen_eingefärbt.png",
             "altText": null
         },
         {
