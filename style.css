@@ -63,6 +63,7 @@ input,textarea{
   padding: 0;
   width: 100%;
 }
+
 body,header,footer{
   width: 100%;
   min-width: 320px;
@@ -70,16 +71,12 @@ body,header,footer{
 }
 body {
   position: relative;
-  height: 100vh;
-  max-height: 700px;
+  min-height: 100vh;
+  display: grid;
+  overflow-y: scroll;
+  grid-template-rows: auto 1fr auto;
   background-color: white;
   scroll-behavior: smooth;
-}
-
-header,footer{
-  position: fixed;
-  z-index: 9999;
-  text-align: center;
 }
 
 header{
@@ -88,6 +85,8 @@ header{
   border-bottom: 4px solid #FFCB05;
   color: white;
 }
+
+
 
 header h2{
   margin: 0;
@@ -126,6 +125,14 @@ main{
   background-color: white;
   z-index: 9999;
   width: 100%;
+  border-bottom: 1px solid #00274C;
+  max-width: 740px;
+}
+
+.scrollToTopButton{
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
 
 
@@ -588,7 +595,7 @@ svg{
 .search-icon{fill: #00274C;}
 
 .regular-icon{
-  fill: #aaa;
+  fill: #637381;
   cursor: pointer;
 }
 
@@ -616,6 +623,12 @@ svg{
   animation-iteration-count: infinite;
 }
 
+.headerContent{
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1em;
+  }
+
 @keyframes loading {
   0%   {left:0px; width:1px;}
   50%  {left:0px; width:12em;}
@@ -623,12 +636,13 @@ svg{
 }
 
 @media only screen and (min-width: 600px) {
-  body,header,footer{
+  main{
     max-width: 768px;
   }
   h1 {
     font-size: 1.5em;
   }
+  
   .flex[class*="paragraph"]{
     flex-direction: row;
   }

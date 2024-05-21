@@ -6,10 +6,9 @@ const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const search_svg = (<svg role="img" focusable="false" aria-hidden="true" className="search-icon" xmlns="http://www.w3.org/2000/svg" width="18.895" height="18.9" viewBox="0 0 18.895 18.9">
 	<path id="union2" data-name="union2" className="cls-1" d="M-85.811,405.607-90.1,401.32A7.941,7.941,0,0,1-95,403a7.943,7.943,0,0,1-5.656-2.343,8.009,8.009,0,0,1,0-11.314A7.944,7.944,0,0,1-95,387a7.95,7.95,0,0,1,5.657,2.343,8.014,8.014,0,0,1,.663,10.563l4.287,4.287a1,1,0,0,1,0,1.414,1,1,0,0,1-.707.293A1,1,0,0,1-85.811,405.607Zm-13.435-14.849a6.007,6.007,0,0,0,0,8.485A5.957,5.957,0,0,0-95,401a5.957,5.957,0,0,0,4.243-1.757A5.961,5.961,0,0,0-89,395a5.961,5.961,0,0,0-1.758-4.243A5.961,5.961,0,0,0-95,389,5.961,5.961,0,0,0-99.247,390.758Z" transform="translate(103 -387)" />
 </svg>);
-const report_svg = (<svg role="img" className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="19.716" height="17.964" viewBox="0 0 19.716 17.964">
-	<title>Report incorrect definition</title>
-	<path id="report" className="cls-1" d="M-84.228,406.518h-15.71a1.981,1.981,0,0,1-1.726-.99,1.981,1.981,0,0,1-.016-1.99l7.854-13.964a1.977,1.977,0,0,1,1.743-1.019,1.977,1.977,0,0,1,1.743,1.019l7.855,13.964a1.982,1.982,0,0,1-.017,1.991A1.981,1.981,0,0,1-84.228,406.518Zm-7.855-4.761a1.254,1.254,0,0,0-1.253,1.253,1.254,1.254,0,0,0,1.253,1.253,1.254,1.254,0,0,0,1.253-1.253A1.254,1.254,0,0,0-92.083,401.757Zm0-8.769a1.254,1.254,0,0,0-1.253,1.253v5.011a1.254,1.254,0,0,0,1.253,1.253,1.254,1.254,0,0,0,1.253-1.253v-5.011A1.254,1.254,0,0,0-92.083,392.989Z" transform="translate(101.941 -388.554)" />
-</svg>);
+const report_svg = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+	<title>Reprt incorrect definition</title>
+	<path d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>);
 const copy_svg = (<svg role="img" className="regular-icon" xmlns="http://www.w3.org/2000/svg" width="17.325" height="19" viewBox="0 0 17.325 19">
 	<title>Copy this definition to clipboard</title>
 	<path id="copy" className="cls-1" d="M-97,406a2,2,0,0,1-2-2h10.329a1,1,0,0,0,1-1V393a1,1,0,0,0-1-1v-2h1a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm-4-3a2,2,0,0,1-2-2V389a2,2,0,0,1,2-2h9.326a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2Zm0-13v10a1,1,0,0,0,1,1h7.33a1,1,0,0,0,1-1V390a1,1,0,0,0-1-1H-100A1,1,0,0,0-101,390Z" transform="translate(103 -387)" />
@@ -125,7 +124,7 @@ class Dictionary4Word extends React.Component {
 
 		if (messageTop > 0 && top > messageTop) {
 			message.classList.add("sticky");
-			message.style.top = document.querySelector('header').offsetHeight + 'px';
+			message.style.top = 0 + 'px';
 			cardList.style.marginTop = message.offsetHeight + 'px';
 		} else {
 			message.classList.remove("sticky");
@@ -233,7 +232,6 @@ class Dictionary4Paragraph extends React.Component {
 		);
 	}
 }
-
 class SearchBar4Word extends React.Component {
 	constructor(props) {
 		super(props);
@@ -298,6 +296,42 @@ class SearchBar4Word extends React.Component {
 		);
 	}
 }
+
+class ReturnToTop extends React.Component {
+	constructor(props){
+		super(props);
+		this._isMounted = false;
+	}
+	componentDidMount() {
+		this._isMounted = true;
+		window.addEventListener('scroll', this.handleScroll);
+	}
+	componentWillUnmount() {
+		this._isMounted = false;
+		 window.removeEventListener('scroll', this.handleScroll);
+	}
+	handleScroll(event) {
+		let scrollTop = event.srcElement.body.scrollTop,
+			itemTranslate = Math.min(0, scrollTop/3 - 60);
+
+		this.setState({
+			transform: itemTranslate
+		});
+	}
+
+	handleMouseUp(event) {
+		document.body.scrollTop = 0; // For Safari
+  		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	}
+	render() {
+		return (
+			<div class="scrollToTopButton">
+
+			</div>
+		);
+	}
+}
+
 //content editable field
 class SearchBar4Paragraph extends React.Component {
 	constructor(props) {
