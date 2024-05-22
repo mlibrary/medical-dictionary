@@ -386,16 +386,20 @@ button[class*="none"]{
 .box-paragraph textarea{
   display: inline-block;
   position: absolute;
-  height: auto;
+  height: 100%;
   top:.0;
   left:0;
   z-index: 99;
   background-color: transparent;
-  height: 1.5em;
 }
+
 
 .directions{
   padding: 1em;
+  font-style: italic;
+  color: #637381;
+  border: 1px dashed #637381;
+  border-radius: 10px;
 }
 
 
@@ -419,6 +423,10 @@ button[class*="none"]{
   scroll-behavior: smooth;
   margin-top: .5em;
   overflow: auto;
+}
+
+.cardHeader{
+  max-width: 75%;
 }
 
 .hasCard{
@@ -472,7 +480,7 @@ button[class*="none"]{
 }
 
 .term-card-selected{
-  top:-2px;
+  background-color: #FFF9E6;
   /*background-color: rgba(254, 203, 5, .09);*/
   /*border:1px solid #FECB05;*/
   box-shadow: 0 1px 10px 0 rgba(254, 203, 5, 1);
@@ -494,7 +502,7 @@ button[class*="none"]{
   position: relative;
 }
 .message-copied::before{
-  content: "Copied!";
+  content: "Copied";
   color: white;
   background-color: #00274C;
   opacity: 0;
@@ -508,12 +516,13 @@ button[class*="none"]{
   animation-duration: 2s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 @keyframes pop {
   0%   {top:-1.5em; opacity:0;}
   12%  {top:-2em; opacity:.8;}
-  50% {top:-3em; opacity:0;}
+  75% {top:-2em; opacity:.8;}
   100% {top:-3em; opacity:0;}
 }
 
@@ -655,6 +664,10 @@ svg{
   }
   .search-box-container,.TermCardList_para{
     width: 50%;
+  }
+
+  .directions{
+    margin: .5em 1em;
   }
   .search-box .box-paragraph{
     flex-grow: 1;

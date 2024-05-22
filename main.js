@@ -309,6 +309,7 @@ class SearchBar4Paragraph extends React.Component {
 		this._isMounted = false;
 	}
 	handleChange(event) {
+		console.log(event.target.scrollHeight);
 		const target = event.target;
 		target.style.height = 'inherit';//to auto set textarea's height
 		target.style.height = `${target.scrollHeight}px`;
@@ -328,7 +329,7 @@ class SearchBar4Paragraph extends React.Component {
 			<div className="search-box-container">
 				<div className="search-box flex">
 					<div className="box-paragraph relative no-scroll-bar">
-						<textarea id="paragraph" name="search" placeholder="Please paste the text here" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+						<textarea class="textAreaInput" id="paragraph" name="search" placeholder="Please paste the text here" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
 							onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
 						<div id="under-textarea" dangerouslySetInnerHTML={{ __html: this.props.display }}></div>
 					</div>
@@ -475,7 +476,7 @@ class TermCardList4Paragraph extends React.Component {
 		}
 		else{
 			return(
-				<div className="directions">If any terms from the pasted text are in this dictionary, the terms will be highlighted in the pasted text and the definitions will appear here.</div>
+				<div className="directions">Any found terms from the pasted text will appear here.</div>
 			)
 		}
 		
@@ -540,7 +541,7 @@ class TermCard extends React.Component {
 		return (
 			<div className={this.props.type === "selected" ? "term-card term-card-selected" : "term-card"} onClick={this.handleClick} >
 				<div className="flex-center">
-					<div className="row flex-start">
+					<div className="row flex-start cardHeader">
 						<h2>{item.term}</h2>
 					</div>
 					<div className="iconset">
@@ -648,8 +649,8 @@ class Report extends React.Component {
 				<div className="form term-card">
 					<h3 className="capitalize">{this.props.type} sent!</h3>
 					<p>Your {isReport ? "report of incorrect information about" : "request for the definition of"} <strong>{this.state.query}</strong> has been sent! We will update the dictionary as soon as we can.</p>
-					{isReport ? "" : <p>At the mean time, please reach out to you health advisor for more information</p>}
-					<p>ðŸ’™ Thank you for your {this.props.type} and patience!</p>
+					{isReport ? "" : <p>In the mean time, please reach out to your health advisor for more information</p>}
+					<p>Thank you for your {this.props.type} and patience!</p>
 					<div onClick={this.handleBack} className="right"><button className="button-dark">Back</button></div>
 				</div>);
 		} else if (isReport) //the form for report (when a user find something wrong with the term/definition)
