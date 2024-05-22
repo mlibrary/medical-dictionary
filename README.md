@@ -11,7 +11,7 @@ The initial version was designed in 2011 and published in three versions: websit
 To install this widget in your own website, please use the follwing code:
 
 ```html
-<iframe src="http://www.lib.umich.edu/medical-dictionary" style="margin: 0 auto; height: 640px; width: 600px; border: 2px solid #eee;"></iframe>
+<iframe src="https://mlibrary.github.io/medical-dictionary/" style="margin: 0 auto; height: 640px; width: 600px; border: 2px solid #eee;"></iframe>
 ```
 
 The widget is responsive with a min-width of 320px, max-width of 768px and max-height of 700px. The recommended iframe width is 600px.
