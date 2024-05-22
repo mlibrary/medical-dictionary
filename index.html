@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-M8JXVGBH');</script>
+	<!-- End Google Tag Manager -->
 	<meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!--[if lt IE 9]>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<!--[if lt IE 9]>
       <script src="full/html5shiv/html5shiv-printshiv.js"></script>
     <![endif]-->
-    <link href="style.css" type="text/css" rel="stylesheet"></link>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<link href="style.css" type="text/css" rel="stylesheet">
+	</link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 	<title>Plain Language Medical Dictionary</title>
 </head>
+
 <body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8JXVGBH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<header>
 		<div class="headerContent">
 			<h1>Plain Language Medical Dictionary</h1>
@@ -21,18 +37,14 @@
 	<main id="root"></main>
 	<footer>
 		<p>&copy; This application is copyright <span id="year">2024</span>, The Regents of the University of Michigan.</p>
-    <p>
-If you would like to embed this widget in your website, please use the following code:
-<br>
-<em>
-&lt;iframe src="https://apps.lib.umich.edu/medical-dictionary" style="margin: 2em 1%; height: 650px; width: 98%; border: 2px solid #EEE;"&gt;&lt;/iframe&gt;
-</em>
-    </p>
+		<p> If you would like to embed this widget in your website, please use the following code: <br>
+			<em> &lt;iframe src="https://apps.lib.umich.edu/medical-dictionary" style="margin: 2em 1%; height: 650px; width: 98%; border: 2px solid #EEE;"&gt;&lt;/iframe&gt; </em>
+		</p>
 	</footer>
 	<!-- react.js -->
 	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
- 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
- 	<!-- components -->
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<!-- components -->
 	<script type="text/babel" src="main.js"></script>
 	<script type="text/javascript">
 		const d = new Date();
@@ -40,4 +52,5 @@ If you would like to embed this widget in your website, please use the following
 		document.getElementById('year').innerHTML = year;
 	</script>
 </body>
+
 </html>

@@ -404,7 +404,7 @@ class MessageRow extends React.Component {
 		else if (this.props.type === 'letter') //letter browsing
 			return <p>{this.props.length} {this.props.length > 1 ? "terms" : "term"} started with <strong>{this.props.query}</strong>:</p>;
 		else
-			return <p>Possible matches for <strong>{this.props.query}</strong>:</p>;
+			return <p>{this.props.length} possible matches for <strong>{this.props.query}</strong>:</p>;
 	}
 }
 
