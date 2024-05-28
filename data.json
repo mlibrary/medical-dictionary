@@ -435,8 +435,8 @@
         {
             "term": "airways",
             "definition": "The tubes that take air in and out of your lungs.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/2308a_The_Trachea.jpg",
+            "altText": "The tubes (trachea and bronchi) going from the mouth tother lungs. The tubes are colored light blue; the lungs are colored purple."
         },
         {
             "term": "alcoholic steatohepatitis",
@@ -1365,8 +1365,8 @@
         {
             "term": "brain",
             "definition": "The organ that controls your thoughts, memory, speech, and movements. It also controls the functions of many organs.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Lobes_of_the_brain_NL.png",
+            "altText": "Side view of the brain with each lobes in a different color."
         },
         {
             "term": "breakthrough infection",
@@ -2787,8 +2787,8 @@
         {
             "term": "dental caries",
             "definition": "Holes in your teeth. Also called cavities or tooth decay.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Blausen_0864_ToothDecay.png",
+            "altText": "Colored layers of the structure of a tooth and gums, showing 3 different kinds of tooth decay. All areas are labeled."
         },
         {
             "term": "dental implant",
@@ -3859,8 +3859,8 @@
         {
             "term": "esophagus",
             "definition": "The tube that carries food and liquids from your mouth to your stomach.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/2412_The_Esophagus.jpg",
+            "altText": "Side view of the structures in a human head. Long tube, labeled \"esophagus,\" extends from throat to the stomach."
         },
         {
             "term": "especially",
@@ -4369,8 +4369,8 @@
         {
             "term": "gallbladder",
             "definition": "An organ located near your liver that stores a fluid (bile) that helps to digest fat.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/2425_Gallbladder.jpg",
+            "altText": "Gallbladder, shown in front of the liver, with individuals parts labeled."
         },
         {
             "term": "gallstones",
@@ -4759,8 +4759,8 @@
         {
             "term": "heart",
             "definition": "An organ made of muscles that pumps blood through your body. It is on the left side of your body.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray490blanco.png",
+            "altText": "The heart can be seen between the right and left lungs.Some structures are shown in red or blue."
         },
         {
             "term": "heart attack",
@@ -5815,8 +5815,8 @@
         {
             "term": "internal organs",
             "definition": "Organs that are inside your body, like your heart, lungs, or stomach.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Internal_organs.png",
+            "altText": "Internal structures (or organs), all labeled, of the human body."
         },
         {
             "term": "internist",
@@ -5984,7 +5984,7 @@
             "term": "joint",
             "definition": "Where 2 or more bones come together, like your shoulder or ankle.",
             "imgURL": "./images/Bursa_of_elbow_joint.jpg",
-            "altText": null
+            "altText": "Back (posterior) view of the knee bones. Letters show the different bones, connecting tissue (shown in blue), and tissue that connects bones."
         },
         {
             "term": "juvenile disease or condition",
@@ -6283,8 +6283,8 @@
         {
             "term": "liver",
             "definition": "The largest organ inside your body. It helps to digest food, store energy, and remove poisons from your body.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray1085.png",
+            "altText": "Left and right parts of the liver, labeled as \"right lobe\" and \"left lobe.\""
         },
         {
             "term": "Liver spots",
@@ -6373,8 +6373,8 @@
         {
             "term": "lungs",
             "definition": "The 2 organs in your chest that help you breathe.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray962.png",
+            "altText": "The lungs, cut away so that you can see the inner tubes that move air through the lungs. Upper and lover sections of the lungs are labeled \"upper lobe\" and \"lower lobe.\""
         },
         {
             "term": "lupus",
@@ -6517,8 +6517,8 @@
         {
             "term": "mandible",
             "definition": "The lower jaw.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray995.png",
+            "altText": "Right side (or lateral view) of the bones of the lower half of the head around the teeth and jaws. The top is labeled \"maxilla\" and the lower area is labeled \"mandible.\""
         },
         {
             "term": "manifest",
@@ -7693,8 +7693,8 @@
         {
             "term": "pancreas",
             "definition": "A gland behind the stomach that helps with digestion.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Figure_37_05_05.jpg",
+            "altText": "Pancreas shown with surrounding organs, all labeled. The stomach and part of the small intestine (duodenum) are orange, the gallbladder is green, and the pancreas, at the bottom, is orange with a pattern of circles."
         },
         {
             "term": "pancreatitis",
@@ -7813,8 +7813,8 @@
         {
             "term": "patella",
             "definition": "Your kneecap.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray351.png",
+            "altText": "Knee joint, with the knee cap (patella) shown on the right."
         },
         {
             "term": "paternity testing",
@@ -8809,8 +8809,8 @@
         {
             "term": "prostate",
             "definition": "A gland in the male body that makes semen.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray1152.png",
+            "altText": "Bladder and prostate glands, with the prostate gland shown below the bladder."
         },
         {
             "term": "prostate cancer",
@@ -10052,7 +10052,7 @@
             "term": "skull",
             "definition": "The bones of your head bones.",
             "imgURL": "./images/703_Parts_of_Skull-01.jpg",
-            "altText": null
+            "altText": "Bones of human head (skull) seen from right, with labels for the back and top of the skull (brain case) and front of skull (facial bones)."
         },
         {
             "term": "sleep apnea",
@@ -10171,8 +10171,8 @@
         {
             "term": "spleen",
             "definition": "An organ in your belly that helps fight diseases and balance fluids in your body.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/Gray1226.png",
+            "altText": "Spleen shown on the left behind the kidney. Organs are outlined in blue; the spleen is green and the other organs are purple or blue."
         },
         {
             "term": "spontaneous",
@@ -10297,8 +10297,8 @@
         {
             "term": "stomach",
             "definition": "The place in your upper belly where food is first broken down (digested). It is between the tube that takes food from your mouth to your stomach (esophagus) and your small intestine.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/201405_stomach.png",
+            "altText": "Stomach, colored pink, with openings of the tube that carries food from the mouth to the stomach (esophagus, top) and small intestine (bottom)"
         },
         {
             "term": "stomach ulcers",
@@ -10682,7 +10682,7 @@
             "term": "teeth, tooth",
             "definition": "The 32 bone-like objects in our jaw.",
             "imgURL": "./images/Bleibende_Zähne_beim_Menschen_eingefärbt.png",
-            "altText": null
+            "altText": "The 8 permanent teeth on the bottom right side of the jaw, all labeled with words and colors for the different kinds of teeth"
         },
         {
             "term": "telephone",
@@ -10843,8 +10843,8 @@
         {
             "term": "thyroid",
             "definition": "A gland in your neck that is shaped like a butterfly. It makes hormones that help your body work normally.",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/1811_The_Thyroid_Gland.png",
+            "altText": "The butterfly-shaped organ over the tube that goes to the stonach (esophagus)."
         },
         {
             "term": "tibia",
@@ -10945,8 +10945,8 @@
         {
             "term": "trachea",
             "definition": "The tube that comes from your mouth to your lungs. Also called \"windpipe.\"",
-            "imgURL": null,
-            "altText": null
+            "imgURL": "./images/2308a_The_Trachea.jpg",
+            "altText": "The tube that begins below the larynx and connects to other bubes (bronchi) that go into the lungs. It is colored light blue. The lungs are colored purple."
         },
         {
             "term": "traditional medicine",

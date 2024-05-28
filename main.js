@@ -536,7 +536,7 @@ class TermCard extends React.Component {
 			altText: this.props.query[3]
 		};
 		
-		let img = item.imgURL != "" ? (<div className="image-col"><img className="image" src={item.imgURL} alt={item.altText} /></div>) : "";
+		let img = item.imgURL != "" ? (<div className="image-col"><a href={item.imgURL} target="_blank"><img className="image" src={item.imgURL} alt={item.altText} /></a></div>) : "";
 
 		return (
 			<div className={this.props.type === "selected" ? "term-card term-card-selected" : "term-card"} onClick={this.handleClick} >
