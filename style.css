@@ -416,10 +416,8 @@ button[class*="none"]{
 ////////////////////////*/
 
 .TermCardList_para{ /*same size as the search-box-container*/
-  max-height: 20em;
   position: relative;/*required for getting offsetTop*/
   overflow-y: scroll;
-  height: 80vw;
   scroll-behavior: smooth;
   margin-top: .5em;
   overflow: auto;
