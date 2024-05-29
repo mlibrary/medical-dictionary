@@ -281,7 +281,7 @@ class SearchBar4Word extends React.Component {
 		return (
 			<div className="search-box-container relative" onBlur={this.handleBlur}>
 				<div className="search-box flex">
-					<input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+					<input type="text" name="search" placeholder="Search for a medical term" autoComplete="off" aria-label="Search for a medical term" autoCorrect="off" autoCapitalize="off" spellCheck="false"
 						onChange={this.handleChange} value={value}></input>
 					{value.length > 0 ? <button className="button-none" onClick={this.handleClear} title="clear search field">{close_svg}</button> : null}
 					{search_svg}
@@ -309,7 +309,6 @@ class SearchBar4Paragraph extends React.Component {
 		this._isMounted = false;
 	}
 	handleChange(event) {
-		console.log(event.target.scrollHeight);
 		const target = event.target;
 		target.style.height = 'inherit';//to auto set textarea's height
 		target.style.height = `${target.scrollHeight}px`;
@@ -329,7 +328,7 @@ class SearchBar4Paragraph extends React.Component {
 			<div className="search-box-container">
 				<div className="search-box flex">
 					<div className="box-paragraph relative no-scroll-bar">
-						<textarea class="textAreaInput" id="paragraph" name="search" placeholder="Please paste the text here" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+						<textarea class="textAreaInput" id="paragraph" name="search" placeholder="Please paste the text here" aria-label="Please paste the text here" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
 							onInput={this.handleChange} onMouseUp={this.handleMouseUp} onBlur={this.handleChange}></textarea>
 						<div id="under-textarea" dangerouslySetInnerHTML={{ __html: this.props.display }}></div>
 					</div>
@@ -515,7 +514,6 @@ class TermCard extends React.Component {
 	//copy term and definition to clipboard
 	handleCopy(event) {
 		this._isMounted && this.setState({ copied: false });
-		console.log(this.props.query);
 		navigator.clipboard.writeText(this.props.query[0] + ": " + this.props.query[1]).then(function () {
 			/* success */
 			this._isMounted && this.setState({ copied: true });

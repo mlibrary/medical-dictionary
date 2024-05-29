@@ -177,9 +177,13 @@ a{
   font-size: .8em;
   color: #00B5AF;
 }
-/*input:focus, button:focus, a:focus{
-  outline: none;
-}*/
+
+:focus{
+  outline: 0;
+  box-shadow: 0 0 0 2px #ffcb05, 0 0 0 3px #212b36;
+  border-radius: 2px !important;
+}
+
 textarea{
   outline: none;
   border: none;
@@ -448,19 +452,6 @@ button[class*="none"]{
   margin-top: 1em;
 }
 
-.rotateButton{
-  transition: transform .3s ease-in-out;
-}
-
-.rotateButton:disabled{
-  display: none;
-}
-
-.rotate180{
-  transform: rotate(180deg);
-  transition: .3s linear;
-}
-
 .term-card{
   width: 100%;
   position: relative;
@@ -471,10 +462,6 @@ button[class*="none"]{
   border-radius: .5em;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   z-index: 10;
-}
-
-.term-card-expandable{
-  cursor: pointer;
 }
 
 .term-card-selected{
