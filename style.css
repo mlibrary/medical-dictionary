@@ -63,6 +63,7 @@ input,textarea{
   padding: 0;
   width: 100%;
 }
+
 body,header,footer{
   width: 100%;
   min-width: 320px;
@@ -70,24 +71,22 @@ body,header,footer{
 }
 body {
   position: relative;
-  height: 100vh;
-  max-height: 700px;
+  min-height: 100vh;
+  display: grid;
+  overflow-y: scroll;
+  grid-template-rows: auto 1fr auto;
   background-color: white;
   scroll-behavior: smooth;
-}
-
-header,footer{
-  position: fixed;
-  z-index: 9999;
-  text-align: center;
 }
 
 header{
   top:0;
   background-color: #00274C;
-  border-bottom: 4px solid #FECB05;
+  border-bottom: 4px solid #FFCB05;
   color: white;
 }
+
+
 
 header h2{
   margin: 0;
@@ -99,7 +98,7 @@ footer{
   bottom:0;
   padding: 1em auto;
   background-color: #00274C;
-  border-top: 4px solid #fecb05;
+  border-top: 4px solid #FFCB05;
   color: #fff;
   text-align:left;
 }
@@ -119,7 +118,6 @@ main{
   margin:0 auto;
   margin-bottom: 2em;
   padding: 0 1em;
-  overflow-y: scroll;
 }
 
 .sticky{
@@ -127,8 +125,13 @@ main{
   background-color: white;
   z-index: 9999;
   width: 100%;
+  border-bottom: 1px solid #00274C;
+  max-width: 740px;
 }
 
+.definitionParagraph{
+  max-width: 38rem;
+}
 
 h1 {
   line-height: 120%;
@@ -174,9 +177,13 @@ a{
   font-size: .8em;
   color: #00B5AF;
 }
-/*input:focus, button:focus, a:focus{
-  outline: none;
-}*/
+
+:focus{
+  outline: 0;
+  box-shadow: 0 0 0 2px #ffcb05, 0 0 0 3px #212b36;
+  border-radius: 2px !important;
+}
+
 textarea{
   outline: none;
   border: none;
@@ -383,12 +390,20 @@ button[class*="none"]{
 .box-paragraph textarea{
   display: inline-block;
   position: absolute;
-  height: auto;
+  height: 100%;
   top:.0;
   left:0;
   z-index: 99;
   background-color: transparent;
-  height: 1.5em;
+}
+
+
+.directions{
+  padding: 1em;
+  font-style: italic;
+  color: #637381;
+  border: 1px dashed #637381;
+  border-radius: 10px;
 }
 
 
@@ -396,8 +411,8 @@ button[class*="none"]{
 ////    BrowseField    ////
 ////////////////////////*/
 
-.BrowseFeild{
-  margin-top: .8em;
+.browseField{
+  margin-top: 1rem;
 }
 
 /*//////////////////////////
@@ -405,20 +420,37 @@ button[class*="none"]{
 ////////////////////////*/
 
 .TermCardList_para{ /*same size as the search-box-container*/
-  display: none;
-  max-height: 20em;
   position: relative;/*required for getting offsetTop*/
   overflow-y: scroll;
-  height: 80vw;
   scroll-behavior: smooth;
   margin-top: .5em;
+  overflow: auto;
 }
+
+.cardHeader{
+  max-width: 75%;
+}
+
 .hasCard{
   display: block;
   padding: 0 .2em 10em .2em;
   min-width: 48%;
 }
 
+.image{
+  max-height: 500px;
+  max-width: 100%;
+  padding: 1em 0;
+}
+
+.image-col{
+  border-top: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 500px;
+  margin-top: 1em;
+}
 
 .term-card{
   width: 100%;
@@ -428,15 +460,12 @@ button[class*="none"]{
   margin-bottom: 1em;
   background-color: white;
   border-radius: .5em;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   z-index: 10;
 }
 
-.term-card h2{
-  width: 80%;
-}
 .term-card-selected{
-  top:-2px;
+  background-color: #FFF9E6;
   /*background-color: rgba(254, 203, 5, .09);*/
   /*border:1px solid #FECB05;*/
   box-shadow: 0 1px 10px 0 rgba(254, 203, 5, 1);
@@ -458,7 +487,7 @@ button[class*="none"]{
   position: relative;
 }
 .message-copied::before{
-  content: "Copied!";
+  content: "Copied";
   color: white;
   background-color: #00274C;
   opacity: 0;
@@ -472,12 +501,13 @@ button[class*="none"]{
   animation-duration: 2s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 @keyframes pop {
   0%   {top:-1.5em; opacity:0;}
   12%  {top:-2em; opacity:.8;}
-  50% {top:-3em; opacity:0;}
+  75% {top:-2em; opacity:.8;}
   100% {top:-3em; opacity:0;}
 }
 
@@ -498,8 +528,8 @@ button[class*="none"]{
   margin-bottom: 1em;
   background-color: #f0f0f0;
   border-radius: .5em;
-  cursor: pointer;
 }
+
 .form-textarea{
   flex-grow: 1;
   border:1.5px solid #aaa;
@@ -562,7 +592,7 @@ svg{
 .search-icon{fill: #00274C;}
 
 .regular-icon{
-  fill: #aaa;
+  fill: #637381;
   cursor: pointer;
 }
 
@@ -590,6 +620,12 @@ svg{
   animation-iteration-count: infinite;
 }
 
+.headerContent{
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1em;
+  }
+
 @keyframes loading {
   0%   {left:0px; width:1px;}
   50%  {left:0px; width:12em;}
@@ -597,12 +633,13 @@ svg{
 }
 
 @media only screen and (min-width: 600px) {
-  body,header,footer{
+  main{
     max-width: 768px;
   }
   h1 {
     font-size: 1.5em;
   }
+  
   .flex[class*="paragraph"]{
     flex-direction: row;
   }
@@ -613,6 +650,10 @@ svg{
   .search-box-container,.TermCardList_para{
     width: 50%;
   }
+
+  .directions{
+    margin: .5em 1em;
+  }
   .search-box .box-paragraph{
     flex-grow: 1;
     display: inline-block;
@@ -622,10 +663,10 @@ svg{
     overflow-y: scroll;
   }
   .hasCard{
-    padding: 0 .2em 10em 1em;
+    padding: 0 .2em 0em 1em;
   }
   .TermCardList_word{
-    padding: 0 .2em 10em .2em;
+    padding: 0 .2em;
   }
 }
 

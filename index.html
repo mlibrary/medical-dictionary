@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QT01H3WHRF"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-QT01H3WHRF');
+	</script>
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-M8JXVGBH');</script>
+	<!-- End Google Tag Manager -->
 	<meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!--[if lt IE 9]>
+	<!--[if lt IE 9]>
       <script src="full/html5shiv/html5shiv-printshiv.js"></script>
     <![endif]-->
-    <link href="style.css" type="text/css" rel="stylesheet"></link>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<link href="style.css" type="text/css" rel="stylesheet">
+	</link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 	<title>Plain Language Medical Dictionary</title>
 </head>
+
 <body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8JXVGBH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<header>
-		<h1>Plain Language Medical Dictionary</h1>
-		<h2>Application by the University of Michigan Library</h2>
+		<div class="headerContent">
+			<h1>Plain Language Medical Dictionary</h1>
+			<h2>Application by the University of Michigan Library</h2>
+		</div>
 	</header>
-	<main id="root" class="no-scroll-bar"></main>
+	<main id="root"></main>
 	<footer>
-		<p>&copy; This application is copyright 2020, The Regents of the University of Michigan.</p>
-    <p>
-If you would like to embed this widget in your website, please use the following code:
-<br>
-<em>
-&lt;iframe src="https://apps.lib.umich.edu/medical-dictionary" style="margin: 2em 1%; height: 650px; width: 98%; border: 2px solid #EEE;"&gt;&lt;/iframe&gt;
-</em>
-    </p>
+		<p>&copy; This application is copyright <span id="year">2024</span>, The Regents of the University of Michigan.</p>
+		<p> If you would like to embed this widget in your website, please use the following code: <br>
+			<em> &lt;iframe src="https://mlibrary.github.io/medical-dictionary/" style="margin: 2em 1%; height: 650px; width: 98%; border: 2px solid #EEE;"&gt;&lt;/iframe&gt; </em>
+		</p>
 	</footer>
 	<!-- react.js -->
 	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
- 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
- 	<!-- components -->
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<!-- components -->
 	<script type="text/babel" src="main.js"></script>
-
-	<!-- scroll motion control for word search -->
 	<script type="text/javascript">
-		function handleResize() {
-			$('main').css('padding-top',$('header').outerHeight(true)+'px');
-		}
-		$( document ).ready(function() {
-			let lastScrollTop=0;
-			const main=$('main');
-			handleResize();
-			window.onresize = handleResize;
-
-		});
-
+		const d = new Date();
+		let year = d.getFullYear();
+		document.getElementById('year').innerHTML = year;
 	</script>
 </body>
+
 </html>
