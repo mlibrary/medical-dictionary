@@ -2,9 +2,9 @@
 
 The Plain Language Medical Dictionary (PLMD) widget is a project of the University of Michigan Taubman Health Sciences Library as part of the Michigan Health Literacy Awareness project, aimming to help people with a non-medical background better understand the medical terms. 
 
-The initial version was designed in 2011 and published in three versions: website widget, iOS mobile application, and Android mobile application. In 2019, the widget was redesigned to a responsive webpage as one of [the Library Engagement Fellow projects](https://engage.lib.umich.edu/engagement-fellows/).
+The initial version was designed in 2011 and published in three versions: website widget, iOS mobile application, and Android mobile application. In 2019, the widget was redesigned to a responsive webpage as one of [the Library Engagement Fellow projects](https://engage.lib.umich.edu/engagement-fellows/) and in 2024 the widget was updated to support images and remediate accessibility issues.
 
-© This application is copyright 2020, The Regents of the University of Michigan.
+© This application is copyright 2025, The Regents of the University of Michigan.
 
 ## Install
 
@@ -19,29 +19,29 @@ The widget is responsive with a min-width of 320px, max-width of 768px and max-h
 
 ## Features & Functions
 
-- Letter browsing
+### Letter browsing
 
-By clicking on the button of letter, the user can view the terms with the same initials.
+The user can browse terms by letter by selecting the first and second letter buttons:
 
-<img src="images/rdm_f1.PNG" alt="function1" width="600"/>
+![A screenshot of the Plain Launguage Medical Dictionary showing the letters "a" and "ag" selected. Two matching terms, "Agender" and "Aggregate" are shown in the results.](https://github.com/user-attachments/assets/ebcfb637-69ed-4bd9-bc89-fcee749eb159)
 
-- "Word Search": for short terms
+### "Word Search": for short terms
 
-Under the "word" mode, as the user typing in the search box, the search results would be displayed below immediately.
+Users can search for terms by typing in the search input while the "Word" mode is selected
 
-<img src="images/rdm_f2.PNG" alt="function2" width="600"/>
+![A screenshot showing the search input with the letters "a" and "b" typed into it. A series of matching autofill option terms appears below the input and the matching terms and definitions appears in the results.](https://github.com/user-attachments/assets/d8a80e77-aab4-4a6b-b610-75f6decc7537)
 
-- "Paragraph Search": for longer text
+### "Paragraph Search": for longer text
 
-Users can paste or type in a paragraph or an article and the medical terms included would be marked. When a user clicks on the marked term in the textarea, the term card would be highlighted and scrolled in view accorddingly.
+Users can paste or type text into a longer input box while the "Paragraph" mode is selected. This allows users to paste in longer paragraphs of text. All matching medical terms within the text are highlighted and their respective definitionas are displayed. When a user clicks on the marked term in the textarea, the term card is highlighted and focus is placed on the term.
 
-<img src="images/rdm_f3.PNG" alt="function3" width="600"/>
+![A screenshot showing a user entering a longer string of text. The text has a series of words highlighted. Those highlighted terms appear as terms and definitions next to the input box.](https://github.com/user-attachments/assets/fbffb88d-e804-4131-8199-9db376b5070b)
 
-- Report incorrect definitions & Request more medical terms
+## Report incorrect definitions & Request more medical terms
 
-To further enrich our repository and keep this product updated, we designed this updating system that allows users to request definitions of terms we do not have and report information they think are incorrect. We will collect these feedback and update the repository sustainably. 
+To further enrich our repository and keep this product updated, we designed this updating system that allows users to request definitions of terms we do not have and report information they think is incorrect.
 
-<img src="images/rdm_f4.PNG" alt="function4" width="600"/>
+![A screenshot showing a user reporting the "Shortness of Breath" term. The term and a definition are shown with an input box where the user can explain the issue with the term.](https://github.com/user-attachments/assets/8d11bb44-9177-409b-aa2b-2d8f4138ec92)
 
 ## Development
 
