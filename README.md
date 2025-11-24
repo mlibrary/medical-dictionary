@@ -1,4 +1,4 @@
-# Plain Language Medical Dictionary
+# Plain Language Medical Dictionary (PLMD)
 
 The Plain Language Medical Dictionary (PLMD) widget is a project of the University of Michigan Taubman Health Sciences Library as part of the Michigan Health Literacy Awareness project, aimming to help people with a non-medical background better understand the medical terms. 
 
